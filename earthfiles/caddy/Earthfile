@@ -1,0 +1,67 @@
+build-caddy:
+    DO ../udcs/image+GO
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    
+    ARG VERSION
+
+    RUN --mount=type=cache,target=/go/pkg \
+        echo ">>>>>>>>>>>>>>> Build Version: ${VERSION} <<<<<<<<<<<<<<<" \
+        && go get -u github.com/caddyserver/xcaddy/cmd/xcaddy \
+        && xcaddy build ${VERSION} --output /caddy \
+            --with github.com/caddy-dns/route53 \
+            --with github.com/caddy-dns/cloudflare \
+            --with github.com/caddy-dns/alidns \
+            --with github.com/caddy-dns/dnspod \
+            --with github.com/caddy-dns/gandi \
+            --with github.com/abiosoft/caddy-exec \
+            --with github.com/greenpau/caddy-trace \
+            --with github.com/hairyhenderson/caddy-teapot-module \
+            --with github.com/kirsch33/realip \
+            --with github.com/porech/caddy-maxmind-geolocation \
+            --with github.com/caddyserver/format-encoder \
+            --with github.com/caddyserver/replace-response \
+            --with github.com/imgk/caddy-trojan
+
+    SAVE ARTIFACT /caddy AS LOCAL /caddy
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/language/go+FIX_DNS
+
+    ARG VERSION
+
+    BUILD +build-caddy --build-arg --VERSION=$VERSION
+    
+    # See https://caddyserver.com/docs/conventions#file-locations for details
+    ENV XDG_CONFIG_HOME /config
+    ENV XDG_DATA_HOME /data
+    
+    COPY +build-caddy/caddy /usr/bin/caddy
+    
+    RUN apk add mailcap \
+        && mkdir /etc/caddy /usr/share/caddy \
+        && curl -s https://raw.githubusercontent.com/caddyserver/dist/master/config/Caddyfile > /etc/caddy/Caddyfile \
+        && curl -s https://raw.githubusercontent.com/caddyserver/dist/master/welcome/index.html > /usr/share/caddy/index.html
+
+    DO ../udcs/os/alpine+CLEAN_UP
+    
+    VOLUME /config
+    VOLUME /data
+    
+    EXPOSE 80
+    EXPOSE 443
+    EXPOSE 2019
+    
+    WORKDIR /srv
+    
+    CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+
+    SAVE IMAGE mritd/caddy:latest mritd/caddy:$VERSION
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build

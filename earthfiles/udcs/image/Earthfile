@@ -1,0 +1,23 @@
+ALPINE:
+    COMMAND
+    FROM alpine
+
+DEBIAN:
+    COMMAND
+    FROM debian
+
+GOLANG:
+    COMMAND
+    FROM golang:1-alpine
+
+GO:
+    COMMAND
+    DO +GOLANG
+
+JDK8:
+    COMMAND
+    FROM adoptopenjdk:8-jdk
+
+JDK11:
+    COMMAND
+    FROM adoptopenjdk:11-jdk

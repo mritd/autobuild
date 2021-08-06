@@ -1,0 +1,4 @@
+UPGREADE:
+    COMMAND
+    RUN apt update \
+        apt upgrade -y
