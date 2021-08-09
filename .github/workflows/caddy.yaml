@@ -1,17 +1,15 @@
 name: Caddy
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+  schedule:
+    - cron: * 8 * * *
 jobs:
   build-caddy:
     runs-on: ubuntu-latest
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      COMMIT_TOKEN: ${{ secrets.COMMIT_TOKEN }}
       FORCE_COLOR: 1
     steps:
     - uses: actions/checkout@v2
@@ -25,16 +23,7 @@ jobs:
         fi
         git checkout -b "$branch" || true
     - name: Docker Login
-      run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_TOKEN"
-    - name: Download latest earthly
-      run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.5.20/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
-    - name: Earthly version
-      run: earthly --version
-    - name: Multi-platform init
-      run: |
-          sudo apt-get install qemu binfmt-support qemu-user-static -y
-          sudo docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-          sudo docker stop earthly-buildkitd || true
+      run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
     - name: Multi-platform builds
       working-directory: earthfiles/caddy
-      run: earthly -P --build-arg VERSION=$(cat version) --push +all
+      run: bash build.sh
