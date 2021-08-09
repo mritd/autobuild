@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-caddy:
+  init-build:
     runs-on: ubuntu-latest
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -35,6 +35,11 @@ jobs:
           sudo apt-get install qemu binfmt-support qemu-user-static -y
           sudo docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           sudo docker stop earthly-buildkitd || true
+  build-linux-amd64:
     - name: Run build
       working-directory: earthfiles/caddy
-      run: earthly --build-arg VERSION=$(cat version) --push +all
+      run: earthly --build-arg VERSION=$(cat version) --platform=linux/amd64 --push +build
+  build-linux-arm64:
+    - name: Run build
+      working-directory: earthfiles/caddy
+      run: earthly --build-arg VERSION=$(cat version) --platform=linux/arm64 --push +build
