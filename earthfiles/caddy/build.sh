@@ -39,5 +39,5 @@ if [ "$?" == 1 ]; then
     init_earthly
     build
 else
-    echo "\033[1;32mNo update found.\033[0m"
+    echo -e "\033[1;32mNo update found.\033[0m"
 fi
