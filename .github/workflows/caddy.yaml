@@ -30,6 +30,11 @@ jobs:
       run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.5.20/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
     - name: Earthly version
       run: earthly --version
+    - name: Multi-platform init
+      run: |
+          apt-get install qemu binfmt-support qemu-user-static -y
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker stop earthly-buildkitd || true
     - name: Run build
       working-directory: earthfiles/caddy
       run: earthly --build-arg VERSION=$(cat version) --push +all
