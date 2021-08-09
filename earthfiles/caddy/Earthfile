@@ -23,7 +23,7 @@ build-caddy:
             --with github.com/caddyserver/replace-response \
             --with github.com/imgk/caddy-trojan
 
-    SAVE ARTIFACT /caddy AS LOCAL /caddy
+    SAVE ARTIFACT /caddy
 
 build:
     DO ../udcs/image+ALPINE
@@ -61,7 +61,7 @@ build:
     
     CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
 
-    SAVE IMAGE mritd/caddy:latest mritd/caddy:$VERSION
+    SAVE IMAGE --push mritd/caddy:latest mritd/caddy:$VERSION
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build-image
