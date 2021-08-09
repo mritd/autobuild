@@ -37,7 +37,7 @@ jobs:
           sudo docker stop earthly-buildkitd || true
     - name: Build linux amd64 
       working-directory: earthfiles/caddy
-      run: sudo earthly --build-arg VERSION=$(cat version) --platform=linux/amd64 --push +build
+      run: earthly -P --build-arg VERSION=$(cat version) --platform=linux/amd64 --push +build
     - name: Build linux arm64
       working-directory: earthfiles/caddy
-      run: sudo earthly --build-arg VERSION=$(cat version) --platform=linux/arm64 --push +build
+      run: earthly -P --build-arg VERSION=$(cat version) --platform=linux/arm64 --push +build
