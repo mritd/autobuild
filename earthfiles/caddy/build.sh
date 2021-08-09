@@ -3,7 +3,7 @@
 set -e
 
 function install_pkg(){
-    apt install jq qemu binfmt-support qemu-user-static -y
+    sudo apt install jq qemu binfmt-support qemu-user-static -y
 }
 
 function check_version(){
@@ -20,9 +20,9 @@ function check_version(){
 
 
 function init_earthly(){
-     wget -q -O /usr/local/bin/earthly $(curl -sL https://api.github.com/repos/earthly/earthly/releases/latest \
+     sudo wget -q -O /usr/local/bin/earthly $(curl -sL https://api.github.com/repos/earthly/earthly/releases/latest \
          | jq -r '.assets[].browser_download_url' | grep earthly-linux-amd64)
-     chmod +x /usr/local/bin/earthly
+     sudo chmod +x /usr/local/bin/earthly
 }
 
 function build(){
