@@ -2,7 +2,8 @@ name: Caddy
 
 on:
   schedule:
-    - cron: * 8 * * *
+    - cron: '* 8 * * *'
+
 jobs:
   build-caddy:
     runs-on: ubuntu-latest
