@@ -35,9 +35,6 @@ jobs:
           sudo apt-get install qemu binfmt-support qemu-user-static -y
           sudo docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           sudo docker stop earthly-buildkitd || true
-    - name: Build linux amd64 
+    - name: Multi-platform build 
       working-directory: earthfiles/caddy
-      run: earthly -P --build-arg VERSION=$(cat version) --platform=linux/amd64 --push +build
-    - name: Build linux arm64
-      working-directory: earthfiles/caddy
-      run: earthly -P --build-arg VERSION=$(cat version) --platform=linux/arm64 --push +build
+      run: earthly -P --build-arg VERSION=$(cat version) --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/7 --platform=linux/arm/v6 --push +build
