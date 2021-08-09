@@ -35,7 +35,7 @@ build:
 
     ARG VERSION
 
-    BUILD +build-caddy --build-arg --VERSION=$VERSION
+    BUILD +build-caddy --build-arg --VERSION=${VERSION}
     
     # See https://caddyserver.com/docs/conventions#file-locations for details
     ENV XDG_CONFIG_HOME /config
@@ -61,7 +61,7 @@ build:
     
     CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
 
-    SAVE IMAGE mritd/caddy:latest mritd/caddy:$VERSION
+    SAVE IMAGE --push mritd/caddy:latest mritd/caddy:$VERSION
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
