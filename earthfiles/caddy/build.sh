@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 function install_pkg(){
     sudo apt install jq qemu binfmt-support qemu-user-static -y
@@ -15,6 +15,8 @@ function init_earthly(){
 
 function build(){
     earthly -P --build-arg VERSION=$(cat version) --push +all
+    git config --global user.name mritd
+    git config --global user.email mritd@linux.com
     git add version
     git commit -m "$(cat version): GitHub Action Auto Update(`date +'%Y-%m-%d %H:%M:%S'`)"
     git push https://mritd:${COMMIT_TOKEN}@github.com/mritd/autobuild.git
