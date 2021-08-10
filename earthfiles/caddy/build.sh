@@ -1,21 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 function install_pkg(){
     sudo apt install jq qemu binfmt-support qemu-user-static -y
-}
-
-function check_version(){
-    latest_version=$(curl -s "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r .tag_name)
-    latest_build_version=$(cat version)
-
-    if [ "${latest_version}" != "${latest_build_version}" ]; then
-        echo ${latest_version} > version
-        return 1
-    else
-        return 0
-    fi
 }
 
 
@@ -33,9 +21,12 @@ function build(){
 }
 
 install_pkg
-check_version
 
-if [ "$?" == 1 ]; then
+latest_version=$(curl -s "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r .tag_name)
+latest_build_version=$(cat version)
+
+if [ "${latest_version}" != "${latest_build_version}" ]; then
+    echo ${latest_version} > version
     init_earthly
     build
 else
