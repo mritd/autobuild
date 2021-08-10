@@ -2,27 +2,23 @@ TIMEZONE:
     COMMAND
     ENV TZ Asia/Shanghai
 
-    RUN apk add tzdata \
+    RUN apk add tzdata --no-cache \
         && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
         && echo ${TZ} > /etc/timezone
 
 UPGRADE:
     COMMAND
-    RUN apk upgrade
+    RUN apk upgrade --no-cache
 
 COMMON_PKG:
     COMMAND
-    RUN apk add bash tzdata bind-tools busybox-extras ca-certificates libc6-compat wget curl
+    RUN apk add bash tzdata bind-tools busybox-extras ca-certificates libc6-compat wget curl --no-cache
 
 INSTALL_BUILD_BASE:
     COMMAND
-    RUN apk add --virtual build-dependencies alpine-sdk jq
+    RUN apk add --virtual build-dependencies alpine-sdk jq --no-cache
 
 REMOVE_BUILD_BASE:
     COMMAND
-    RUN apk del build-dependencies
-
-CLEAN_UP:
-    COMMAND
-    RUN rm -rf /var/cache/apk/*
+    RUN apk del build-dependencies --no-cache 
 
