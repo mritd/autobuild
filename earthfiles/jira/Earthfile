@@ -14,7 +14,7 @@ build:
 
     CMD ["/hijack.sh"]
 
-    SAVE IMAGE --push mritd/jira:latest
+    SAVE IMAGE --push mritd/jira:latest mritd/atlassian-jira:latest
 
 all:
     BUILD --platform=linux/amd64 +build
