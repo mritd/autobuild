@@ -29,3 +29,7 @@ NGINX:
 CONFLUENCE:
     COMMAND
     FROM atlassian/confluence-server:7.12
+
+JIRA:
+    COMMAND
+    FROM atlassian/jira-software:8.13
