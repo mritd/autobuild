@@ -1,4 +1,4 @@
-name: Caddy
+name: mritd/caddy
 
 on:
   workflow_dispatch:

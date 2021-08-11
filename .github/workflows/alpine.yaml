@@ -1,4 +1,4 @@
-name: Alpine
+name: mritd/alpine
 
 on:
   workflow_dispatch:
