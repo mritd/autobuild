@@ -21,3 +21,7 @@ JDK8:
 JDK11:
     COMMAND
     FROM adoptopenjdk:11-jdk
+
+NGINX:
+    COMMAND
+    FROM nginx:alpine
