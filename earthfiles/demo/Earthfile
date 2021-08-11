@@ -7,8 +7,6 @@ build:
 
     COPY landscape-animation-experiment /usr/share/nginx/html
 
-    CMD ["/bin/bash"]
-
     SAVE IMAGE --push mritd/demo:latest mritd/html:latest
 
 all:
