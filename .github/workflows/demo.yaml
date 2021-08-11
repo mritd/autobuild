@@ -26,5 +26,5 @@ jobs:
     - name: Docker Login
       run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
     - name: Multi-platform builds
-      working-directory: earthfiles/alpine
+      working-directory: earthfiles/demo
       run: bash build.sh
