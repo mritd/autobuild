@@ -1,4 +1,24 @@
-UPGREADE:
+TIMEZONE:
+    COMMAND
+    ENV TZ Asia/Shanghai
+
+    RUN export DEBIAN_FRONTEND=noninteractive \
+        && apt install tzdata -y \
+        && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
+        && echo ${TZ} > /etc/timezone \
+        && dpkg-reconfigure --frontend noninteractive tzdata \
+        && rm -rf /var/lib/apt/lists/*
+
+UPGRADE:
     COMMAND
     RUN apt update \
-        apt upgrade -y
+        && apt upgrade -y \
+        && apt autoremove -y \
+        && apt autoclean -y \
+        && rm -rf /var/lib/apt/lists/*
+
+COMMON_PKG:
+    COMMAND
+    RUN apt update \
+        && apt install tzdata ca-certificates wget curl -y \
+        && rm -rf /var/lib/apt/lists/*

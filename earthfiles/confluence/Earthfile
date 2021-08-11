@@ -1,0 +1,20 @@
+build:
+    DO ../udcs/image+CONFLUENCE
+    DO ../udcs+LABEL
+    DO ../udcs/os/debian+UPGRADE
+    DO ../udcs/os/debian+COMMON_PKG
+    DO ../udcs/os/debian+TIMEZONE
+
+    ENV AGENT_PATH /opt/atlassian-agent.jar
+
+    COPY atlassian-agent.jar ${AGENT_PATH}
+    COPY hijack.sh /hijack.sh
+
+    RUN chown ${RUN_USER}:${RUN_GROUP} ${AGENT_PATH}
+
+    CMD ["/hijack.sh"]
+
+    SAVE IMAGE --push mritd/confluence:latest
+
+all:
+    BUILD --platform=linux/amd64 +build

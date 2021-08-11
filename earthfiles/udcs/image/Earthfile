@@ -25,3 +25,7 @@ JDK11:
 NGINX:
     COMMAND
     FROM nginx:alpine
+
+CONFLUENCE:
+    COMMAND
+    FROM atlassian/confluence-server:7.12
