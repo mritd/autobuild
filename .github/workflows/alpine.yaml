@@ -6,7 +6,7 @@ on:
     - cron: '* 8 * * 1'
 
 jobs:
-  build-alpine:
+  docker:
     runs-on: ubuntu-latest
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
