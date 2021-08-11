@@ -1,0 +1,15 @@
+build:
+    DO ../udcs/image+NGINX
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+TIMEZONE
+
+    RUN rm -rf /usr/share/nginx/html
+
+    COPY landscape-animation-experiment /usr/share/nginx/html
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push mritd/demo:latest mritd/html:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
