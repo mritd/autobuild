@@ -11,6 +11,40 @@ OPENJDK:
 
     CMD ["bash"]
 
+JAVA_BUILD:
+    COMMAND
+    ENV MAVEN_VERSION 3.8.1
+    ENV MAVEN_CACHE_DIR /data/maven_cache
+    ENV MAVEN_INSTALL_DIR /usr/local/maven
+    ENV MAVEN_DOWNLOAD_URL https://mirror.serverion.com/apache/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+    
+    ENV GRADLE_VERSION 7.1.1
+    ENV GRADLE_CACHE_DIR /data/gradle_cache
+    ENV GRADLE_INSTALL_DIR /usr/local/gradle
+    ENV GRADLE_DOWNLOAD_URL https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
+
+    ENV PATH ${PATH}:${MAVEN_INSTALL_DIR}/bin:${GRADLE_INSTALL_DIR}/bin
+
+    RUN set -e \
+        && curl -sSL ${MAVEN_DOWNLOAD_URL} > apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+        && tar -zxf apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+        && mv apache-maven-${MAVEN_VERSION} ${MAVEN_INSTALL_DIR} \
+        && curl -sSL ${GRADLE_DOWNLOAD_URL} > gradle-${GRADLE_VERSION}-bin.zip \
+        && unzip -q gradle-${GRADLE_VERSION}-bin.zip \
+        && mv gradle-${GRADLE_VERSION} ${GRADLE_INSTALL_DIR} \
+        && apt purge -y unzip \
+        && rm -rf /var/lib/apt/lists/* \
+            apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+            gradle-${GRADLE_VERSION}-bin.zip
+
+    COPY cmvn /usr/local/bin/cmvn
+    COPY cgradle /usr/local/bin/cgradle
+    
+    VOLUME ${MAVEN_CACHE_DIR}
+    VOLUME ${GRADLE_CACHE_DIR}
+    
+    CMD ["bash"]
+
 build-openjdk8:
     DO ../udcs/image+JDK8
     DO +OPENJDK
@@ -35,8 +69,41 @@ build-openjdk11-openj9:
 
     SAVE IMAGE --push mritd/openjdk11:openj9
 
+build-openjdk8-javabuild:
+    DO ../udcs/image+JDK8
+    DO +OPENJDK
+    DO +JAVA_BUILD
+
+    SAVE IMAGE --push mritd/javabuild8:latest mritd/javabuild8:hotsport
+
+build-openjdk8-openj9-javabuild:
+    DO ../udcs/image+JDK8_OPENJ9
+    DO +OPENJDK
+    DO +JAVA_BUILD
+
+    SAVE IMAGE --push mritd/javabuild8:openj9
+
+build-openjdk11-javabuild:
+    DO ../udcs/image+JDK11
+    DO +OPENJDK
+    DO +JAVA_BUILD
+
+    SAVE IMAGE --push mritd/javabuild11:latest mritd/javabuild11:hotspot
+
+build-openjdk11-openj9-javabuild:
+    DO ../udcs/image+JDK11_OPENJ9
+    DO +OPENJDK
+    DO +JAVA_BUILD
+
+    SAVE IMAGE --push mritd/javabuild11:openj9
+
 all:
     BUILD --platform=linux/amd64 +build-openjdk8
     BUILD --platform=linux/amd64 +build-openjdk8-openj9
     BUILD --platform=linux/amd64 +build-openjdk11
     BUILD --platform=linux/amd64 +build-openjdk11-openj9
+
+    BUILD --platform=linux/amd64 +build-openjdk8-javabuild
+    BUILD --platform=linux/amd64 +build-openjdk8-openj9-javabuild
+    BUILD --platform=linux/amd64 +build-openjdk11-javabuild
+    BUILD --platform=linux/amd64 +build-openjdk11-openj9-javabuild
