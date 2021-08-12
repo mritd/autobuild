@@ -1,0 +1,42 @@
+OPENJDK:
+    COMMAND
+    DO ../udcs+LABEL
+    DO ../udcs/os/debian+UPGRADE
+    DO ../udcs/os/debian+COMMON_PKG
+    DO ../udcs/os/debian+LOCALE
+    DO ../udcs/os/debian+TIMEZONE
+    DO ../udcs+TINI
+    
+    ENTRYPOINT ["tini","--"]
+
+    CMD ["bash"]
+
+build-openjdk8:
+    DO ../udcs/image+JDK8
+    DO +OPENJDK
+
+    SAVE IMAGE --push mritd/openjdk8:latest mritd/openjdk8:hotspot
+
+build-openjdk8-openj9:
+    DO ../udcs/image+JDK8_OPENJ9
+    DO +OPENJDK
+
+    SAVE IMAGE --push mritd/openjdk8:openj9
+
+build-openjdk11:
+    DO ../udcs/image+JDK11
+    DO +OPENJDK
+
+    SAVE IMAGE --push mritd/openjdk11:latest mritd/openjdk11:hotspot
+
+build-openjdk11-openj9:
+    DO ../udcs/image+JDK11_OPENJ9
+    DO +OPENJDK
+
+    SAVE IMAGE --push mritd/openjdk11:openj9
+
+all:
+    BUILD --platform=linux/amd64 +build-openjdk8
+    BUILD --platform=linux/amd64 +build-openjdk8-openj9
+    BUILD --platform=linux/amd64 +build-openjdk11
+    BUILD --platform=linux/amd64 +build-openjdk11-openj9

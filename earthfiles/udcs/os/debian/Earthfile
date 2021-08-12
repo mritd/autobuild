@@ -20,5 +20,19 @@ UPGRADE:
 COMMON_PKG:
     COMMAND
     RUN apt update \
-        && apt install tzdata ca-certificates wget curl -y \
+        && apt install tzdata ca-certificates wget curl nload htop unzip procps dnsutils iputils-ping -y \
+        && rm -rf /var/lib/apt/lists/*
+
+LOCALE:
+    COMMAND
+    ENV LANG en_US.UTF-8
+    ENV LC_ALL en_US.UTF-8
+    ENV LANGUAGE en_US:en
+
+    RUN apt update \
+        && apt install locales -y \
+        && locale-gen --purge en_US.UTF-8 zh_CN.UTF-8 \
+        && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
+        && echo 'LANG="en_US.UTF-8"' > /etc/default/locale \
+        && echo 'LANGUAGE="en_US:en"' >> /etc/default/locale \
         && rm -rf /var/lib/apt/lists/*

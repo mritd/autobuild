@@ -3,3 +3,11 @@ LABEL:
     LABEL maintainer="mritd <mritd@linux.com>"
     LABEL repository="https://github.com/mritd/autobuild"
     LABEL description="GitHub Action + Earthly Auto Build"
+
+TINI:
+    COMMAND
+    ENV TINI_VERSION v0.19.0
+    ENV TINI_DOWNLOAD_URL https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-amd64
+
+    RUN curl -sSL ${TINI_DOWNLOAD_URL} > /usr/bin/tini \
+        && chmod +x /usr/bin/tini
