@@ -1,0 +1,13 @@
+build:
+    DO ../udcs/image+NGINX
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/os/alpine+COMMON_PKG
+
+    COPY singlepage.conf /etc/nginx/conf.d/default.conf
+
+    SAVE IMAGE --push mritd/nginx-singlepage:latest
+
+all:
+    BUILD --platform=linux/amd64 +build
