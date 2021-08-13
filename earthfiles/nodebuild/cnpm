@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+npm --registry=${NPM_REGISTRY} \
+    --unsafe-perm \
+    --cache=${NPM_CACHE_DIR} \
+    --cache-min 9999999 \
+    --disturl=${NPM_DIST} \
+    --userconfig=$HOME/.cnpmrc $@

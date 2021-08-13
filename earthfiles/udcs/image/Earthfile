@@ -30,6 +30,10 @@ JDK11_OPENJ9:
     COMMAND
     FROM adoptopenjdk:11-jdk-openj9
 
+NODE:
+    COMMAND
+    FROM node:lts-buster
+
 NGINX:
     COMMAND
     FROM nginx:alpine
