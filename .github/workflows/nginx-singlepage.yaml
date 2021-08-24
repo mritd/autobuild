@@ -1,7 +1,6 @@
 name: mritd/nginx-singlepage
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: '* 9 * * 1'
 

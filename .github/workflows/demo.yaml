@@ -1,7 +1,6 @@
 name: mritd/demo
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: '* 18 * * 1'
 

@@ -1,7 +1,6 @@
 name: mritd/alpine
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: '* 8 * * 1'
 

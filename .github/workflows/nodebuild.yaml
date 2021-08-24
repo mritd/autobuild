@@ -1,7 +1,6 @@
 name: mritd/nodebuild
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: '* 9 * * 1'
 

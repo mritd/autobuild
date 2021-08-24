@@ -1,7 +1,8 @@
 name: mritd/jira
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '* 18 * * 2'
 
 jobs:
   docker:
