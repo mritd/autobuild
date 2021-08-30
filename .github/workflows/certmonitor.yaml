@@ -1,9 +1,8 @@
-name: mritd/ddns
+name: mritd/certmonitor
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '* 18 * * 1'
+    - cron: '* 8 * * 3'
 
 jobs:
   docker:
@@ -11,6 +10,7 @@ jobs:
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      COMMIT_TOKEN: ${{ secrets.COMMIT_TOKEN }}
       FORCE_COLOR: 1
     steps:
     - uses: actions/checkout@v2
@@ -26,5 +26,5 @@ jobs:
     - name: Docker Login
       run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
     - name: Multi-platform builds
-      working-directory: earthfiles/ddns
+      working-directory: earthfiles/certmonitor
       run: bash build.sh
