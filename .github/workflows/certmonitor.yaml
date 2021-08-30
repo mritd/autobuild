@@ -2,7 +2,7 @@ name: mritd/certmonitor
 
 on:
   repository_dispatch:
-    types: certmonitor
+    types: [certmonitor]
   schedule:
     - cron: '* 8 * * 3'
 
