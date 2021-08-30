@@ -1,7 +1,6 @@
 name: mritd/certmonitor
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: '* 8 * * 3'
 
