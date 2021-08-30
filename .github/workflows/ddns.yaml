@@ -1,7 +1,6 @@
 name: mritd/ddns
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: '* 18 * * 1'
 
