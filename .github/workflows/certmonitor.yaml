@@ -2,7 +2,7 @@ name: mritd/certmonitor
 
 on:
   schedule:
-    - cron: '* 8 * * 3'
+    - cron: '* 8 * * 1'
 
 jobs:
   docker:

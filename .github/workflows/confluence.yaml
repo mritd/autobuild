@@ -2,7 +2,7 @@ name: mritd/confluence
 
 on:
   schedule:
-    - cron: '* 18 * * 2'
+    - cron: '* 18 * * 1'
 
 jobs:
   docker:
