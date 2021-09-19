@@ -1,0 +1,26 @@
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+
+    RUN set -e \
+        && apk add sudo git shadow openssh --no-cache \
+        && ssh-keygen -A \
+        && bash -c "ssh-keygen -q -t rsa -N '' <<< $'\ny' >/dev/null 2>&1" \
+        && echo 'auth sufficient pam_shells.so' > /etc/pam.d/chsh \
+        && curl -sSL https://github.com/mritd.keys > /root/.ssh/authorized_keys \
+        && chmod 0600 /root/.ssh/authorized_keys \
+        && ROOT_PASSWORD=$(hexdump -e '"%02x"' -n 16 /dev/urandom) \
+        && echo "root:${ROOT_PASSWORD}" | chpasswd &>/dev/null \
+        && sed -i "s/#PermitRootLogin.*/PermitRootLogin\ yes/" /etc/ssh/sshd_config \
+        && printf "\nWelcome to Alpine!\n\n" > /etc/motd
+
+    DO ../udcs+PREZTO
+
+    CMD ["/usr/sbin/sshd", "-D", "-e"]
+
+    SAVE IMAGE --push mritd/ssh:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build

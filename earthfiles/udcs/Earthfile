@@ -11,3 +11,8 @@ TINI:
 
     RUN curl -sSL ${TINI_DOWNLOAD_URL} > /usr/bin/tini \
         && chmod +x /usr/bin/tini
+
+PREZTO:
+    COMMAND
+    ENV PREZTO_SCRIPT https://raw.githubusercontent.com/mritd/init/master/prezto/init.sh
+    RUN curl -sSL ${PREZTO_SCRIPT} | bash
