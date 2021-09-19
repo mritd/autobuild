@@ -14,5 +14,10 @@ TINI:
 
 PREZTO:
     COMMAND
-    ENV PREZTO_SCRIPT https://raw.githubusercontent.com/mritd/init/master/prezto/init.sh
-    RUN curl -sSL ${PREZTO_SCRIPT} | bash
+    ENV PREZTO_INIT_SCRIPT https://raw.githubusercontent.com/mritd/init/master/prezto/init.sh
+    RUN curl -sSL ${PREZTO_INIT_SCRIPT} | bash
+
+VIM:
+    COMMAND
+    ENV VIM_INIT_SCRIPT https://raw.githubusercontent.com/mritd/init/master/vim/init.sh
+    RUN curl -sSL ${VIM_INIT_SCRIPT} | bash
