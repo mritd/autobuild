@@ -3,9 +3,11 @@ build:
     DO ../udcs+LABEL
     DO ../udcs/os/alpine+UPGRADE
     DO ../udcs/os/alpine+COMMON_PKG
+    
+    ENV ENABLE_VIM_CONFIG true
 
     RUN set -e \
-        && apk add sudo coreutils zsh git shadow openssh --no-cache \
+        && apk add sudo coreutils zsh git htop shadow openssh --no-cache \
         && ssh-keygen -A \
         && bash -c "ssh-keygen -q -t rsa -N '' <<< $'\ny' >/dev/null 2>&1" \
         && echo 'auth sufficient pam_shells.so' > /etc/pam.d/chsh \
