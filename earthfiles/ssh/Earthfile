@@ -14,8 +14,8 @@ build:
         && ROOT_PASSWORD=$(hexdump -e '"%02x"' -n 16 /dev/urandom) \
         && echo "root:${ROOT_PASSWORD}" | chpasswd &>/dev/null \
         && sed -i "s/#PermitRootLogin.*/PermitRootLogin\ yes/" /etc/ssh/sshd_config \
-        && sed -i "s/#AllowTcpForwarding.*/AllowTcpForwarding\ yes/" /etc/ssh/sshd_config \
         && sed -i "s/#X11Forwarding.*/X11Forwarding\ yes/" /etc/ssh/sshd_config \
+        && sed -i "s/AllowTcpForwarding.*/AllowTcpForwarding\ yes/" /etc/ssh/sshd_config \
         && sed -i "s/#PermitUserEnvironment.*/PermitUserEnvironment\ yes/" /etc/ssh/sshd_config \
         && printf "\nWelcome to Alpine!\n\n" > /etc/motd
 
