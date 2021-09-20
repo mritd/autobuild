@@ -1,0 +1,49 @@
+build-poetbot:
+    DO ../udcs/image+GO
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    
+    RUN --mount=type=cache,target=/go/pkg \
+        apk add alpine-sdk linux-headers zlib-dev openssl-dev gperf php cmake \
+        && git clone https://github.com/tdlib/td.git \
+        && (cd td && rm -rf build && mkdir build && cd build \
+        && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local .. \
+        && cmake --build . --target install -- -j$(nproc) \
+        && cd ../../ && ls -l /usr/local) \
+        && export BUILD_VERSION="CI Auto Build" \
+        && export BUILD_DATE=$(date "+%F %T") \
+        && go install -ldflags \
+                "-X 'main.version=${BUILD_VERSION}' \
+                -X 'main.buildDate=${BUILD_DATE}'" \
+                github.com/mritd/poetbot@master \
+        && scanelf --needed --nobanner /go/bin/poetbot | \
+            awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' | \
+            sort -u | tee /dep_so
+
+    SAVE ARTIFACT /dep_so
+    SAVE ARTIFACT /go/bin/poetbot
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/language/go+FIX_DNS
+
+    BUILD +build-poetbot
+    
+    COPY +build-poetbot/dep_so /dep_so
+    COPY +build-poetbot/poetbot /usr/bin/poetbot
+
+    RUN apk add $(cat /dep_so) --no-cache \
+        && wget https://raw.githubusercontent.com/mritd/poetbot/master/poet.txt -O /poet.txt
+    
+    VOLUME /data
+
+    ENTRYPOINT ["poetbot"]
+
+    SAVE IMAGE --push mritd/poetbot:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
