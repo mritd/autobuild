@@ -9,8 +9,9 @@ build-poetbot:
         && (cd td && rm -rf build && mkdir build && cd build \
         && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local .. \
         && cmake --build . --target install -- -j$(nproc) \
-        && cd ../../ && ls -l /usr/local) \
-        && export BUILD_VERSION="CI Auto Build" \
+        && cd ../../ && ls -l /usr/local)
+
+    RUN export BUILD_VERSION="CI Auto Build" \
         && export BUILD_DATE=$(date "+%F %T") \
         && go install -ldflags \
                 "-X 'main.version=${BUILD_VERSION}' \
@@ -46,4 +47,4 @@ build:
     SAVE IMAGE --push mritd/poetbot:latest
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
