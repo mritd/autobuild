@@ -1,0 +1,28 @@
+build-s2h:
+    DO ../udcs/image+GO
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    
+    RUN --mount=type=cache,target=/go/pkg \
+        go install github.com/mritd/s2h@master
+
+    SAVE ARTIFACT /go/bin/s2h
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/language/go+FIX_DNS
+
+    BUILD +build-s2h
+    
+    COPY +build-s2h/s2h /usr/bin/s2h
+    
+    ENTRYPOINT ["s2h"]
+
+    SAVE IMAGE --push mritd/s2h:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
