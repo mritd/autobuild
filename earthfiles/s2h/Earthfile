@@ -4,7 +4,7 @@ build-s2h:
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
     
     RUN --mount=type=cache,target=/go/pkg \
-        go install github.com/mritd/s2h@master
+        go install -trimpath -ldflags '-w -s' github.com/mritd/s2h@master
 
     SAVE ARTIFACT /go/bin/s2h
 
