@@ -3,6 +3,11 @@ name: mritd/privoxy
 on:
   schedule:
     - cron: '* 8 * * 1'
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: 'Manually trigger'
+        required: true
 
 jobs:
   docker:
