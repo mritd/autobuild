@@ -1,0 +1,47 @@
+build:
+    DO ../udcs/image+UBUNTU
+    DO ../udcs+LABEL
+    DO ../udcs/os/debian+UPGRADE
+    DO ../udcs/os/debian+COMMON_PKG
+    DO ../udcs/os/debian+LOCALE
+    DO ../udcs/os/debian+TIMEZONE
+
+    ENV BUILD_USER asuswrt
+    ENV BUILD_USER_HOME /home/asuswrt
+
+    RUN set -ex \
+        && apt update \
+        && apt upgrade -y \
+        && apt install -y git vim rsync sudo \
+        && useradd -m -r -s /bin/bash ${BUILD_USER} \
+        && echo 'asuswrt ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/${BUILD_USER} \
+        && ln -sf /bin/bash /bin/sh \
+        && apt autoclean -y \
+        && rm -rf /var/lib/apt/lists/*
+
+    RUN set -ex \
+        && dpkg --add-architecture i386 \
+        && apt update \
+        && apt install -y libtool-bin cmake libproxy-dev uuid-dev liblzo2-dev \
+            autoconf automake bash bison bzip2 diffutils file flex m4 g++ gawk \
+            groff-base libtool libslang2 make patch perl pkg-config shtool \
+            subversion tar texinfo zlib1g zlib1g-dev gettext libexpat1-dev \
+            libssl-dev cvs gperf unzip python libxml-parser-perl gcc-multilib \
+            gconf-editor libxml2-dev g++-multilib gitk libncurses5 mtd-utils \
+            libncurses5-dev libvorbis-dev git autopoint autogen sed build-essential \
+            intltool libelf1:i386 libglib2.0-dev xutils-dev lib32z1-dev \
+            lib32stdc++6 xsltproc gtk-doc-tools bc \
+        && apt autoclean -y \
+        && rm -rf /var/lib/apt/lists/*
+
+    USER ${BUILD_USER}
+
+    COPY download.sh ${BUILD_USER_HOME}/download.sh
+    COPY rsync.sh ${BUILD_USER_HOME}/rsync.sh
+
+    CMD ["bash"]
+
+    SAVE IMAGE --push mritd/asuswrt-merlin-build:latest
+
+all:
+    BUILD --platform=linux/amd64 +build

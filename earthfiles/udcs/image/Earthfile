@@ -6,6 +6,10 @@ DEBIAN:
     COMMAND
     FROM debian
 
+UBUNTU:
+    COMMAND
+    FROM ubuntu
+
 GOLANG:
     COMMAND
     FROM golang:1-alpine
