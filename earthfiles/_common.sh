@@ -9,3 +9,5 @@ function init_earthly(){
         sudo chmod +x /usr/local/bin/earthly
     fi
 }
+
+export DATE_TAG=$(date "+%Y%m%d%H%M%S")

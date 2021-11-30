@@ -5,7 +5,7 @@ set -e
 source ../_common.sh
 
 function build(){
-    earthly -P --push +all
+    earthly -P --build-arg DATE_TAG=${DATE_TAG} --push +all
 }
 
 install_pkg
