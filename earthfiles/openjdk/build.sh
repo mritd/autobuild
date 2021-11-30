@@ -5,6 +5,7 @@ set -e
 source ../_common.sh
 
 function build(){
+    echo "################## ${DATE_TAG} ##################"
     earthly -P --build-arg DATE_TAG=${DATE_TAG} --push +all
 }
 
