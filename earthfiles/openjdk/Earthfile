@@ -7,7 +7,6 @@ OPENJDK:
     DO ../udcs/os/debian+COMMON_PKG
     DO ../udcs/os/debian+LOCALE
     DO ../udcs/os/debian+TIMEZONE
-    DO ../udcs/language/java+JAVA_OPTS
     DO ../udcs+TINI
     
     ENTRYPOINT ["tini","--"]
@@ -51,6 +50,7 @@ JAVA_BUILD:
 build-openjdk8:
     DO ../udcs/image+JDK8
     DO +OPENJDK
+    DO ../udcs/language/java+JAVA_OPTS
 
     SAVE IMAGE --push mritd/openjdk8:latest mritd/openjdk8:hotspot mritd/openjdk8:hotspot-${DATE_TAG}
 
@@ -63,6 +63,7 @@ build-openjdk8-openj9:
 build-openjdk11:
     DO ../udcs/image+JDK11
     DO +OPENJDK
+    DO ../udcs/language/java+JAVA_OPTS
 
     SAVE IMAGE --push mritd/openjdk11:latest mritd/openjdk11:hotspot mritd/openjdk11:hotspot-${DATE_TAG}
 
@@ -75,6 +76,7 @@ build-openjdk11-openj9:
 build-openjdk8-javabuild:
     DO ../udcs/image+JDK8
     DO +OPENJDK
+    DO ../udcs/language/java+JAVA_OPTS
     DO +JAVA_BUILD
 
     SAVE IMAGE --push mritd/javabuild8:latest mritd/javabuild8:hotspot mritd/javabuild8:hotspot-${DATE_TAG}
@@ -89,6 +91,7 @@ build-openjdk8-openj9-javabuild:
 build-openjdk11-javabuild:
     DO ../udcs/image+JDK11
     DO +OPENJDK
+    DO ../udcs/language/java+JAVA_OPTS
     DO +JAVA_BUILD
 
     SAVE IMAGE --push mritd/javabuild11:latest mritd/javabuild11:hotspot mritd/javabuild11:hotspot-${DATE_TAG}
