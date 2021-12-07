@@ -7,6 +7,7 @@ OPENJDK:
     DO ../udcs/os/debian+COMMON_PKG
     DO ../udcs/os/debian+LOCALE
     DO ../udcs/os/debian+TIMEZONE
+    DO ../udcs/language/java+JAVA_OPTS
     DO ../udcs+TINI
     
     ENTRYPOINT ["tini","--"]

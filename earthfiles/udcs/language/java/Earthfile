@@ -1,0 +1,13 @@
+JAVA_OPTS:
+    COMMAND
+    ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom \
+                -XX:AutoBoxCacheMax=20000 \
+                -XX:+UnlockExperimentalVMOptions \
+                -XX:+UseCGroupMemoryLimitForHeap \
+                -XX:+AlwaysPreTouch \
+                -XX:+PrintFlagsFinal \
+                -XX:+PrintCommandLineFlags \
+                -XX:+PrintGCDateStamps \
+                -XX:+PrintGCDetails \
+                -XX:+PrintGCApplicationStoppedTime \
+                -Xloggc:/var/log/jvmgc.log
