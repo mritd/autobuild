@@ -1,0 +1,18 @@
+docker-cli:
+    FROM docker
+    SAVE ARTIFACT /usr/local/bin/docker /usr/local/bin/docker
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+
+    COPY +docker-cli/usr/local/bin/docker /usr/local/bin/docker
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push mritd/docker-cli:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
