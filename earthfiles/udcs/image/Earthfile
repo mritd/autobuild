@@ -24,7 +24,7 @@ JDK8:
 
 JDK8_OPENJ9:
     COMMAND
-    FROM eclipse-temurin:8-jdk-openj9
+    FROM adoptopenjdk:8-jdk-openj9
 
 JDK11:
     COMMAND
