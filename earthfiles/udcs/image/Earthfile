@@ -20,15 +20,15 @@ GO:
 
 JDK8:
     COMMAND
-    FROM adoptopenjdk:8-jdk
+    FROM eclipse-temurin:8-jdk
 
 JDK8_OPENJ9:
     COMMAND
-    FROM adoptopenjdk:8-jdk-openj9
+    FROM eclipse-temurin:8-jdk-openj9
 
 JDK11:
     COMMAND
-    FROM adoptopenjdk:11-jdk
+    FROM eclipse-temurin:11-jdk
 
 JDK11_OPENJ9:
     COMMAND
