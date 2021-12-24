@@ -24,7 +24,7 @@ JDK8:
 
 JDK8_OPENJ9:
     COMMAND
-    FROM adoptopenjdk:8-jdk-openj9
+    FROM ibm-semeru-runtimes:open-8-jdk
 
 JDK11:
     COMMAND
@@ -32,7 +32,7 @@ JDK11:
 
 JDK11_OPENJ9:
     COMMAND
-    FROM adoptopenjdk:11-jdk-openj9
+    FROM ibm-semeru-runtimes:open-11-jdk
 
 NODE:
     COMMAND
