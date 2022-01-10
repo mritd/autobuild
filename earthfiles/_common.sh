@@ -1,4 +1,5 @@
 function install_pkg(){
+    sudo apt update -y
     sudo apt install jq qemu binfmt-support qemu-user-static -y
 }
 
