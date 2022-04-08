@@ -27,7 +27,6 @@ JAVA_OPTS_17:
                     -XX:+PrintFlagsFinal
                     -XX:+PrintCommandLineFlags
                     -XX:+PrintGCDetails
-                    -XX:+PrintGCApplicationStoppedTime
                     -XX:+HeapDumpOnOutOfMemoryError
                     -XX:HeapDumpPath=/var/log/jvm_dumps
                     -Xloggc:/var/log/jvmgc.log
