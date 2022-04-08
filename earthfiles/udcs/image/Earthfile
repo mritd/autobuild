@@ -34,6 +34,14 @@ JDK11_OPENJ9:
     COMMAND
     FROM ibm-semeru-runtimes:open-11-jdk
 
+JDK17:
+    COMMAND
+    FROM eclipse-temurin:17-jdk
+
+JDK17_OPENJ9:
+    COMMAND
+    FROM ibm-semeru-runtimes:open-17-jdk
+
 NODE:
     COMMAND
     FROM node:lts-buster
