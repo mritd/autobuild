@@ -78,7 +78,7 @@ build-openjdk11-openj9:
 build-openjdk17:
     DO ../udcs/image+JDK17
     DO +OPENJDK
-    DO ../udcs/language/java+JAVA_OPTS
+    DO ../udcs/language/java+JAVA_OPTS_17
 
     SAVE IMAGE --push mritd/openjdk17:latest mritd/openjdk17:hotspot mritd/openjdk17:hotspot-${DATE_TAG}
 
@@ -123,7 +123,7 @@ build-openjdk11-openj9-javabuild:
 build-openjdk17-javabuild:
     DO ../udcs/image+JDK17
     DO +OPENJDK
-    DO ../udcs/language/java+JAVA_OPTS
+    DO ../udcs/language/java+JAVA_OPTS_17
     DO +JAVA_BUILD
 
     SAVE IMAGE --push mritd/javabuild17:latest mritd/javabuild17:hotspot mritd/javabuild17:hotspot-${DATE_TAG}

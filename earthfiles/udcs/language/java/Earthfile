@@ -15,3 +15,20 @@ JAVA_OPTS:
                     -XX:HeapDumpPath=/var/log/jvm_dumps
                     -Xloggc:/var/log/jvmgc.log
                     -XshowSettings:vm"
+
+JAVA_OPTS_17:
+    COMMAND
+    # see also: https://merikan.com/2019/04/jvm-in-a-container
+    ENV JAVA_OPTS "-Djava.security.egd=file:/dev/./urandom
+                    -XX:AutoBoxCacheMax=20000
+                    -XX:MinRAMPercentage=45.0
+                    -XX:MaxRAMPercentage=80.0
+                    -XX:+AlwaysPreTouch
+                    -XX:+PrintFlagsFinal
+                    -XX:+PrintCommandLineFlags
+                    -XX:+PrintGCDetails
+                    -XX:+PrintGCApplicationStoppedTime
+                    -XX:+HeapDumpOnOutOfMemoryError
+                    -XX:HeapDumpPath=/var/log/jvm_dumps
+                    -Xloggc:/var/log/jvmgc.log
+                    -XshowSettings:vm"
