@@ -26,8 +26,7 @@ JAVA_OPTS_17:
                     -XX:+AlwaysPreTouch
                     -XX:+PrintFlagsFinal
                     -XX:+PrintCommandLineFlags
-                    -XX:+PrintGCDetails
                     -XX:+HeapDumpOnOutOfMemoryError
                     -XX:HeapDumpPath=/var/log/jvm_dumps
-                    -Xloggc:/var/log/jvmgc.log
+                    -Xlog:gc:/var/log/jvmgc.log
                     -XshowSettings:vm"
