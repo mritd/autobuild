@@ -1,3 +1,5 @@
+VERSION 0.6
+
 ALPINE:
     COMMAND
     FROM alpine
@@ -52,7 +54,7 @@ NGINX:
 
 CONFLUENCE:
     COMMAND
-    FROM atlassian/confluence-server:7.12
+    FROM atlassian/confluence-server:7-ubuntu
 
 JIRA:
     COMMAND
