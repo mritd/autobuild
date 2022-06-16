@@ -47,7 +47,7 @@ build:
     
     COPY +build-caddy/caddy /usr/bin/caddy
     
-    RUN apk add mailcap --no-cache \
+    RUN apk add mailcap nss-tools --no-cache \
         && mkdir /etc/caddy /usr/share/caddy \
         && curl -s https://raw.githubusercontent.com/caddyserver/dist/master/config/Caddyfile > /etc/caddy/Caddyfile \
         && curl -s https://raw.githubusercontent.com/caddyserver/dist/master/welcome/index.html > /usr/share/caddy/index.html
