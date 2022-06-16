@@ -17,7 +17,7 @@ OPENJDK:
 
 JAVA_BUILD:
     COMMAND
-    ENV MAVEN_VERSION 3.8.5
+    ENV MAVEN_VERSION 3.8.6
     ENV MAVEN_CACHE_DIR /data/maven_cache
     ENV MAVEN_INSTALL_DIR /usr/local/maven
     ENV MAVEN_DOWNLOAD_URL https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
