@@ -1,0 +1,31 @@
+VERSION 0.6
+
+build-derper:
+    DO ../udcs/image+GO
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    
+    RUN --mount=type=cache,target=/go/pkg \
+        go install tailscale.com/cmd/derper@main
+
+    SAVE ARTIFACT /go/bin/derper
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/language/go+FIX_DNS
+
+    BUILD +build-derper
+    
+    COPY +build-derper/derper /usr/bin/derper
+    
+    ENTRYPOINT ["derper"]
+    CMD ["server"]
+
+    SAVE IMAGE --push mritd/derper:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
