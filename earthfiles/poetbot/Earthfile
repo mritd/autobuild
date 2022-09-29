@@ -49,4 +49,4 @@ build:
     SAVE IMAGE --push mritd/poetbot:latest
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
+    BUILD --platform=linux/amd64 +build
