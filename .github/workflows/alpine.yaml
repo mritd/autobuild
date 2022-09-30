@@ -34,12 +34,11 @@ jobs:
     - name: Docker Login
       run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
     - name: Install Deps
-      run:
-      - sudp apt update -y
-      - sudo apt install curl jq qemu binfmt-support qemu-user-static -y
+      run: |
+        sudp apt update -y
+        sudo apt install curl jq qemu binfmt-support qemu-user-static -y
     - name: Install Earthly
-      run:
-      - sudo curl -fsSL $(curl -fsSL ${EARTHLY_RELEASE_URL} | jq -r '.assets[].browser_download_url' | grep earthly-linux-amd64) > /usr/local/bin/earthly
+      run: sudo curl -fsSL $(curl -fsSL ${EARTHLY_RELEASE_URL} | jq -r '.assets[].browser_download_url' | grep earthly-linux-amd64) > /usr/local/bin/earthly
     - name: Run Build
       working-directory: earthfiles/${{ github.job }}
       run: earthly --ci --allow-privileged --push +all
