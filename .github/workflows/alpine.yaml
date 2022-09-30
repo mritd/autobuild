@@ -16,9 +16,10 @@ jobs:
   alpine:
     runs-on: ubuntu-latest
     env:
+      FORCE_COLOR: 1
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-      FORCE_COLOR: 1
+      EARTHLY_RELEASE_URL: https://api.github.com/repos/earthly/earthly/releases/latest
     steps:
     - uses: actions/checkout@v2
     - name: Put back the git branch into git (Earthly uses it for tagging)
@@ -32,8 +33,13 @@ jobs:
         git checkout -b "$branch" || true
     - name: Docker Login
       run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
-    - name: Install Task
-      uses: arduino/setup-task@v1
-    - name: Run Task
-      working-directory: earthfiles
-      run: task ${{ github.job }}
+    - name: Install Deps
+      run:
+      - sudp apt update -y
+      - sudo apt install curl jq qemu binfmt-support qemu-user-static -y
+    - name: Install Earthly
+      run:
+      - sudo curl -fsSL $(curl -fsSL ${EARTHLY_RELEASE_URL} | jq -r '.assets[].browser_download_url' | grep earthly-linux-amd64) > /usr/local/bin/earthly
+    - name: Run Build
+      working-directory: earthfiles/${{ github.job }}
+      run: earthly --ci --allow-privileged --push +all
