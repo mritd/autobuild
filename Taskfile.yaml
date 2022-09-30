@@ -11,7 +11,7 @@ tasks:
       EARTHLY_DOWNLOAD_URL:
         sh: curl -fsSL https://api.github.com/repos/earthly/earthly/releases/latest | jq -r '.assets[].browser_download_url' | grep earthly-linux-amd64
     cmds:
-      - sudo curl -fsSL ${EARTHLY_DOWNLOAD_URL} > /usr/local/bin/earthly
+      - sudo curl -fsSL {{.EARTHLY_DOWNLOAD_URL}} > /usr/local/bin/earthly
       - sudo chmod +x /usr/local/bin/earthly
   earthly-build:
     deps: [install-earthly]
