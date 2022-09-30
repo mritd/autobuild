@@ -37,7 +37,7 @@ build:
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
-    ARG VERSION
+    ARG VERSION=$(curl -fsSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
 
     BUILD +build-caddy --build-arg --VERSION=${VERSION}
     

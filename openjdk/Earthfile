@@ -1,6 +1,6 @@
 VERSION 0.6
 
-ARG --required DATE_TAG
+ARG DATE_TAG=$(date "+%Y%m%d%H%M%S")
 
 OPENJDK:
     COMMAND
@@ -10,7 +10,7 @@ OPENJDK:
     DO ../udcs/os/debian+LOCALE
     DO ../udcs/os/debian+TIMEZONE
     DO ../udcs+TINI
-    
+
     ENTRYPOINT ["tini","--"]
 
     CMD ["bash"]
