@@ -21,6 +21,7 @@ env:
 
 jobs:
   alpine:
+    runs-on: ubuntu-22.04
     needs: install-deps
     concurrency: docker-image
     steps:
@@ -31,6 +32,7 @@ jobs:
       run: earthly --ci --allow-privileged --push +all
 
   certmonitor:
+    runs-on: ubuntu-22.04
     needs: install-deps
     concurrency: docker-image
     steps:
