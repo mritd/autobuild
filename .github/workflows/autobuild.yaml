@@ -1,4 +1,6 @@
-name: mritd/alpine
+name: autobuild
+
+concurrency: docker-image
 
 on:
   schedule:
@@ -13,7 +15,7 @@ on:
           - build
 
 jobs:
-  alpine:
+  install-deps:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
@@ -41,6 +43,19 @@ jobs:
       run: |
         sudo curl -fsSL $(curl -fsSL ${EARTHLY_RELEASE_URL} | jq -r '.assets[].browser_download_url' | grep earthly-linux-amd64) > /usr/local/bin/earthly
         sudo chmod +x /usr/local/bin/earthly
+
+  alpine:
+    needs: install-deps
+    concurrency: docker-image
+    steps:
+    - name: Earthly Build
+      working-directory: earthfiles/${{ github.job }}
+      run: earthly --ci --allow-privileged --push +all
+
+  certmonitor:
+    needs: install-deps
+    concurrency: docker-image
+    steps:
     - name: Earthly Build
       working-directory: earthfiles/${{ github.job }}
       run: earthly --ci --allow-privileged --push +all
