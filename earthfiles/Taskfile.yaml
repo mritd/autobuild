@@ -1,4 +1,23 @@
 version: '3'
 
-env:
-  EARTHLY
+tasks:
+  install-pkgs:
+    cmds:
+      - apt update -y
+      - apt install curl jq qemu binfmt-support qemu-user-static -y
+  install-earthly:
+    deps: [install-pkgs]
+    vars:
+      EARTHLY_DOWNLOAD_URL:
+        sh: curl -fsSL https://api.github.com/repos/earthly/earthly/releases/latest | jq -r '.assets[].browser_download_url' | grep earthly-linux-amd64
+    cmds:
+      - curl -fsSL ${EARTHLY_DOWNLOAD_URL} > /usr/local/bin/earthly
+      - chmod +x /usr/local/bin/earthly
+  earthly-build:
+    deps: [install-earthly]
+    cmds:
+      - earthly --allow-privileged --push +all
+  alpine:
+    dir: {{.TASK}}
+    cmds:
+      - task: earthly-build

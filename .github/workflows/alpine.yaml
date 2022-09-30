@@ -8,9 +8,12 @@ on:
       trigger:
         description: 'Manually trigger'
         required: true
+        type: choice
+        options:
+          - build
 
 jobs:
-  docker:
+  alpine:
     runs-on: ubuntu-latest
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -29,6 +32,7 @@ jobs:
         git checkout -b "$branch" || true
     - name: Docker Login
       run: docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_PASSWORD"
-    - name: Multi-platform builds
-      working-directory: earthfiles/alpine
-      run: bash build.sh
+    - name: Install Task
+      uses: arduino/setup-task@v1
+    - name: Run Task
+      run: task ${{ github.job }}
