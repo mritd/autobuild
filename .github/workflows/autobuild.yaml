@@ -22,7 +22,6 @@ env:
 jobs:
   alpine:
     runs-on: ubuntu-22.04
-    needs: install-deps
     concurrency: docker-image
     steps:
     - name: Init
@@ -33,7 +32,6 @@ jobs:
 
   certmonitor:
     runs-on: ubuntu-22.04
-    needs: install-deps
     concurrency: docker-image
     steps:
     - name: Init
