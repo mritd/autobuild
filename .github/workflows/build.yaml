@@ -1,4 +1,4 @@
-name: autobuild
+name: Build Images
 
 concurrency: docker-image
 
