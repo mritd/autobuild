@@ -26,4 +26,4 @@ jobs:
       uses: mritd/init-earthly-action@main
     - name: Earthly Build
       working-directory: ${{ github.job }}
-      run: earthly --ci --allow-privileged --push +all
+      run: earthly --allow-privileged --push +all
