@@ -18,6 +18,6 @@ tasks:
     cmds:
       - earthly --allow-privileged --push +all
   alpine:
-    dir: earthfiles/{{.TASK}}
+    dir: {{.TASK}}
     cmds:
       - task: earthly-build

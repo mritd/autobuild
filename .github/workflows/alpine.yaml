@@ -35,4 +35,5 @@ jobs:
     - name: Install Task
       uses: arduino/setup-task@v1
     - name: Run Task
+      working-directory: earthfiles
       run: task ${{ github.job }}
