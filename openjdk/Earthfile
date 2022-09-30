@@ -1,5 +1,8 @@
 VERSION 0.6
 
+LOCALLY
+ARG DATE_TAG=$(date "+%Y%m%d%H%M%S")
+
 OPENJDK:
     COMMAND
     DO ../udcs+LABEL
@@ -8,8 +11,6 @@ OPENJDK:
     DO ../udcs/os/debian+LOCALE
     DO ../udcs/os/debian+TIMEZONE
     DO ../udcs+TINI
-
-    ARG DATE_TAG=$(date "+%Y%m%d%H%M%S")
 
     ENTRYPOINT ["tini","--"]
 
