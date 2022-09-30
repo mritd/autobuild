@@ -1,6 +1,7 @@
 VERSION 0.6
 
-LOCALLY
+FROM mritd/alpine
+
 ARG DATE_TAG=$(date "+%Y%m%d%H%M%S")
 
 OPENJDK:
