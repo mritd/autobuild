@@ -9,8 +9,8 @@ build:
 
     ENV AGENT_PATH /opt/atlassian-agent.jar
 
-    COPY atlassian-agent.jar ${AGENT_PATH}
-    COPY hijack.sh /hijack.sh
+    COPY ./atlassian-agent.jar ${AGENT_PATH}
+    COPY ./hijack.sh /hijack.sh
 
     RUN chown ${RUN_USER}:${RUN_GROUP} ${AGENT_PATH}
 
