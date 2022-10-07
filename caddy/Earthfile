@@ -24,9 +24,7 @@ build-caddy:
             --with github.com/porech/caddy-maxmind-geolocation \
             --with github.com/caddyserver/transform-encoder \
             --with github.com/caddyserver/replace-response \
-            --with github.com/imgk/caddy-trojan \
-            --with github.com/mholt/caddy-l4 \
-            --with github.com/mholt/caddy-webdav
+            --with github.com/imgk/caddy-trojan
 
     SAVE ARTIFACT /caddy
 
