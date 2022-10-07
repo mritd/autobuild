@@ -20,7 +20,7 @@ env:
 jobs:
   REPLACE_NAME:
     runs-on: ubuntu-22.04
-    concurrency: docker-image
+    #concurrency: docker-image
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
