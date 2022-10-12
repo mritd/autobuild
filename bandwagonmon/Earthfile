@@ -6,7 +6,7 @@ build-bandwagonmon:
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
     
     RUN set -e \
-        && go install github.com/mritd/bandwagonmon@master
+        && go install -trimpath -ldflags "-w -s" github.com/mritd/bandwagonmon@master
 
     SAVE ARTIFACT /go/bin/bandwagonmon
 
