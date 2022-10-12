@@ -1,0 +1,30 @@
+VERSION 0.6
+
+build-bandwagonmon:
+    DO ../udcs/image+GO
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    
+    RUN set -e \
+        && go install github.com/mritd/bandwagonmon@master
+
+    SAVE ARTIFACT /go/bin/bandwagonmon
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/language/go+FIX_DNS
+
+    BUILD +build-bandwagonmon
+    
+    COPY +build-bandwagonmon/bandwagonmon /usr/bin/bandwagonmon
+
+    ENTRYPOINT ["bandwagonmon"]
+
+    SAVE IMAGE --push mritd/bandwagonmon:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
