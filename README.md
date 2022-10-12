@@ -22,6 +22,8 @@
 |[![mritd/ssh](https://github.com/mritd/autobuild/actions/workflows/ssh.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/ssh.yaml)|[https://hub.docker.com/r/mritd/ssh](https://hub.docker.com/r/mritd/ssh)|
 |[![mritd/docker-cli](https://github.com/mritd/autobuild/actions/workflows/docker-cli.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/docker-cli.yaml)|[https://hub.docker.com/r/mritd/docker-cli](https://hub.docker.com/r/mritd/docker-cli)|
 |[![mritd/derper](https://github.com/mritd/autobuild/actions/workflows/derper.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/derper.yaml)|[https://hub.docker.com/r/mritd/derper](https://hub.docker.com/r/mritd/derper)|
+|[![mritd/bandwagonmon](https://github.com/mritd/autobuild/actions/workflows/bandwagonmon.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/bandwagonmon.yaml)|[https://hub.docker.com/r/mritd/bandwagonmon](https://hub.docker.com/r/mritd/bandwagonmon)|
+|[![mritd/notibot](https://github.com/mritd/autobuild/actions/workflows/notibot.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/notibot.yaml)|[https://hub.docker.com/r/mritd/notibot](https://hub.docker.com/r/mritd/notibot)|
 
 
 

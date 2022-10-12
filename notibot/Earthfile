@@ -1,0 +1,30 @@
+VERSION 0.6
+
+build-notibot:
+    DO ../udcs/image+GO
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    
+    RUN set -e \
+        && go install -trimpath -ldflags "-w -s" github.com/mritd/notibot@master
+
+    SAVE ARTIFACT /go/bin/notibot
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/language/go+FIX_DNS
+
+    BUILD +build-notibot
+    
+    COPY +build-notibot/notibot /usr/bin/notibot
+
+    ENTRYPOINT ["notibot"]
+
+    SAVE IMAGE --push mritd/notibot:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
