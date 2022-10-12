@@ -22,7 +22,11 @@ build:
     
     COPY +build-notibot/notibot /usr/bin/notibot
 
-    ENTRYPOINT ["notibot"]
+    EXPOSE 8080
+
+    ENTRYPOINT ["bash", "-c"]
+    
+    CMD ["notibot --username ${NOTI_USERNAME} --password ${NOTI_PASSWORD} --bot-api ${TELEGRAM_API} --bot-token ${TELEGRAM_TOKEN} --recipient ${TELEGRAM_RECIPIENT}"]
 
     SAVE IMAGE --push mritd/notibot:latest
 
