@@ -24,6 +24,7 @@ build:
     ENV DERP_CERT_MODE letsencrypt
     ENV DERP_CERT_DIR /var/run/tailscale
     ENV DERP_STUN true
+    ENV DERP_STUN_PORT 3456
     ENV DERP_VERIFY_CLIENTS false
     
     BUILD +build-derper
@@ -33,11 +34,12 @@ build:
     VOLUME ["/var/run/tailscale"]
 
     CMD deper \
+            --a=${DERP_ADDR} \
             --hostname=${DERP_DOMAIN} \
             --certmode=${DERP_CERT_MODE} \
             --certdir=$DERP_CERT_DIR} \
-            --a=${DERP_ADDR} \
-            --stun=${DERP_STUN}  \
+            --stun=${DERP_STUN} \
+            --stun-port=${DERP_STUN_PORT} \
             --http-port=${DERP_HTTP_PORT} \
             --verify-clients=${DERP_VERIFY_CLIENTS}
 
