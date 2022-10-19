@@ -25,7 +25,7 @@ build:
     ENV DERP_CERT_DIR /var/run/tailscale
     ENV DERP_STUN true
     ENV DERP_STUN_PORT 3456
-    ENV DERP_VERIFY_CLIENTS false
+    ENV DERP_VERIFY_CLIENTS true
     
     BUILD +build-derper
     
