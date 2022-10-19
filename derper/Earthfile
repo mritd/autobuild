@@ -26,6 +26,9 @@ build:
     ENV DERP_STUN true
     ENV DERP_STUN_PORT 3456
     ENV DERP_VERIFY_CLIENTS true
+
+    EXPOSE 8080/tcp
+    EXPOSE 3456/udp
     
     BUILD +build-derper
     
