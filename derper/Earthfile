@@ -33,7 +33,7 @@ build:
 
     VOLUME ["/var/run/tailscale"]
 
-    CMD deper \
+    CMD derper \
             --a=${DERP_ADDR} \
             --hostname=${DERP_DOMAIN} \
             --certmode=${DERP_CERT_MODE} \
