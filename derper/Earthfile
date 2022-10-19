@@ -31,7 +31,7 @@ build:
     
     COPY +build-derper/derper /usr/bin/derper
 
-    VOLUME ["/var/run/tailscale"]
+    VOLUME ["/var/run/tailscale", "/var/lib/derper"]
 
     CMD derper \
             --a=${DERP_ADDR} \
