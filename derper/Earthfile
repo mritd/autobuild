@@ -27,12 +27,11 @@ build:
     ENV DERP_STUN_PORT 3456
     ENV DERP_VERIFY_CLIENTS true
 
+    BUILD +build-derper
+    COPY +build-derper/derper /usr/bin/derper
+
     EXPOSE 8080/tcp
     EXPOSE 3456/udp
-    
-    BUILD +build-derper
-    
-    COPY +build-derper/derper /usr/bin/derper
 
     VOLUME ["/var/run/tailscale", "/var/lib/derper"]
 
