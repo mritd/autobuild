@@ -5,9 +5,14 @@ build-bandwagonmon:
     DO ../udcs/os/alpine+UPGRADE
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
     
+    ENV GIT_REPO https://github.com/mritd/bandwagonmon.git
+    ENV SRC_DIR /go/src/github.com/mritd/bandwagonmon
+
     RUN set -e \
+        && git clone ${GIT_REPO} ${SRC_DIR} \
+        && cd ${SRC_DIR} \
         && export GIT_COMMIT=$(git rev-list -1 HEAD) \
-        && go install -trimpath -ldflags "-w -s -X main.commit=${GIT_COMMIT}" github.com/mritd/bandwagonmon@master
+        && go install -trimpath -ldflags "-w -s -X main.commit=${GIT_COMMIT}"
 
     SAVE ARTIFACT /go/bin/bandwagonmon
 
