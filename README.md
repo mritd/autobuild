@@ -42,26 +42,19 @@ Now, Earthly has solved this problem; I unified the specific language version、
 
 ```sh
 .
-├── earthfiles                      # All Earthfiles are contained in this directory
-│   ├── alpine
-│   │   ├── build.sh
-│   │   └── Earthfile
-│   ├── caddy                       # The second-level directory name is the target image
-│   │   ├── build.sh
-│   │   ├── Earthfile
-│   │   └── version
-│   ├── openjdk
-│   │   ├── build.sh                # Every image directory will have `build.sh` for automated build
-│   │   ├── cgradle                 # If the build image needs some other files, they will also be saved in this directory
-│   │   ├── cmvn
-│   │   └── Earthfile               # Earthfile is a file similar to Dockerfile, it is modular, it is very convenient to reuse code
-│   │
-│   │
-│   └── udcs                        # udcs (user-defined commands) is a special directory where most common Earthfiles are stored
-│       ├── Earthfile               # udcs/Earthfile stores general commands that do not depend on system os and language
-│       ├── image                   # udcs/image stores the basic runtime or compile image of most programming languages
-│       ├── language                # udcs/language stores special commands for specific languages
-│       └── os                      # udcs/os stores special commands for specific system os
+├── caddy                       # The directory name is the target image
+│   └── Earthfile
+├── openjdk
+│   ├── cgradle                 # If the build image needs some other files, they will also be saved in this directory
+│   ├── cmvn
+│   └── Earthfile               # Earthfile is a file similar to Dockerfile, it is modular, it is very convenient to reuse code
+│
+│
+├── udcs                        # udcs (user-defined commands) is a special directory where most common Earthfiles are stored
+│   ├── Earthfile               # udcs/Earthfile stores general commands that do not depend on system os and language
+│   ├── image                   # udcs/image stores the basic runtime or compile image of most programming languages
+│   ├── language                # udcs/language stores special commands for specific languages
+│   └── os                      # udcs/os stores special commands for specific system os
 │
 │
 ├── .github
