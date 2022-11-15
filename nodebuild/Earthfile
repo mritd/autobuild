@@ -1,5 +1,9 @@
 VERSION 0.6
 
+FROM mritd/alpine
+
+ARG DATE_TAG=$(date "+%Y%m%d%H%M%S")
+
 build:
     DO ../udcs/image+NODE
     DO ../udcs+LABEL
@@ -26,7 +30,7 @@ build:
 
     CMD ["node"]
 
-    SAVE IMAGE --push mritd/nodebuild:latest
+    SAVE IMAGE --push mritd/nodebuild:${DATE_TAG} mritd/nodebuild:latest
 
 all:
     BUILD --platform=linux/amd64 +build
