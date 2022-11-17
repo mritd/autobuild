@@ -1,7 +1,7 @@
 VERSION 0.6
 
 FROM mritd/alpine
-ARG DATE_TAG=$(date "+%Y%m%d%H%M%S")
+ARG DATE_TAG=$(date "+%Y%m%d")
 ARG VERSION=$(curl -fsSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
 
 build-caddy:
