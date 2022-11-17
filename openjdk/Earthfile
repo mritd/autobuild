@@ -2,7 +2,7 @@ VERSION 0.6
 
 FROM mritd/alpine
 
-ARG DATE_TAG=$(date "+%Y%m%d%H%M%S")
+ARG DATE_TAG=$(date "+%Y%m%d")
 
 OPENJDK:
     COMMAND
