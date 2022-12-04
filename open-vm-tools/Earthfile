@@ -20,7 +20,7 @@ build:
 
     ENTRYPOINT ["/entrypoint.sh"]
 
-    SAVE IMAGE --push mritd/xpenology-open-vm-tools:${DATE_TAG} mritd/xpenology-open-vm-tools
+    SAVE IMAGE --push mritd/open-vm-tools:${DATE_TAG} mritd/open-vm-tools
 
 all:
     BUILD --platform=linux/amd64 +build
