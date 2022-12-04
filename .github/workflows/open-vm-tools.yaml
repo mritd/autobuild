@@ -1,4 +1,4 @@
-name: mritd/ssh
+name: mritd/open-vm-tools
 
 on:
   schedule:
