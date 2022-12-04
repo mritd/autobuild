@@ -24,6 +24,7 @@
 |[![mritd/derper](https://github.com/mritd/autobuild/actions/workflows/derper.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/derper.yaml)|[https://hub.docker.com/r/mritd/derper](https://hub.docker.com/r/mritd/derper)|
 |[![mritd/bandwagonmon](https://github.com/mritd/autobuild/actions/workflows/bandwagonmon.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/bandwagonmon.yaml)|[https://hub.docker.com/r/mritd/bandwagonmon](https://hub.docker.com/r/mritd/bandwagonmon)|
 |[![mritd/notibot](https://github.com/mritd/autobuild/actions/workflows/notibot.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/notibot.yaml)|[https://hub.docker.com/r/mritd/notibot](https://hub.docker.com/r/mritd/notibot)|
+|[![mritd/open-vm-tools](https://github.com/mritd/autobuild/actions/workflows/open-vm-tools.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/open-vm-tools.yaml)|[https://hub.docker.com/r/mritd/open-vm-tools](https://hub.docker.com/r/mritd/open-vm-tools)|
 
 
 

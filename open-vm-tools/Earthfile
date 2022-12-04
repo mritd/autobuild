@@ -1,0 +1,26 @@
+VERSION 0.6
+
+FROM debian:11-slim
+
+ARG DATE_TAG=$(date "+%Y%m%d")
+
+build:
+    DO ../udcs+LABEL
+    DO ../udcs/os/debian+UPGRADE
+
+    RUN set -ex \
+        && apt update \
+        && apt install openssh-client open-vm-tools -y \
+        && rm -rf /var/lib/apt/lists/*
+
+    COPY shutdown.sh /sbin/shutdown
+    COPY entrypoint.sh /entrypoint.sh
+    
+    VOLUME /root/.ssh
+
+    ENTRYPOINT ["/entrypoint.sh"]
+
+    SAVE IMAGE --push mritd/xpenology-open-vm-tools:${DATE_TAG} mritd/xpenology-open-vm-tools
+
+all:
+    BUILD --platform=linux/amd64 +build
