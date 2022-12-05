@@ -1,16 +1,17 @@
 VERSION 0.6
 
-FROM alpine
+FROM debian:11-slim
 
 ARG DATE_TAG=$(date "+%Y%m%d")
 
 build:
     DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/debian+UPGRADE
 
     RUN set -ex \
-        && apk update \
-        && apk add bash openssh-client open-vm-tools
+        && apt update \
+        && apt install openssh-client open-vm-tools -y \
+        && rm -rf /var/lib/apt/lists/*
 
     COPY shutdown.sh /sbin/shutdown
     COPY entrypoint.sh /entrypoint.sh
