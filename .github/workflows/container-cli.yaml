@@ -1,4 +1,4 @@
-name: mritd/docker-cli
+name: mritd/container-cli
 
 on:
   schedule:
@@ -18,7 +18,7 @@ env:
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 jobs:
-  docker-cli:
+  container-cli:
     runs-on: ubuntu-22.04
     #concurrency: docker-image
     steps:

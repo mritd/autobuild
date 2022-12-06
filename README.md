@@ -20,11 +20,11 @@
 |[![mritd/privoxy](https://github.com/mritd/autobuild/actions/workflows/privoxy.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/privoxy.yaml)|[https://hub.docker.com/r/mritd/privoxy](https://hub.docker.com/r/mritd/privoxy)|
 |[![mritd/s2h](https://github.com/mritd/autobuild/actions/workflows/s2h.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/s2h.yaml)|[https://hub.docker.com/r/mritd/s2h](https://hub.docker.com/r/mritd/s2h)|
 |[![mritd/ssh](https://github.com/mritd/autobuild/actions/workflows/ssh.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/ssh.yaml)|[https://hub.docker.com/r/mritd/ssh](https://hub.docker.com/r/mritd/ssh)|
-|[![mritd/docker-cli](https://github.com/mritd/autobuild/actions/workflows/docker-cli.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/docker-cli.yaml)|[https://hub.docker.com/r/mritd/docker-cli](https://hub.docker.com/r/mritd/docker-cli)|
 |[![mritd/derper](https://github.com/mritd/autobuild/actions/workflows/derper.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/derper.yaml)|[https://hub.docker.com/r/mritd/derper](https://hub.docker.com/r/mritd/derper)|
 |[![mritd/bandwagonmon](https://github.com/mritd/autobuild/actions/workflows/bandwagonmon.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/bandwagonmon.yaml)|[https://hub.docker.com/r/mritd/bandwagonmon](https://hub.docker.com/r/mritd/bandwagonmon)|
 |[![mritd/notibot](https://github.com/mritd/autobuild/actions/workflows/notibot.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/notibot.yaml)|[https://hub.docker.com/r/mritd/notibot](https://hub.docker.com/r/mritd/notibot)|
 |[![mritd/open-vm-tools](https://github.com/mritd/autobuild/actions/workflows/open-vm-tools.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/open-vm-tools.yaml)|[https://hub.docker.com/r/mritd/open-vm-tools](https://hub.docker.com/r/mritd/open-vm-tools)|
+|[![mritd/container-cli](https://github.com/mritd/autobuild/actions/workflows/container-cli.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/container-cli.yaml)|[https://hub.docker.com/r/mritd/container-cli](https://hub.docker.com/r/mritd/container-cli)|
 
 
 
