@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 if [ ! -f /data/ssh_dnsacme ] || [ ! -f /data/ssh_dnsacme.pub ]; then
     ssh-keygen -t ed25519 -f /data/ssh_dnsacme -q -C dnsacme -N "" <<<y >/dev/null 2>&1
