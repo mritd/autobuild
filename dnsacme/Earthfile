@@ -27,15 +27,35 @@ build:
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
+    RUN apk add openssh-client --no-cache
+
+    ENV XDG_CONFIG_HOME /data
+
     BUILD +build-dnsacme
     
     COPY +build-dnsacme/dnsacme-local /usr/local/bin/dnsacme
 
-    EXPOSE 8080
+    VOLUME /data
 
     CMD ["dnsacme"]
     
     SAVE IMAGE --push mritd/dnsacme:latest mritd/dnsacme:${DATE_TAG}
 
+unraid:
+    BUILD +build
+
+    ENV ACME_OBTAINED_HOOK unraid
+
+    COPY unraid.sh /usr/local/bin/unraid
+    COPY entrypoint.sh /entrypoint.sh
+
+    VOLUME /host_ssh
+    VOLUME /host_certs
+
+    ENTRYPOINT ["/entrypoint.sh"]
+
+    SAVE IMAGE --push mritd/dnsacme:unraid mritd/dnsacme:unraid-${DATE_TAG}
+
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +unraid
