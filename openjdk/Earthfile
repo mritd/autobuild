@@ -19,19 +19,18 @@ OPENJDK:
 
 JAVA_BUILD:
     COMMAND
-    ENV MAVEN_VERSION 3.8.6
     ENV MAVEN_CACHE_DIR /data/maven_cache
     ENV MAVEN_INSTALL_DIR /usr/local/maven
-    ENV MAVEN_DOWNLOAD_URL https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
-    
-    ENV GRADLE_VERSION 7.5.1
     ENV GRADLE_CACHE_DIR /data/gradle_cache
     ENV GRADLE_INSTALL_DIR /usr/local/gradle
-    ENV GRADLE_DOWNLOAD_URL https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
 
     ENV PATH ${PATH}:${MAVEN_INSTALL_DIR}/bin:${GRADLE_INSTALL_DIR}/bin
 
     RUN set -e \
+        && export MAVEN_VERSION=$(curl -s https://api.github.com/repos/apache/maven/releases/latest | jq -r '.name') \
+        && export MAVEN_DOWNLOAD_URL=https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+        && export GRADLE_VERSION=$(curl -s https://api.github.com/repos/gradle/gradle/releases/latest | jq -r '.name') \
+        && export GRADLE_DOWNLOAD_URL=https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
         && curl -sSL ${MAVEN_DOWNLOAD_URL} > apache-maven-${MAVEN_VERSION}-bin.tar.gz \
         && tar -zxf apache-maven-${MAVEN_VERSION}-bin.tar.gz \
         && mv apache-maven-${MAVEN_VERSION} ${MAVEN_INSTALL_DIR} \
