@@ -1,0 +1,41 @@
+VERSION 0.6
+
+FROM mritd/alpine
+
+ARG DATE_TAG=$(date "+%Y%m%d")
+
+build-dnsacme:
+    DO ../udcs/image+GO
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    DO ../udcs+GO_TASK
+    
+    ENV REPO https://github.com/mritd/dnsacme.git
+    ENV SRC_PATH /go/src/github.com/mritd/dnsacme
+
+    RUN set -e \
+        && git clone ${REPO} ${SRC_PATH} \
+        && cd ${SRC_PATH} && task
+
+    SAVE ARTIFACT ${SRC_PATH}/build/dnsacme-local
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/language/go+FIX_DNS
+
+    BUILD +build-dnsacme
+    
+    COPY +build-dnsacme/dnsacme-local /usr/local/bin/dnsacme
+
+    EXPOSE 8080
+
+    CMD ["dnsacme"]
+    
+    SAVE IMAGE --push mritd/dnsacme:latest mritd/dnsacme:${DATE_TAG}
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
