@@ -53,8 +53,8 @@ unraid:
     ENV ACME_OBTAINED_HOOK unraid
     
     COPY +build-dnsacme/dnsacme-local /usr/local/bin/dnsacme
-    COPY unraid.sh /usr/local/bin/unraid
-    COPY entrypoint.sh /entrypoint.sh
+    COPY unraid_hook.sh /usr/local/bin/unraid
+    COPY unraid_entrypoint.sh /entrypoint.sh
 
     VOLUME /data
     VOLUME /host_ssh
