@@ -47,6 +47,9 @@ unraid:
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
+    LABEL net.unraid.docker.icon=https://github.com/mritd/dnsacme/raw/main/logo.png
+    LABEL net.unraid.docker.shell=bash
+
     RUN apk add openssh-client --no-cache
 
     ENV XDG_CONFIG_HOME /data
