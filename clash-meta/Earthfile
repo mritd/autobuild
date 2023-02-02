@@ -1,0 +1,47 @@
+VERSION 0.6
+
+FROM mritd/alpine
+ARG DATE_TAG=$(date "+%Y%m%d")
+ARG VERSION=$(curl -fsSL "https://api.github.com/repos/MetaCubeX/Clash.Meta/releases/latest" | jq -r '.tag_name')
+
+build-clash:
+    DO ../udcs/image+GO
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+
+    RUN --mount=type=cache,target=/go/pkg set -e \
+        && echo ">>>>>>>>>>>>>>> Build Version: ${VERSION} <<<<<<<<<<<<<<<" \
+        && git clone --depth 1 --branch $(VERSION) https://github.com/MetaCubeX/Clash.Meta.git /go/src/clash-meta \
+        && go build /go/src/clash-meta/main.go -o /clash -trimpath \
+            -ldflags '-X "github.com/Dreamacro/clash/constant.Version=$(VERSION)" \
+                        -X "github.com/Dreamacro/clash/constant.BuildTime=$(DATE_TAG)" -w -s -buildid='
+
+    SAVE ARTIFACT /clash
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/language/go+FIX_DNS
+
+    BUILD +build-clash --build-arg --VERSION=${VERSION}
+    
+    ENV XDG_CONFIG_HOME /config
+    ENV XDG_DATA_HOME /data
+    
+    COPY +build-clash/clash /usr/bin/clash
+    
+    RUN set -e \
+        && apk add ca-certificates tzdata iptables --no-cache
+    
+    VOLUME /config
+    VOLUME /data
+    
+    CMD ["clash"]
+
+    SAVE IMAGE --push mritd/clash-meta:latest mritd/clash-meta:${VERSION} mritd/clash-meta:${VERSION}-${DATE_TAG}
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
