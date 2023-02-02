@@ -41,6 +41,7 @@ build:
     
     VOLUME /config
     VOLUME /data
+    VOLUME /root/.config/clash
     
     CMD ["clash"]
 
