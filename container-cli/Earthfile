@@ -72,9 +72,10 @@ podman:
            esac \
         && download_url="https://github.com/containers/podman/releases/latest/download/podman-remote-static-linux_${os_arch}.tar.gz" \
         && curl -sSL ${download_url} > podman-remote-static_${os_arch}.tar.gz \
-        && tar -zxvf podman-remote-static_${os_arch}.tar.gz -C /tmp
+        && tar -zxvf podman-remote-static_${os_arch}.tar.gz -C /tmp \
+        && mv /tmp/podman-remote-static_${os_arch} /tmp/podman-remote-static
 
-    SAVE ARTIFACT /tmp/podman-remote-static_${os_arch} /tmp/podman
+    SAVE ARTIFACT /tmp/podman-remote-static /tmp/podman
 
 build:
     DO ../udcs/image+ALPINE
