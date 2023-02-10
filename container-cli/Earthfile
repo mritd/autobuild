@@ -59,7 +59,18 @@ nerdctl:
 podman:
     FROM mritd/alpine
     RUN set -e \
-        && download_url="https://github.com/containers/podman/releases/latest/download/podman-remote-static.tar.gz" \
+        && os_arch=$(uname -m) \
+        && case $os_arch in \
+             x86_64) os_arch="amd64" ;; \
+             x86) os_arch="386" ;; \
+             i686) os_arch="386" ;; \
+             i386) os_arch="386" ;; \
+             aarch64) os_arch="arm64" ;; \
+             armv5*) os_arch="armv5" ;; \
+             armv6*) os_arch="armv6" ;; \
+             armv7*) os_arch="armv7" ;; \
+           esac \
+        && download_url="https://github.com/containers/podman/releases/latest/download/podman-remote-static-linux_${os_arch}.tar.gz" \
         && curl -sSL ${download_url} > podman-remote-static.tar.gz \
         && tar -zxvf podman-remote-static.tar.gz -C /tmp
 
