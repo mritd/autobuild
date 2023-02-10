@@ -9,6 +9,7 @@ build:
     RUN apk add aria2 --no-cache
 
     COPY aria2.conf /etc/aria2.conf
+    COPY entrypoint.sh /entrypoint.sh
 
     VOLUME /data
 
