@@ -71,11 +71,11 @@ podman:
              armv7*) os_arch="armv7" ;; \
            esac \
         && download_url="https://github.com/containers/podman/releases/latest/download/podman-remote-static-linux_${os_arch}.tar.gz" \
-        && curl -sSL ${download_url} > podman-remote-static_${os_arch}.tar.gz \
-        && tar -zxvf podman-remote-static_${os_arch}.tar.gz -C /tmp \
-        && mv /tmp/bin/podman-remote-static_${os_arch} /tmp/podman-remote-static
+        && curl -sSL ${download_url} > podman-remote-static-linux_${os_arch}.tar.gz \
+        && tar -zxvf podman-remote-static-linux_${os_arch}.tar.gz -C /tmp \
+        && mv /tmp/bin/podman-remote-static-linux_${os_arch} /tmp/podman
 
-    SAVE ARTIFACT /tmp/podman-remote-static /tmp/podman
+    SAVE ARTIFACT /tmp/podman /tmp/podman
 
 build:
     DO ../udcs/image+ALPINE
