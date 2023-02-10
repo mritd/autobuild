@@ -27,6 +27,7 @@
 | [![mritd/container-cli](https://github.com/mritd/autobuild/actions/workflows/container-cli.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/container-cli.yaml)          | [https://hub.docker.com/r/mritd/container-cli](https://hub.docker.com/r/mritd/container-cli)       |
 | [![mritd/dnsacme](https://github.com/mritd/autobuild/actions/workflows/dnsacme.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/dnsacme.yaml)                            | [https://hub.docker.com/r/mritd/dnsacme](https://hub.docker.com/r/mritd/dnsacme)                   |
 | [![mritd/clash-meta](https://github.com/mritd/autobuild/actions/workflows/clash-meta.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/clash-meta.yaml)                   | [https://hub.docker.com/r/mritd/clash-meta](https://hub.docker.com/r/mritd/clash-meta)             |
+| [![mritd/aria2](https://github.com/mritd/autobuild/actions/workflows/aria2.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aria2.yaml)                                  | [https://hub.docker.com/r/mritd/aria2](https://hub.docker.com/r/mritd/aria2)                       |
 
 
 

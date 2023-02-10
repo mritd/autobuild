@@ -1,0 +1,24 @@
+VERSION 0.6
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+
+    RUN apk add aria2 --no-cahce
+
+    COPY aria2.conf /etc/aria2.conf
+
+    VOLUME /data
+
+    EXPOSE 6800/tcp
+    EXPOSE 6789/tcp
+    EXPOSE 6789/udp
+
+    CMD ["/entrypoint.sh"]
+
+    SAVE IMAGE --push mritd/aria2:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
