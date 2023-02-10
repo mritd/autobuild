@@ -20,7 +20,6 @@ build:
 
     RUN apt update \
         && apt install python2 -y \
-        && npm config set unsafe-perm true \
         && npm install -g npm \
         && npm install -g pnpm fis3
 
