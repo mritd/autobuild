@@ -11,6 +11,8 @@ build:
     COPY aria2.conf /etc/aria2.conf
     COPY entrypoint.sh /entrypoint.sh
 
+    ENV XDG_DATA_HOME /data
+
     VOLUME /data
 
     EXPOSE 6800/tcp
