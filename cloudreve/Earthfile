@@ -10,7 +10,7 @@ build-frontend:
     RUN set -e \
         && apk add zip \
         && git clone --recurse-submodules https://github.com/mritd/Cloudreve.git /src/cloudreve \
-        && cd /src/cloudreve/assets && yarn install && yarn build \
+        && cd /src/cloudreve/assets && yarn install --network-timeout 1000000000 && yarn build \
         && cd .. && zip -r - assets/build > /tmp/assets.zip
 
     SAVE ARTIFACT /tmp/assets.zip
