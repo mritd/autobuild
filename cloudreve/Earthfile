@@ -1,0 +1,59 @@
+VERSION 0.6
+
+build-frontend:
+    FROM node:16-alpine
+
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+
+    RUN set -e \
+        && apk add zip \
+        && git clone --recurse-submodules https://github.com/mritd/Cloudreve.git /src/cloudreve \
+        && cd /src/cloudreve/assets && yarn install && yarn build \
+        && cd .. && zip -r - assets/build > /tmp/assets.zip
+
+    SAVE ARTIFACT /tmp/assets.zip
+
+build-backend:
+    DO ../udcs/image+GO
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    
+    RUN --mount=type=cache,target=/go/pkg \
+        git clone https://github.com/mritd/Cloudreve.git /src/cloudreve
+
+    COPY +build-frontend/assets.zip /src/cloudreve/assets.zip
+
+    WORKDIR /src/cloudreve
+
+    RUN go build -trimpath -o /tmp/cloudreve -ldflags \
+            "-w -s -X github.com/cloudreve/Cloudreve/v3/pkg/conf.BackendVersion=$(git describe --tags --always) \
+            -X github.com/cloudreve/Cloudreve/v3/pkg/conf.LastCommit=$(git rev-parse --short HEAD)"
+
+    SAVE ARTIFACT /tmp/cloudreve
+
+build:
+    DO ../udcs/image+ALPINE
+    DO ../udcs+LABEL
+    DO ../udcs/os/alpine+UPGRADE
+    DO ../udcs/os/alpine+COMMON_PKG
+    DO ../udcs/os/alpine+TIMEZONE
+    DO ../udcs/language/go+FIX_DNS
+
+    BUILD +build-backend
+    
+    COPY +build-backend/cloudreve /usr/local/bin/cloudreve
+
+    WORKDIR /data
+    
+    EXPOSE 5212
+    
+    VOLUME ["/data"]
+    
+    CMD ["cloudreve"]
+
+    SAVE IMAGE --push mritd/cloudreve:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
