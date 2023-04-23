@@ -1,0 +1,16 @@
+VERSION 0.7
+
+build:
+    FROM mritd/alpine
+
+    RUN set -ex \
+        && curl -sSL https://github.com/megastep/makeself/raw/master/makeself-header.sh > /usr/local/bin/makeself-header.sh \
+        && curl -sSL https://github.com/megastep/makeself/raw/master/makeself.sh > /usr/local/bin/makeself \
+        && chmod +x /usr/local/bin/makeself-header.sh /usr/local/bin/makeself
+
+    CMD ["/bin/bash"]
+
+    SAVE IMAGE --push mritd/makeself:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
