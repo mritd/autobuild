@@ -23,7 +23,7 @@ jobs:
   alpine:
     runs-on: ubuntu-22.04
     concurrency: alpine
-    if: github.event.inputs.action == 'alpine' || github.event.inputs.action == 'all' || github.event_name == 'schedule'
+    if: github.event.inputs.trigger == 'alpine' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -35,7 +35,7 @@ jobs:
     needs: alpine
     runs-on: ubuntu-22.04
     concurrency: alpine
-    if: github.event.inputs.action == 'ssh' || github.event.inputs.action == 'all' || github.event_name == 'schedule'
+    if: github.event.inputs.trigger == 'ssh' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -169,6 +169,7 @@ jobs:
   caddy:
     runs-on: ubuntu-22.04
     concurrency: buildkit
+    if: github.event.inputs.trigger == 'caddy' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -179,6 +180,7 @@ jobs:
   nodebuild:
     runs-on: ubuntu-22.04
     concurrency: buildkit
+    if: github.event.inputs.trigger == 'nodebuild' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -189,6 +191,7 @@ jobs:
   openjdk:
     runs-on: ubuntu-22.04
     concurrency: buildkit
+    if: github.event.inputs.trigger == 'openjdk' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -199,6 +202,7 @@ jobs:
   open-vm-tools:
     runs-on: ubuntu-22.04
     concurrency: buildkit
+    if: github.event.inputs.trigger == 'open-vm-tools' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -209,6 +213,7 @@ jobs:
   nginx-singlepage:
     runs-on: ubuntu-22.04
     concurrency: buildkit
+    if: github.event.inputs.trigger == 'nginx-singlepage' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
