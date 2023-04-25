@@ -1,5 +1,7 @@
 VERSION 0.7
 
+DO ../udcs+BUILD_DATE
+
 build-dnsacme:
     DO ../udcs/image+GO
     DO ../udcs/os/alpine+UPGRADE
@@ -60,5 +62,5 @@ unraid:
     SAVE IMAGE --push mritd/dnsacme:unraid mritd/dnsacme:unraid-${BUILD_DATE}
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build
-    # BUILD --platform=linux/amd64 --platform=linux/arm64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +unraid
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 +unraid

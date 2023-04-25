@@ -1,5 +1,7 @@
 VERSION 0.7
 
+DO ../udcs+BUILD_DATE
+
 OPENJDK:
     COMMAND
     DO ../udcs+LABEL
@@ -136,17 +138,15 @@ build-openjdk17-openj9-javabuild:
 
 
 all:
-    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
-
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk8
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk8-openj9
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk11
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk11-openj9
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk17
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk17-openj9
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk8-javabuild
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk8-openj9-javabuild
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk11-javabuild
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk11-openj9-javabuild
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk17-javabuild
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build-openjdk17-openj9-javabuild
+    BUILD --platform=linux/amd64 +build-openjdk8
+    BUILD --platform=linux/amd64 +build-openjdk8-openj9
+    BUILD --platform=linux/amd64 +build-openjdk11
+    BUILD --platform=linux/amd64 +build-openjdk11-openj9
+    BUILD --platform=linux/amd64 +build-openjdk17
+    BUILD --platform=linux/amd64 +build-openjdk17-openj9
+    BUILD --platform=linux/amd64 +build-openjdk8-javabuild
+    BUILD --platform=linux/amd64 +build-openjdk8-openj9-javabuild
+    BUILD --platform=linux/amd64 +build-openjdk11-javabuild
+    BUILD --platform=linux/amd64 +build-openjdk11-openj9-javabuild
+    BUILD --platform=linux/amd64 +build-openjdk17-javabuild
+    BUILD --platform=linux/amd64 +build-openjdk17-openj9-javabuild

@@ -1,5 +1,7 @@
 VERSION 0.7
 
+DO ../udcs+BUILD_DATE
+
 build-caddy:
     DO ../udcs/image+GO
     DO ../udcs/os/alpine+UPGRADE
@@ -33,10 +35,9 @@ build:
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
-    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
-    ARG VERSION=$(curl -fsSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
+    ARG VERSION=$(curl -sSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
 
-    BUILD +build-caddy --build-arg --VERSION=${VERSION}
+    BUILD +build-caddy --VERSION=${VERSION}
     
     # See https://caddyserver.com/docs/conventions#file-locations for details
     ENV XDG_CONFIG_HOME /config

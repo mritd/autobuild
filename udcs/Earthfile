@@ -6,6 +6,11 @@ LABEL:
     LABEL repository="https://github.com/mritd/autobuild"
     LABEL description="GitHub Action + Earthly Auto Build"
 
+BUILD_DATE:
+    COMMAND
+    FROM mritd/alpine
+    ARG --global BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+
 TINI:
     COMMAND
     ENV TINI_VERSION v0.19.0
