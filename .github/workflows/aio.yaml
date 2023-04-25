@@ -2,15 +2,18 @@ name: All In One
 
 on:
   schedule:
-    - cron: '0 8 * * 1'
+    - cron: 0 16 * * 1
   workflow_dispatch:
     inputs:
-      job:
-        description: 'Choose a job to run'
+      trigger:
+        description: Manually trigger
         required: true
-        type: string
-        default: all
-        options: ${{ steps.get_jobs.outputs.job_options }}
+        type: choice
+        options:
+          - alpine
+          - alpine-base
+          - standalone
+
 
 env:
   FORCE_COLOR: 1
@@ -18,32 +21,10 @@ env:
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 jobs:
-  get_jobs:
-    runs-on: ubuntu-latest
-    outputs:
-      job_options: ${{ toJson(
-        from: steps.list_jobs.outputs.jobs
-      ) }}
-    steps:
-      - name: List Jobs
-        run: echo "::set-output name=jobs::$(echo "${{ toJson(jobs) }}" | jq -r 'keys[]')"
-
   alpine:
     runs-on: ubuntu-latest
     concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-    
-  ssh:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
+    if: contains(github.event.inputs.trigger, ${{ github.job }}, alpine-base, all) || github.event_name == schedule
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -51,192 +32,47 @@ jobs:
       working-directory: ${{ github.job }}
       run: earthly --allow-privileged --push +all
 
-  s2h:
+  alpine-base:
     needs: alpine
     runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
+    strategy:
+      matrix:
+        directory:
+          - ssh
+          - s2h
+          - makeself
+          - derper
+          - container-cli
+          - aria2
+          - bandwagonmon
+          - ddns
+          - dnsacme
+          - idgen
+          - notibot
+          - clash-meta
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
     - name: Earthly Build
-      working-directory: ${{ github.job }}
+      working-directory: ${{ matrix.directory }}
       run: earthly --allow-privileged --push +all
 
-  makeself:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  derper:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  container-cli:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  aria2:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  bandwagonmon:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  ddns:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  dnsacme:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  idgen:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  notibot:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  clash-meta:
-    needs: alpine
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
 
 ##########################################################################
 
-  caddy:
+  standalone:
     runs-on: ubuntu-latest
-    concurrency: buildkit
-    if: github.event.inputs.trigger == 'caddy' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
+    strategy:
+      matrix:
+        directory:
+          - caddy
+          - nodebuild
+          - openjdk
+          - open-vm-tools
+          - nginx-singlepage
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
     - name: Earthly Build
-      working-directory: ${{ github.job }}
+      working-directory: ${{ matrix.directory }}
       run: earthly --allow-privileged --push +all
-
-  nodebuild:
-    runs-on: ubuntu-latest
-    concurrency: buildkit
-    if: github.event.inputs.trigger == 'nodebuild' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  openjdk:
-    runs-on: ubuntu-latest
-    concurrency: buildkit
-    if: github.event.inputs.trigger == 'openjdk' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  open-vm-tools:
-    runs-on: ubuntu-latest
-    concurrency: buildkit
-    if: github.event.inputs.trigger == 'open-vm-tools' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  nginx-singlepage:
-    runs-on: ubuntu-latest
-    concurrency: buildkit
-    if: github.event.inputs.trigger == 'nginx-singlepage' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
