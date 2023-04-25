@@ -10,7 +10,9 @@ on:
         required: true
         type: choice
         options:
+          - all
           - alpine
+          - ssh
 
 env:
   FORCE_COLOR: 1
@@ -21,6 +23,7 @@ jobs:
   alpine:
     runs-on: ubuntu-22.04
     concurrency: alpine
+    if: github.event.inputs.action == 'alpine' || github.event.inputs.action == 'all' || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -32,6 +35,7 @@ jobs:
     needs: alpine
     runs-on: ubuntu-22.04
     concurrency: alpine
+    if: github.event.inputs.action == 'ssh' || github.event.inputs.action == 'all' || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
