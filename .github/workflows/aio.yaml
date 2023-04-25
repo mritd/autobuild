@@ -35,7 +35,9 @@ jobs:
   alpine-base:
     needs: alpine
     runs-on: ubuntu-latest
+    continue-on-error: true
     strategy:
+      max-parallel: 3
       matrix:
         directory:
           - ssh
@@ -58,11 +60,11 @@ jobs:
       run: earthly --allow-privileged --push +all
 
 
-##########################################################################
-
   standalone:
     runs-on: ubuntu-latest
+    continue-on-error: true
     strategy:
+      max-parallel: 3
       matrix:
         directory:
           - caddy
