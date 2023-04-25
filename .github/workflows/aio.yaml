@@ -13,6 +13,7 @@ on:
           - all
           - alpine
           - ssh
+          - test
 
 env:
   FORCE_COLOR: 1
@@ -20,10 +21,15 @@ env:
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
+    steps:
+      - run: echo "${{ toJson(github) }}"
   alpine:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
-    if: github.event.inputs.trigger == 'alpine' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -33,9 +39,9 @@ jobs:
     
   ssh:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
-    if: github.event.inputs.trigger == 'ssh' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -45,8 +51,9 @@ jobs:
 
   s2h:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -56,8 +63,9 @@ jobs:
 
   makeself:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -67,8 +75,9 @@ jobs:
 
   derper:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -78,8 +87,9 @@ jobs:
 
   container-cli:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -89,8 +99,9 @@ jobs:
 
   aria2:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -100,8 +111,9 @@ jobs:
 
   bandwagonmon:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -111,8 +123,9 @@ jobs:
 
   ddns:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -122,8 +135,9 @@ jobs:
 
   dnsacme:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -133,8 +147,9 @@ jobs:
 
   idgen:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -144,8 +159,9 @@ jobs:
 
   notibot:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -155,8 +171,9 @@ jobs:
 
   clash-meta:
     needs: alpine
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: alpine
+    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == 'schedule'
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -167,7 +184,7 @@ jobs:
 ##########################################################################
 
   caddy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: buildkit
     if: github.event.inputs.trigger == 'caddy' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
@@ -178,7 +195,7 @@ jobs:
       run: earthly --allow-privileged --push +all
 
   nodebuild:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: buildkit
     if: github.event.inputs.trigger == 'nodebuild' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
@@ -189,7 +206,7 @@ jobs:
       run: earthly --allow-privileged --push +all
 
   openjdk:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: buildkit
     if: github.event.inputs.trigger == 'openjdk' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
@@ -200,7 +217,7 @@ jobs:
       run: earthly --allow-privileged --push +all
 
   open-vm-tools:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: buildkit
     if: github.event.inputs.trigger == 'open-vm-tools' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
@@ -211,7 +228,7 @@ jobs:
       run: earthly --allow-privileged --push +all
 
   nginx-singlepage:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency: buildkit
     if: github.event.inputs.trigger == 'nginx-singlepage' || github.event.inputs.trigger == 'all' || github.event_name == 'schedule'
     steps:
