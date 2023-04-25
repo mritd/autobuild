@@ -1,0 +1,214 @@
+name: mritd/alpine
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: 'Manually trigger'
+        required: true
+        type: choice
+        options:
+          - alpine
+
+env:
+  FORCE_COLOR: 1
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+jobs:
+  alpine:
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+    
+  ssh:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  s2h:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  makeself:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  derper:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  container-cli:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  aria2:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  bandwagonmon:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  ddns:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  dnsacme:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  idgen:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  notibot:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  clash-meta:
+    needs: alpine
+    runs-on: ubuntu-22.04
+    concurrency: alpine
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+##########################################################################
+
+  caddy:
+    runs-on: ubuntu-22.04
+    concurrency: buildkit
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  nodebuild:
+    runs-on: ubuntu-22.04
+    concurrency: buildkit
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  openjdk:
+    runs-on: ubuntu-22.04
+    concurrency: buildkit
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  open-vm-tools:
+    runs-on: ubuntu-22.04
+    concurrency: buildkit
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+
+  nginx-singlepage:
+    runs-on: ubuntu-22.04
+    concurrency: buildkit
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ github.job }}
+      run: earthly --allow-privileged --push +all
+

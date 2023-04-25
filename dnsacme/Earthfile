@@ -1,9 +1,5 @@
 VERSION 0.7
 
-FROM mritd/alpine
-
-ARG DATE_TAG=$(date "+%Y%m%d")
-
 build-dnsacme:
     DO ../udcs/image+GO
     DO ../udcs/os/alpine+UPGRADE
@@ -20,10 +16,8 @@ build-dnsacme:
     SAVE ARTIFACT ${SRC_PATH}/build/dnsacme-local
 
 build:
-    DO ../udcs/image+ALPINE
-    DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+COMMON_PKG
+    FROM mritd/alpine
+    
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
@@ -37,13 +31,11 @@ build:
 
     CMD ["dnsacme"]
     
-    SAVE IMAGE --push mritd/dnsacme:latest mritd/dnsacme:${DATE_TAG}
+    SAVE IMAGE --push mritd/dnsacme:latest mritd/dnsacme:${BUILD_DATE}
 
 unraid:
-    DO ../udcs/image+ALPINE
-    DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+COMMON_PKG
+    FROM mritd/alpine
+    
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
@@ -65,8 +57,8 @@ unraid:
 
     ENTRYPOINT ["/entrypoint.sh"]
 
-    SAVE IMAGE --push mritd/dnsacme:unraid mritd/dnsacme:unraid-${DATE_TAG}
+    SAVE IMAGE --push mritd/dnsacme:unraid mritd/dnsacme:unraid-${BUILD_DATE}
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +unraid
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build
+    # BUILD --platform=linux/amd64 --platform=linux/arm64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +unraid

@@ -1,9 +1,5 @@
 VERSION 0.7
 
-FROM mritd/alpine
-ARG DATE_TAG=$(date "+%Y%m%d")
-ARG VERSION=$(curl -fsSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
-
 build-caddy:
     DO ../udcs/image+GO
     DO ../udcs/os/alpine+UPGRADE
@@ -37,6 +33,9 @@ build:
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+    ARG VERSION=$(curl -fsSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
+
     BUILD +build-caddy --build-arg --VERSION=${VERSION}
     
     # See https://caddyserver.com/docs/conventions#file-locations for details
@@ -61,7 +60,7 @@ build:
     
     CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
 
-    SAVE IMAGE --push mritd/caddy:latest mritd/caddy:${VERSION} mritd/caddy:${VERSION}-${DATE_TAG}
+    SAVE IMAGE --push mritd/caddy:latest mritd/caddy:${VERSION} mritd/caddy:${VERSION}-${BUILD_DATE}
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build

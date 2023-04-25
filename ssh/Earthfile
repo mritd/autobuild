@@ -1,10 +1,7 @@
 VERSION 0.7
 
 build:
-    DO ../udcs/image+ALPINE
-    DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+COMMON_PKG
+    FROM mritd/alpine
 
     RUN set -e \
         && apk add sudo coreutils zsh git htop shadow openssh python3 --no-cache \

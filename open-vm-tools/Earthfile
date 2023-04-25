@@ -2,8 +2,6 @@ VERSION 0.7
 
 FROM debian:11-slim
 
-ARG DATE_TAG=$(date "+%Y%m%d")
-
 build:
     DO ../udcs+LABEL
     DO ../udcs/os/debian+UPGRADE
@@ -20,7 +18,7 @@ build:
 
     ENTRYPOINT ["/entrypoint.sh"]
 
-    SAVE IMAGE --push mritd/open-vm-tools:${DATE_TAG} mritd/open-vm-tools
+    SAVE IMAGE --push mritd/open-vm-tools:${BUILD_DATE} mritd/open-vm-tools:latest
 
 all:
-    BUILD --platform=linux/amd64 +build
+    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build

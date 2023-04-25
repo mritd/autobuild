@@ -6,15 +6,13 @@ build-derper:
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
     
     RUN --mount=type=cache,target=/go/pkg \
-        go install -ldflags='-w -s' tailscale.com/cmd/derper@main
+        go install -trimpath -ldflags "-w -s" tailscale.com/cmd/derper@main
 
     SAVE ARTIFACT /go/bin/derper
 
 build:
-    DO ../udcs/image+ALPINE
-    DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+COMMON_PKG
+    FROM mritd/alpine
+
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
@@ -28,6 +26,7 @@ build:
     ENV DERP_VERIFY_CLIENTS true
 
     BUILD +build-derper
+
     COPY +build-derper/derper /usr/bin/derper
 
     EXPOSE 8080/tcp
@@ -39,7 +38,7 @@ build:
             --a=${DERP_ADDR} \
             --hostname=${DERP_DOMAIN} \
             --certmode=${DERP_CERT_MODE} \
-            --certdir=$DERP_CERT_DIR} \
+            --certdir=${DERP_CERT_DIR} \
             --stun=${DERP_STUN} \
             --stun-port=${DERP_STUN_PORT} \
             --http-port=${DERP_HTTP_PORT} \

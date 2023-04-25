@@ -15,7 +15,7 @@ build-poetbot:
 
     RUN export BUILD_VERSION="CI Auto Build" \
         && export BUILD_DATE=$(date "+%F %T") \
-        && go install -ldflags \
+        && go install -trimpath -ldflags \
                 "-X 'main.version=${BUILD_VERSION}' \
                 -X 'main.buildDate=${BUILD_DATE}'" \
                 github.com/mritd/poetbot@master \
@@ -27,10 +27,8 @@ build-poetbot:
     SAVE ARTIFACT /go/bin/poetbot
 
 build:
-    DO ../udcs/image+ALPINE
-    DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+COMMON_PKG
+    FROM mritd/alpine
+    
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 

@@ -6,15 +6,13 @@ build-ddns:
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
     
     RUN --mount=type=cache,target=/go/pkg \
-        go install github.com/mritd/ddns@latest
+        go install -trimpath -ldflags "-w -s" github.com/mritd/ddns@latest
 
     SAVE ARTIFACT /go/bin/ddns
 
 build:
-    DO ../udcs/image+ALPINE
-    DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+COMMON_PKG
+    FROM mritd/alpine
+    
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 

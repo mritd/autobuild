@@ -1,15 +1,13 @@
 VERSION 0.7
 
-FROM mritd/alpine
-
-ARG DATE_TAG=$(date "+%Y%m%d")
-
 docker-cli:
     FROM docker
+
     SAVE ARTIFACT /usr/local/bin/docker /tmp/docker
 
 docker-compose:
     FROM mritd/alpine
+
     RUN set -e \
         && download_url="https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)" \
         && curl -sSL ${download_url} > /tmp/docker-compose \
@@ -18,6 +16,7 @@ docker-compose:
 
 kubectl:
     FROM mritd/alpine
+
     RUN set -e \
         && version=$(curl -sSL https://dl.k8s.io/release/stable.txt) \
         && os_arch=$(uname -m) \
@@ -37,6 +36,7 @@ kubectl:
 
 nerdctl:
     FROM mritd/alpine
+
     RUN set -e \
         && os_arch=$(uname -m) \
         && case $os_arch in \
@@ -58,6 +58,7 @@ nerdctl:
 
 podman:
     FROM mritd/alpine
+
     RUN set -e \
         && os_arch=$(uname -m) \
         && case $os_arch in \
@@ -78,10 +79,11 @@ podman:
     SAVE ARTIFACT /tmp/podman /tmp/podman
 
 build:
-    DO ../udcs/image+ALPINE
-    DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
+    FROM mritd/alpine
+    
     DO ../udcs/os/alpine+COMMON_PKG
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
     
     COPY +docker-cli/tmp/docker /usr/local/bin/docker
     COPY +docker-compose/tmp/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose
@@ -91,7 +93,7 @@ build:
 
     CMD ["bash"]
 
-    SAVE IMAGE --push mritd/container-cli:${DATE_TAG} mritd/container-cli:latest
+    SAVE IMAGE --push mritd/container-cli:${BUILD_DATE} mritd/container-cli:latest
 
 all:
     BUILD --platform=linux/amd64 +build

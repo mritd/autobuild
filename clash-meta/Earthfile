@@ -1,9 +1,5 @@
 VERSION 0.7
 
-FROM mritd/alpine
-ARG DATE_TAG=$(date "+%Y%m%d")
-ARG VERSION=$(curl -fsSL "https://api.github.com/repos/MetaCubeX/Clash.Meta/releases/latest" | jq -r '.tag_name')
-
 build-clash:
     FROM golang:1.19-alpine
     DO ../udcs/os/alpine+UPGRADE
@@ -22,10 +18,8 @@ build-clash:
     SAVE ARTIFACT /clash
 
 build:
-    DO ../udcs/image+ALPINE
-    DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+COMMON_PKG
+    FROM mritd/alpine
+    
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
@@ -48,4 +42,4 @@ build:
     SAVE IMAGE --push mritd/clash-meta:latest mritd/clash-meta:${VERSION} mritd/clash-meta:${VERSION}-${DATE_TAG}
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") --VERSION=$(curl -fsSL "https://api.github.com/repos/MetaCubeX/Clash.Meta/releases/latest" | jq -r '.tag_name') +build
