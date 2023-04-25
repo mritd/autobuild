@@ -5,12 +5,12 @@ on:
     - cron: '0 8 * * 1'
   workflow_dispatch:
     inputs:
-      trigger:
-        description: 'Manually trigger'
+      job:
+        description: 'Choose a job to run'
         required: true
-        type: choice
-        options: |
-          ${{ join(jobs, '\n') }}
+        type: string
+        default: all
+        options: ${{ steps.get_jobs.outputs.job_options }}
 
 env:
   FORCE_COLOR: 1
@@ -18,6 +18,16 @@ env:
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 jobs:
+  get_jobs:
+    runs-on: ubuntu-latest
+    outputs:
+      job_options: ${{ toJson(
+        from: steps.list_jobs.outputs.jobs
+      ) }}
+    steps:
+      - name: List Jobs
+        run: echo "::set-output name=jobs::$(echo "${{ toJson(jobs) }}" | jq -r 'keys[]')"
+
   alpine:
     runs-on: ubuntu-latest
     concurrency: alpine
