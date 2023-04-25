@@ -1,4 +1,4 @@
-name: mritd/alpine
+name: All In One
 
 on:
   schedule:
