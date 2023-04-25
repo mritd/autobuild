@@ -7,6 +7,8 @@ build-caddy:
     DO ../udcs/os/alpine+UPGRADE
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
 
+    ARG --required VERSION
+
     RUN --mount=type=cache,target=/go/pkg \
         echo ">>>>>>>>>>>>>>> Build Version: ${VERSION} <<<<<<<<<<<<<<<" \
         && go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest \
