@@ -72,6 +72,10 @@ jobs:
           - openjdk
           - open-vm-tools
           - nginx-singlepage
+          - demo
+          - poetbot
+          - jira
+          - confluence
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
