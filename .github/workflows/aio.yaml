@@ -25,7 +25,7 @@ jobs:
   alpine:
     runs-on: ubuntu-latest
     concurrency: alpine
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'alpine-base', 'all') || github.event_name == schedule
+    if: contains(fromJSON('["${{ github.job }}", "all", "alpine-base"]'), github.event.inputs.trigger) || github.event_name == schedule
     steps:
     - name: Init Earthly
       uses: mritd/init-earthly-action@main
@@ -36,7 +36,7 @@ jobs:
   alpine-base:
     needs: alpine
     runs-on: ubuntu-latest
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'all') || github.event_name == schedule
+    if: contains(fromJSON('["${{ github.job }}", "all"]'), github.event.inputs.trigger) || github.event_name == schedule
     continue-on-error: true
     strategy:
       max-parallel: 3
@@ -64,7 +64,7 @@ jobs:
 
   standalone:
     runs-on: ubuntu-latest
-    if: contains(github.event.inputs.trigger, '${{ github.job }}', 'all') || github.event_name == schedule
+    if: contains(fromJSON('["${{ github.job }}", "all"]'), github.event.inputs.trigger) || github.event_name == schedule
     continue-on-error: true
     strategy:
       max-parallel: 3
