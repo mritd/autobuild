@@ -9,7 +9,14 @@ LABEL:
 BUILD_DATE:
     COMMAND
     FROM mritd/alpine
-    ARG --global BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+
+OS_ARCH:
+    COMMAND
+    FROM mritd/osarch
+
+    ARG OS_ARCH=$(osarch)
 
 TINI:
     COMMAND
@@ -32,3 +39,4 @@ VIM:
 GO_TASK:
     COMMAND
     RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+

@@ -1,0 +1,11 @@
+VERSION 0.7
+
+build:
+    FROM busybox
+
+    COPY osarch.sh /usr/bin/osarch
+
+    SAVE IMAGE --push mritd/osarch:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/386 --platform=linux/arm64 --platform=linux/arm/5 --platform=linux/arm/6 --platform=linux/arm/7 +build

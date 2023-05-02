@@ -8,83 +8,63 @@ docker-cli:
 docker-compose:
     FROM mritd/alpine
 
-    RUN set -e \
+    RUN set -ex \
         && download_url="https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)" \
         && curl -sSL ${download_url} > /tmp/docker-compose \
         && chmod +x /tmp/docker-compose
+
     SAVE ARTIFACT /tmp/docker-compose /tmp/docker-compose
 
 kubectl:
     FROM mritd/alpine
 
-    RUN set -e \
+    ARG --required OS_ARCH
+
+    RUN set -ex \
         && version=$(curl -sSL https://dl.k8s.io/release/stable.txt) \
-        && os_arch=$(uname -m) \
-        && case $os_arch in \
-             x86_64) os_arch="amd64" ;; \
-             x86) os_arch="386" ;; \
-             i686) os_arch="386" ;; \
-             i386) os_arch="386" ;; \
-             aarch64) os_arch="arm64" ;; \
-             armv5*) os_arch="armv5" ;; \
-             armv6*) os_arch="armv6" ;; \
-             armv7*) os_arch="armv7" ;; \
-           esac \
-        && curl -sSL "https://dl.k8s.io/release/${version}/bin/linux/${os_arch}/kubectl" > /tmp/kubectl \
+        && curl -sSL "https://dl.k8s.io/release/${version}/bin/linux/${OS_ARCH}/kubectl" > /tmp/kubectl \
         && chmod +x /tmp/kubectl
+
     SAVE ARTIFACT /tmp/kubectl /tmp/kubectl
 
 nerdctl:
     FROM mritd/alpine
 
-    RUN set -e \
-        && os_arch=$(uname -m) \
-        && case $os_arch in \
-             x86_64) os_arch="amd64" ;; \
-             x86) os_arch="386" ;; \
-             i686) os_arch="386" ;; \
-             i386) os_arch="386" ;; \
-             aarch64) os_arch="arm64" ;; \
-             armv5*) os_arch="armv5" ;; \
-             armv6*) os_arch="armv6" ;; \
-             armv7*) os_arch="armv7" ;; \
-           esac \
+    ARG --required OS_ARCH
+
+    RUN set -ex \
         && download_url=$(curl -sSL https://api.github.com/repos/containerd/nerdctl/releases | \
-            jq -r '.[0].assets[].browser_download_url' | grep -v full | grep "linux-${os_arch}") \
-        && curl -sSL ${download_url} > nerdctl-${os_arch}.tar.gz \
-        && tar -zxvf nerdctl-${os_arch}.tar.gz -C /tmp
+            jq -r '.[0].assets[].browser_download_url' | grep -v full | grep "linux-${OS_ARCH}") \
+        && curl -sSL ${download_url} > nerdctl-${OS_ARCH}.tar.gz \
+        && tar -zxvf nerdctl-${OS_ARCH}.tar.gz -C /tmp
 
     SAVE ARTIFACT /tmp/nerdctl /tmp/nerdctl
 
 podman:
     FROM mritd/alpine
 
-    RUN set -e \
-        && os_arch=$(uname -m) \
-        && case $os_arch in \
-             x86_64) os_arch="amd64" ;; \
-             x86) os_arch="386" ;; \
-             i686) os_arch="386" ;; \
-             i386) os_arch="386" ;; \
-             aarch64) os_arch="arm64" ;; \
-             armv5*) os_arch="armv5" ;; \
-             armv6*) os_arch="armv6" ;; \
-             armv7*) os_arch="armv7" ;; \
-           esac \
-        && download_url="https://github.com/containers/podman/releases/latest/download/podman-remote-static-linux_${os_arch}.tar.gz" \
-        && curl -sSL ${download_url} > podman-remote-static-linux_${os_arch}.tar.gz \
-        && tar -zxvf podman-remote-static-linux_${os_arch}.tar.gz -C /tmp \
-        && mv /tmp/bin/podman-remote-static-linux_${os_arch} /tmp/podman
+    ARG --required OS_ARCH
+
+    RUN set -ex \
+        && download_url="https://github.com/containers/podman/releases/latest/download/podman-remote-static-linux_${OS_ARCH}.tar.gz" \
+        && curl -sSL ${download_url} > podman-remote-static-linux_${OS_ARCH}.tar.gz \
+        && tar -zxvf podman-remote-static-linux_${OS_ARCH}.tar.gz -C /tmp \
+        && mv /tmp/bin/podman-remote-static-linux_${OS_ARCH} /tmp/podman
 
     SAVE ARTIFACT /tmp/podman /tmp/podman
 
 build:
     FROM mritd/alpine
-    
-    DO ../udcs/os/alpine+COMMON_PKG
 
-    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+    ARG --required OS_ARCH
+    ARG --required BUILD_DATE
     
+    BUILD +docker-cli --OS_ARCH=${OS_ARCH}
+    BUILD +docker-compose --OS_ARCH=${OS_ARCH}
+    BUILD +kubectl --OS_ARCH=${OS_ARCH}
+    BUILD +nerdctl --OS_ARCH=${OS_ARCH}
+    BUILD +podman --OS_ARCH=${OS_ARCH}
+
     COPY +docker-cli/tmp/docker /usr/local/bin/docker
     COPY +docker-compose/tmp/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose
     COPY +kubectl/tmp/kubectl /usr/local/bin/kubectl
@@ -96,4 +76,14 @@ build:
     SAVE IMAGE --push mritd/container-cli:${BUILD_DATE} mritd/container-cli:latest
 
 all:
-    BUILD --platform=linux/amd64 +build
+    #DO ../udcs+BUILD_DATE
+    #DO ../udcs+OS_ARCH
+    FROM mritd/alpine
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S") 
+
+    FROM mritd/osarch
+
+    ARG OS_ARCH=$(osarch)
+
+    BUILD --platform=linux/amd64 +build --BUILD_DATE=${BUILD_DATE} --OS_ARCH=${OS_ARCH}

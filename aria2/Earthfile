@@ -3,7 +3,8 @@ VERSION 0.7
 build:
     FROM mritd/alpine
 
-    RUN apk add aria2 --no-cache
+    RUN set -ex \
+        && apk add aria2 --no-cache
 
     COPY aria2.conf /etc/aria2.conf
     COPY entrypoint.sh /entrypoint.sh

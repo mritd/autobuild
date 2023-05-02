@@ -5,7 +5,7 @@ build-notibot:
     DO ../udcs/os/alpine+UPGRADE
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
     
-    RUN set -e \
+    RUN set -ex \
         && go install -trimpath -ldflags "-w -s" github.com/mritd/notibot@main
 
     SAVE ARTIFACT /go/bin/notibot

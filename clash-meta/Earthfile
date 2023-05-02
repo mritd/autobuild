@@ -1,13 +1,12 @@
 VERSION 0.7
 
-DO ../udcs+BUILD_DATE
-
-ARG --global VERSION=$(curl -fsSL "https://api.github.com/repos/MetaCubeX/Clash.Meta/releases/latest" | jq -r '.tag_name')
-
 build-clash:
-    FROM golang:1.19-alpine
+    DO ../udcs/image+GO
     DO ../udcs/os/alpine+UPGRADE
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+
+    ARG VERSION
+    ARG BUILD_DATE
 
     RUN --mount=type=cache,target=/go/pkg set -e \
         && echo ">>>>>>>>>>>>>>> Build Version: ${VERSION} <<<<<<<<<<<<<<<" \
@@ -27,10 +26,13 @@ build:
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
-    BUILD +build-clash --build-arg --VERSION=${VERSION}
-    
+    ARG VERSION
+    ARG BUILD_DATE
+
     ENV XDG_CONFIG_HOME /config
     ENV XDG_DATA_HOME /data
+
+    BUILD +build-clash --VERSION=${VERSION}
     
     COPY +build-clash/clash /usr/bin/clash
     
@@ -43,7 +45,11 @@ build:
     
     CMD ["clash"]
 
-    SAVE IMAGE --push mritd/clash-meta:latest mritd/clash-meta:${VERSION} mritd/clash-meta:${VERSION}-${DATE_TAG}
+    SAVE IMAGE --push mritd/clash-meta:latest mritd/clash-meta:${VERSION} mritd/clash-meta:${VERSION}-${BUILD_DATE}
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
+    DO ../udcs+BUILD_DATE
+
+    ARG VERSION=$(curl -fsSL "https://api.github.com/repos/MetaCubeX/Clash.Meta/releases/latest" | jq -r '.tag_name')
+
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build --VERSION=${VERSION} --BUILD_DATE=${BUILD_DATE}

@@ -1,10 +1,12 @@
 VERSION 0.7
 
-FROM debian:11-slim
-
 build:
+    FROM debian:11-slim
+
     DO ../udcs+LABEL
     DO ../udcs/os/debian+UPGRADE
+
+    ARG --required BUILD_DATE
 
     RUN set -ex \
         && apt update \
@@ -21,4 +23,8 @@ build:
     SAVE IMAGE --push mritd/open-vm-tools:${BUILD_DATE} mritd/open-vm-tools:latest
 
 all:
-    BUILD --platform=linux/amd64 --build-arg --BUILD_DATE=$(date "+%Y%m%d%H%M%S") +build
+    FROM mritd/alpine
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+
+    BUILD --platform=linux/amd64 +build --BUILD_DATE=${BUILD_DATE}

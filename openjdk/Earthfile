@@ -55,6 +55,8 @@ build-openjdk8:
     DO +OPENJDK
     DO ../udcs/language/java+JAVA_OPTS
 
+    ARG --required BUILD_DATE
+
     SAVE IMAGE --push mritd/openjdk8:latest mritd/openjdk8:hotspot mritd/openjdk8:hotspot-${BUILD_DATE}
 
 build-openjdk8-openj9:
@@ -68,11 +70,15 @@ build-openjdk11:
     DO +OPENJDK
     DO ../udcs/language/java+JAVA_OPTS_11
 
+    ARG --required BUILD_DATE
+
     SAVE IMAGE --push mritd/openjdk11:latest mritd/openjdk11:hotspot mritd/openjdk11:hotspot-${BUILD_DATE}
 
 build-openjdk11-openj9:
     DO ../udcs/image+JDK11_OPENJ9
     DO +OPENJDK
+
+    ARG --required BUILD_DATE
 
     SAVE IMAGE --push mritd/openjdk11:openj9 mritd/openjdk11:openj9-${BUILD_DATE}
 
@@ -81,11 +87,15 @@ build-openjdk17:
     DO +OPENJDK
     DO ../udcs/language/java+JAVA_OPTS_17
 
+    ARG --required BUILD_DATE
+
     SAVE IMAGE --push mritd/openjdk17:latest mritd/openjdk17:hotspot mritd/openjdk17:hotspot-${BUILD_DATE}
 
 build-openjdk17-openj9:
     DO ../udcs/image+JDK17_OPENJ9
     DO +OPENJDK
+
+    ARG --required BUILD_DATE
 
     SAVE IMAGE --push mritd/openjdk17:openj9 mritd/openjdk17:openj9-${BUILD_DATE}
 
@@ -97,12 +107,16 @@ build-openjdk8-javabuild:
     DO ../udcs/language/java+JAVA_OPTS
     DO +JAVA_BUILD
 
+    ARG --required BUILD_DATE
+
     SAVE IMAGE --push mritd/javabuild8:latest mritd/javabuild8:hotspot mritd/javabuild8:hotspot-${BUILD_DATE}
 
 build-openjdk8-openj9-javabuild:
     DO ../udcs/image+JDK8_OPENJ9
     DO +OPENJDK
     DO +JAVA_BUILD
+
+    ARG --required BUILD_DATE
 
     SAVE IMAGE --push mritd/javabuild8:openj9 mritd/javabuild8:openj9-${BUILD_DATE}
 
@@ -112,12 +126,16 @@ build-openjdk11-javabuild:
     DO ../udcs/language/java+JAVA_OPTS_11
     DO +JAVA_BUILD
 
+    ARG --required BUILD_DATE
+
     SAVE IMAGE --push mritd/javabuild11:latest mritd/javabuild11:hotspot mritd/javabuild11:hotspot-${BUILD_DATE}
 
 build-openjdk11-openj9-javabuild:
     DO ../udcs/image+JDK11_OPENJ9
     DO +OPENJDK
     DO +JAVA_BUILD
+
+    ARG --required BUILD_DATE
 
     SAVE IMAGE --push mritd/javabuild11:openj9 mritd/javabuild11:openj9-${BUILD_DATE}
 
@@ -127,6 +145,8 @@ build-openjdk17-javabuild:
     DO ../udcs/language/java+JAVA_OPTS_17
     DO +JAVA_BUILD
 
+    ARG --required BUILD_DATE
+
     SAVE IMAGE --push mritd/javabuild17:latest mritd/javabuild17:hotspot mritd/javabuild17:hotspot-${BUILD_DATE}
 
 build-openjdk17-openj9-javabuild:
@@ -134,19 +154,26 @@ build-openjdk17-openj9-javabuild:
     DO +OPENJDK
     DO +JAVA_BUILD
 
+    ARG --required BUILD_DATE
+
     SAVE IMAGE --push mritd/javabuild17:openj9 mritd/javabuild17:openj9-${BUILD_DATE}
 
 
 all:
-    BUILD --platform=linux/amd64 +build-openjdk8
-    BUILD --platform=linux/amd64 +build-openjdk8-openj9
-    BUILD --platform=linux/amd64 +build-openjdk11
-    BUILD --platform=linux/amd64 +build-openjdk11-openj9
-    BUILD --platform=linux/amd64 +build-openjdk17
-    BUILD --platform=linux/amd64 +build-openjdk17-openj9
-    BUILD --platform=linux/amd64 +build-openjdk8-javabuild
-    BUILD --platform=linux/amd64 +build-openjdk8-openj9-javabuild
-    BUILD --platform=linux/amd64 +build-openjdk11-javabuild
-    BUILD --platform=linux/amd64 +build-openjdk11-openj9-javabuild
-    BUILD --platform=linux/amd64 +build-openjdk17-javabuild
-    BUILD --platform=linux/amd64 +build-openjdk17-openj9-javabuild
+    #DO ../udcs+BUILD_DATE
+    FROM mritd/alpine
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+
+    BUILD --platform=linux/amd64 +build-openjdk8 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk8-openj9 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk11 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk11-openj9 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk17 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk17-openj9 --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk8-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk8-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk11-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk11-openj9-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk17-javabuild --BUILD_DATE=${BUILD_DATE}
+    BUILD --platform=linux/amd64 +build-openjdk17-openj9-javabuild --BUILD_DATE=${BUILD_DATE}

@@ -21,6 +21,7 @@ build:
     COPY +build-idgen/idgen /usr/bin/idgen
     
     ENTRYPOINT ["idgen"]
+
     CMD ["server"]
 
     SAVE IMAGE --push mritd/idgen:latest

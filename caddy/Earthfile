@@ -5,8 +5,8 @@ build-caddy:
     DO ../udcs/os/alpine+UPGRADE
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
 
-    ARG BUILD_DATE
-    ARG VERSION
+    ARG --required BUILD_DATE
+    ARG --required VERSION
 
     RUN --mount=type=cache,target=/go/pkg \
         echo ">>>>>>>>>>>>>>> Build Version: ${VERSION} <<<<<<<<<<<<<<<" \
@@ -36,8 +36,8 @@ build:
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
-    ARG BUILD_DATE
-    ARG VERSION
+    ARG --required BUILD_DATE
+    ARG --required VERSION
 
     BUILD +build-caddy --VERSION=${VERSION}
     
@@ -66,8 +66,10 @@ build:
     SAVE IMAGE --push mritd/caddy:latest mritd/caddy:${VERSION} mritd/caddy:${VERSION}-${BUILD_DATE}
 
 all:
-    DO ../udcs+BUILD_DATE
+    #DO ../udcs+BUILD_DATE
+    FROM mritd/alpine
 
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
     ARG VERSION=$(curl -sSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
 
     BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build --BUILD_DATE=${BUILD_DATE} --VERSION=${VERSION}
