@@ -1,13 +1,12 @@
 VERSION 0.7
 
-DO ../udcs+BUILD_DATE
-
 build-caddy:
     DO ../udcs/image+GO
     DO ../udcs/os/alpine+UPGRADE
     DO ../udcs/os/alpine+INSTALL_BUILD_BASE
 
-    ARG --required VERSION
+    ARG BUILD_DATE
+    ARG VERSION
 
     RUN --mount=type=cache,target=/go/pkg \
         echo ">>>>>>>>>>>>>>> Build Version: ${VERSION} <<<<<<<<<<<<<<<" \
@@ -37,9 +36,10 @@ build:
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
 
-    ARG VERSION=$(curl -sSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
+    ARG BUILD_DATE
+    ARG VERSION
 
-    BUILD +build-caddy --VERSION=$VERSION
+    BUILD +build-caddy --VERSION=${VERSION}
     
     # See https://caddyserver.com/docs/conventions#file-locations for details
     ENV XDG_CONFIG_HOME /config
@@ -66,4 +66,8 @@ build:
     SAVE IMAGE --push mritd/caddy:latest mritd/caddy:${VERSION} mritd/caddy:${VERSION}-${BUILD_DATE}
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
+    DO ../udcs+BUILD_DATE
+
+    ARG VERSION=$(curl -sSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
+
+    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build --BUILD_DATE=${BUILD_DATE} --VERSION=${VERSION}
