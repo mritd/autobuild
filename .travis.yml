@@ -10,7 +10,7 @@ env:
     - FORCE_COLOR=1
 
 install:
-  - echo "$DOCKERHUB_TOKEN" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly
   - chmod +x /usr/local/bin/earthly
   - earthly bootstrap --with-autocomplete
