@@ -11,8 +11,8 @@ env:
 
 install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly
-  - chmod +x /usr/local/bin/earthly
+  - sudo wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly
+  - sudo chmod +x /usr/local/bin/earthly
   - earthly bootstrap --with-autocomplete
 
 _earthly: &earthly
