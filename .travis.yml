@@ -13,12 +13,12 @@ install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - sudo wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly
   - sudo chmod +x /usr/local/bin/earthly
-  - earthly bootstrap --with-autocomplete
+  - sudo earthly bootstrap --with-autocomplete
 
 _earthly: &earthly
   script:
     - cd $TRAVIS_JOB_NAME
-    - earthly --ci --allow-privileged --push +all
+    - sudo earthly --ci --allow-privileged --push +all
 
 jobs:
   include:
