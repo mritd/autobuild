@@ -1,0 +1,26 @@
+dist: jammy
+
+language: go
+
+services:
+  - docker
+
+env:
+  global:
+    - FORCE_COLOR=1
+
+install:
+  - docker login --username "$DOCKERHUB_USERNAME" --password "$DOCKERHUB_TOKEN"
+  - wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly
+  - chmod +x /usr/local/bin/earthly
+  - earthly bootstrap --with-autocomplete
+
+_earthly: &earthly
+  script:
+    - cd $TRAVIS_JOB_NAME
+    - earthly --ci --allow-privileged --push +all
+
+jobs:
+  include:
+    - name: alpine
+      <<: *earthly
