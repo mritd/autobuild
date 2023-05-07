@@ -25,3 +25,40 @@ jobs:
   include:
     - name: alpine
       <<: *earthly
+
+    - name: ssh
+      depends_on: alpine
+      <<: *earthly
+    - name: s2h
+      depends_on: alpine
+      <<: *earthly
+    - name: makeself
+      depends_on: alpine
+      <<: *earthly
+    - name: derper
+      depends_on: alpine
+      <<: *earthly
+    - name: container-cli
+      depends_on: alpine
+      <<: *earthly
+    - name: aria2
+      depends_on: alpine
+      <<: *earthly
+    - name: bandwagonmon
+      depends_on: alpine
+      <<: *earthly
+    - name: ddns
+      depends_on: alpine
+      <<: *earthly
+    - name: dnsacme
+      depends_on: alpine
+      <<: *earthly
+    - name: idgen
+      depends_on: alpine
+      <<: *earthly
+    - name: notibot
+      depends_on: alpine
+      <<: *earthly
+    - name: clash-meta
+      depends_on: alpine
+      <<: *earthly
