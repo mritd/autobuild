@@ -24,41 +24,70 @@ _earthly: &earthly
 jobs:
   include:
     - name: alpine
+      stage: alpine
       <<: *earthly
 
     - name: ssh
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: s2h
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: makeself
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: derper
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: container-cli
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: aria2
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: bandwagonmon
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: ddns
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: dnsacme
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: idgen
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: notibot
-      depends_on: alpine
+      stage: alpine-base
       <<: *earthly
     - name: clash-meta
-      depends_on: alpine
+      stage: alpine-base
+      <<: *earthly
+
+    - name: caddy
+      stage: standalone
+      <<: *earthly
+    - name: nodebuild
+      stage: standalone
+      <<: *earthly
+    - name: openjdk
+      stage: standalone
+      <<: *earthly
+    - name: open-vm-tools
+      stage: standalone
+      <<: *earthly
+    - name: nginx-singlepage
+      stage: standalone
+      <<: *earthly
+    - name: demo
+      stage: standalone
+      <<: *earthly
+    - name: poetbot
+      stage: standalone
+      <<: *earthly
+    - name: jira
+      stage: standalone
+      <<: *earthly
+    - name: confluence
+      stage: standalone
       <<: *earthly
