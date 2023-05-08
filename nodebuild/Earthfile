@@ -27,7 +27,7 @@ build:
 
     CMD ["node"]
 
-    SAVE IMAGE --push mritd/nodebuild:${BUILD_DATE} mritd/nodebuild:latest
+    SAVE IMAGE --push ghcr.io/mritd/nodebuild:${BUILD_DATE} mritd/nodebuild:latest
 
 all:
     # DO ../udcs+BUILD_DATE

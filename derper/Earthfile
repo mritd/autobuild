@@ -44,7 +44,7 @@ build:
             --http-port=${DERP_HTTP_PORT} \
             --verify-clients=${DERP_VERIFY_CLIENTS}
 
-    SAVE IMAGE --push mritd/derper:latest
+    SAVE IMAGE --push ghcr.io/mritd/derper:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build

@@ -33,7 +33,7 @@ build:
 
     CMD ["dnsacme"]
     
-    SAVE IMAGE --push mritd/dnsacme:latest mritd/dnsacme:${BUILD_DATE}
+    SAVE IMAGE --push ghcr.io/mritd/dnsacme:latest mritd/dnsacme:${BUILD_DATE}
 
 unraid:
     FROM mritd/alpine
@@ -61,7 +61,7 @@ unraid:
 
     ENTRYPOINT ["/entrypoint.sh"]
 
-    SAVE IMAGE --push mritd/dnsacme:unraid mritd/dnsacme:unraid-${BUILD_DATE}
+    SAVE IMAGE --push ghcr.io/mritd/dnsacme:unraid mritd/dnsacme:unraid-${BUILD_DATE}
 
 all:
     #DO ../udcs+BUILD_DATE

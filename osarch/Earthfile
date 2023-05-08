@@ -5,7 +5,7 @@ build:
 
     COPY osarch.sh /usr/bin/osarch
 
-    SAVE IMAGE --push mritd/osarch:latest
+    SAVE IMAGE --push ghcr.io/mritd/osarch:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/386 --platform=linux/arm64 --platform=linux/arm/5 --platform=linux/arm/6 --platform=linux/arm/7 +build

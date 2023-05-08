@@ -16,7 +16,7 @@ build:
 
     CMD ["/hijack.sh"]
 
-    SAVE IMAGE --push mritd/confluence:latest
+    SAVE IMAGE --push ghcr.io/mritd/confluence:latest
 
 all:
     BUILD --platform=linux/amd64 +build

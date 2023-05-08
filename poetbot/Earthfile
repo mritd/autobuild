@@ -44,7 +44,7 @@ build:
 
     ENTRYPOINT ["poetbot"]
 
-    SAVE IMAGE --push mritd/poetbot:latest
+    SAVE IMAGE --push ghcr.io/mritd/poetbot:latest
 
 all:
     BUILD --platform=linux/amd64 +build

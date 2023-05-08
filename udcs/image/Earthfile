@@ -2,19 +2,19 @@ VERSION 0.7
 
 ALPINE:
     COMMAND
-    FROM alpine
+    FROM ghcr.io/mritd/dockerhub/alpine
 
 DEBIAN:
     COMMAND
-    FROM debian
+    FROM ghcr.io/mritd/dockerhub/debian
 
 UBUNTU:
     COMMAND
-    FROM ubuntu
+    FROM ghcr.io/mritd/dockerhub/ubuntu
 
 GOLANG:
     COMMAND
-    FROM golang:1-alpine
+    FROM ghcr.io/mritd/dockerhub/golang:1-alpine
 
 GO:
     COMMAND
@@ -22,40 +22,40 @@ GO:
 
 JDK8:
     COMMAND
-    FROM eclipse-temurin:8-jdk
+    FROM ghcr.io/mritd/dockerhub/eclipse-temurin:8-jdk
 
 JDK8_OPENJ9:
     COMMAND
-    FROM ibm-semeru-runtimes:open-8-jdk
+    FROM ghcr.io/mritd/dockerhub/ibm-semeru-runtimes:open-8-jdk
 
 JDK11:
     COMMAND
-    FROM eclipse-temurin:11-jdk
+    FROM ghcr.io/mritd/dockerhub/eclipse-temurin:11-jdk
 
 JDK11_OPENJ9:
     COMMAND
-    FROM ibm-semeru-runtimes:open-11-jdk
+    FROM ghcr.io/mritd/dockerhub/ibm-semeru-runtimes:open-11-jdk
 
 JDK17:
     COMMAND
-    FROM eclipse-temurin:17-jdk
+    FROM ghcr.io/mritd/dockerhub/eclipse-temurin:17-jdk
 
 JDK17_OPENJ9:
     COMMAND
-    FROM ibm-semeru-runtimes:open-17-jdk
+    FROM ghcr.io/mritd/dockerhub/ibm-semeru-runtimes:open-17-jdk
 
 NODE:
     COMMAND
-    FROM node:lts-buster
+    FROM ghcr.io/mritd/dockerhub/node:lts-buster
 
 NGINX:
     COMMAND
-    FROM nginx:alpine
+    FROM ghcr.io/mritd/dockerhub/nginx:alpine
 
 CONFLUENCE:
     COMMAND
-    FROM atlassian/confluence-server:7-ubuntu
+    FROM ghcr.io/mritd/dockerhub/atlassian/confluence-server:7-ubuntu
 
 JIRA:
     COMMAND
-    FROM atlassian/jira-software:8.13
+    FROM ghcr.io/mritd/dockerhub/atlassian/jira-software:8.13

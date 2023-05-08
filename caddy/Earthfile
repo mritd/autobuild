@@ -63,7 +63,7 @@ build:
     
     CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
 
-    SAVE IMAGE --push mritd/caddy:latest mritd/caddy:${VERSION} mritd/caddy:${VERSION}-${BUILD_DATE}
+    SAVE IMAGE --push ghcr.io/mritd/caddy:latest ghcr.io/mritd/caddy:${VERSION} ghcr.io/mritd/caddy:${VERSION}-${BUILD_DATE}
 
 all:
     #DO ../udcs+BUILD_DATE

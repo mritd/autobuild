@@ -27,71 +27,71 @@ jobs:
       stage: sync-base-image
       <<: *earthly
 
-#    - name: caddy
-#      stage: standalone
-#      <<: *earthly
-#    - name: nodebuild
-#      stage: standalone
-#      <<: *earthly
-#    - name: openjdk
-#      stage: standalone
-#      <<: *earthly
-#    - name: open-vm-tools
-#      stage: standalone
-#      <<: *earthly
-#    - name: nginx-singlepage
-#      stage: standalone
-#      <<: *earthly
-#    - name: demo
-#      stage: standalone
-#      <<: *earthly
-#    - name: poetbot
-#      stage: standalone
-#      <<: *earthly
-#    - name: jira
-#      stage: standalone
-#      <<: *earthly
-#    - name: confluence
-#      stage: standalone
-#      <<: *earthly
-#
-#    - name: alpine
-#      stage: alpine
-#      <<: *earthly
-#
-#    - name: ssh
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: s2h
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: makeself
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: derper
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: container-cli
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: aria2
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: bandwagonmon
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: ddns
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: dnsacme
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: idgen
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: notibot
-#      stage: alpine-base
-#      <<: *earthly
-#    - name: clash-meta
-#      stage: alpine-base
-#      <<: *earthly
+    - name: caddy
+      stage: standalone
+      <<: *earthly
+    - name: nodebuild
+      stage: standalone
+      <<: *earthly
+    - name: openjdk
+      stage: standalone
+      <<: *earthly
+    - name: open-vm-tools
+      stage: standalone
+      <<: *earthly
+    - name: nginx-singlepage
+      stage: standalone
+      <<: *earthly
+    - name: demo
+      stage: standalone
+      <<: *earthly
+    - name: poetbot
+      stage: standalone
+      <<: *earthly
+    - name: jira
+      stage: standalone
+      <<: *earthly
+    - name: confluence
+      stage: standalone
+      <<: *earthly
+
+    - name: alpine
+      stage: alpine
+      <<: *earthly
+
+    - name: ssh
+      stage: alpine-base
+      <<: *earthly
+    - name: s2h
+      stage: alpine-base
+      <<: *earthly
+    - name: makeself
+      stage: alpine-base
+      <<: *earthly
+    - name: derper
+      stage: alpine-base
+      <<: *earthly
+    - name: container-cli
+      stage: alpine-base
+      <<: *earthly
+    - name: aria2
+      stage: alpine-base
+      <<: *earthly
+    - name: bandwagonmon
+      stage: alpine-base
+      <<: *earthly
+    - name: ddns
+      stage: alpine-base
+      <<: *earthly
+    - name: dnsacme
+      stage: alpine-base
+      <<: *earthly
+    - name: idgen
+      stage: alpine-base
+      <<: *earthly
+    - name: notibot
+      stage: alpine-base
+      <<: *earthly
+    - name: clash-meta
+      stage: alpine-base
+      <<: *earthly

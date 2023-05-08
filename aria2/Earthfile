@@ -19,7 +19,7 @@ build:
 
     CMD ["/entrypoint.sh"]
 
-    SAVE IMAGE --push mritd/aria2:latest
+    SAVE IMAGE --push ghcr.io/mritd/aria2:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build

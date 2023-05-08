@@ -28,7 +28,7 @@ build:
 
     ENTRYPOINT ["bandwagonmon"]
 
-    SAVE IMAGE --push mritd/bandwagonmon:latest
+    SAVE IMAGE --push ghcr.io/mritd/bandwagonmon:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build

@@ -9,7 +9,7 @@ build:
 
     COPY singlepage.conf /etc/nginx/conf.d/default.conf
 
-    SAVE IMAGE --push mritd/nginx-singlepage:latest
+    SAVE IMAGE --push ghcr.io/mritd/nginx-singlepage:latest
 
 all:
     BUILD --platform=linux/amd64 +build

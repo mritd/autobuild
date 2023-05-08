@@ -28,7 +28,7 @@ build:
 
     CMD ["notibot"]
 
-    SAVE IMAGE --push mritd/notibot:latest
+    SAVE IMAGE --push ghcr.io/mritd/notibot:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build

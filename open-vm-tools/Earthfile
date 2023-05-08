@@ -20,7 +20,7 @@ build:
 
     ENTRYPOINT ["/entrypoint.sh"]
 
-    SAVE IMAGE --push mritd/open-vm-tools:${BUILD_DATE} mritd/open-vm-tools:latest
+    SAVE IMAGE --push ghcr.io/mritd/open-vm-tools:${BUILD_DATE} mritd/open-vm-tools:latest
 
 all:
     FROM mritd/alpine

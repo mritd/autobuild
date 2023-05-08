@@ -45,7 +45,7 @@ build:
     
     CMD ["clash"]
 
-    SAVE IMAGE --push mritd/clash-meta:latest mritd/clash-meta:${VERSION} mritd/clash-meta:${VERSION}-${BUILD_DATE}
+    SAVE IMAGE --push ghcr.io/mritd/clash-meta:latest ghcr.io/mritd/clash-meta:${VERSION} ghcr.io/mritd/clash-meta:${VERSION}-${BUILD_DATE}
 
 all:
     DO ../udcs+BUILD_DATE

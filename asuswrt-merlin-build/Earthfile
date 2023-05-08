@@ -43,7 +43,7 @@ build:
 
     CMD ["bash"]
 
-    SAVE IMAGE --push mritd/asuswrt-merlin-build:latest
+    SAVE IMAGE --push ghcr.io/mritd/asuswrt-merlin-build:latest
 
 all:
     BUILD --platform=linux/amd64 +build

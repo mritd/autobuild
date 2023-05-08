@@ -73,7 +73,7 @@ build:
 
     CMD ["bash"]
 
-    SAVE IMAGE --push mritd/container-cli:${BUILD_DATE} mritd/container-cli:latest
+    SAVE IMAGE --push ghcr.io/mritd/container-cli:${BUILD_DATE} mritd/container-cli:latest
 
 all:
     #DO ../udcs+BUILD_DATE
