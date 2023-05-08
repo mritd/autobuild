@@ -3,68 +3,68 @@ VERSION 0.7
 alpine:
     FROM alpine:latest
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/alpine:latest
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/alpine:latest
 
 debian:
     FROM debian:latest
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/debian:latest
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/debian:latest
 
 ubuntu:
     FROM ubuntu:latest
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/ubuntu:latest
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/ubuntu:latest
 
 golang:
     FROM golang:1-alpine
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/golang:1-alpine
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/golang:1-alpine
 
 eclipse-temurin:
     FROM eclipse-temurin:8-jdk
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/eclipse-temurin:8-jdk
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/eclipse-temurin:8-jdk
 
     FROM eclipse-temurin:11-jdk
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/eclipse-temurin:11-jdk
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/eclipse-temurin:11-jdk
 
     FROM eclipse-temurin:17-jdk
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/eclipse-temurin:17-jdk
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/eclipse-temurin:17-jdk
 
 ibm-semeru-runtimes:
     FROM ibm-semeru-runtimes:open-8-jdk
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/ibm-semeru-runtimes:open-8-jdk
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/ibm-semeru-runtimes:open-8-jdk
 
     FROM ibm-semeru-runtimes:open-11-jdk
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/ibm-semeru-runtimes:open-11-jdk
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/ibm-semeru-runtimes:open-11-jdk
 
     FROM ibm-semeru-runtimes:open-17-jdk
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/ibm-semeru-runtimes:open-17-jdk
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/ibm-semeru-runtimes:open-17-jdk
 
 node:
     FROM node:lts-buster
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/node:lts-buster
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/node:lts-buster
 
 nginx:
     FROM nginx:alpine
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/nginx:alpine
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/nginx:alpine
 
 confluence-server:
     FROM atlassian/confluence-server:7-ubuntu
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/atlassian/confluence-server:7-ubuntu
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/atlassian/confluence-server:7-ubuntu
 
 jira-software:
     FROM atlassian/jira-software:8.13
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/dockerhub/atlassian/atlassian/jira-software:8.13
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/atlassian/atlassian/jira-software:8.13
 
 
 all:
