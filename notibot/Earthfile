@@ -12,6 +12,10 @@ build-notibot:
 
 build:
     FROM mritd/alpine
+
+    LABEL org.opencontainers.image.source="https://github.com/mritd/notibot"
+    LABEL org.opencontainers.image.description="Telegram Notification Bot"
+    LABEL org.opencontainers.image.licenses="Apache-2.0"
     
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS
@@ -22,9 +26,7 @@ build:
 
     EXPOSE 8080
 
-    ENTRYPOINT ["bash", "-c"]
-    
-    CMD ["notibot --auth-mode ${NOTI_AUTH_MODE} --access-token ${NOTI_ACCESS_TOKEN} --username ${NOTI_USERNAME} --password ${NOTI_PASSWORD} --bot-api ${TELEGRAM_API} --bot-token ${TELEGRAM_TOKEN} --recipient ${TELEGRAM_RECIPIENT}"]
+    CMD ["notibot"]
 
     SAVE IMAGE --push mritd/notibot:latest
 
