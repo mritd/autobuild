@@ -31,7 +31,7 @@ build:
 
 all:
     # DO ../udcs+BUILD_DATE
-    FROM mritd/alpine
+    FROM ghcr.io/mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 

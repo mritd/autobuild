@@ -23,7 +23,7 @@ build:
     SAVE IMAGE --push ghcr.io/mritd/open-vm-tools:${BUILD_DATE} ghcr.io/mritd/open-vm-tools:latest
 
 all:
-    FROM mritd/alpine
+    FROM ghcr.io/mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 

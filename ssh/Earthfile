@@ -1,7 +1,7 @@
 VERSION 0.7
 
 build:
-    FROM mritd/alpine
+    FROM ghcr.io/mritd/alpine
 
     RUN set -e \
         && apk add sudo coreutils zsh git htop shadow openssh python3 --no-cache \

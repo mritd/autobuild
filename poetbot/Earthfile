@@ -27,7 +27,7 @@ build-poetbot:
     SAVE ARTIFACT /go/bin/poetbot
 
 build:
-    FROM mritd/alpine
+    FROM ghcr.io/mritd/alpine
     
     DO ../udcs/os/alpine+TIMEZONE
     DO ../udcs/language/go+FIX_DNS

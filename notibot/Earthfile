@@ -11,7 +11,7 @@ build-notibot:
     SAVE ARTIFACT /go/bin/notibot
 
 build:
-    FROM mritd/alpine
+    FROM ghcr.io/mritd/alpine
 
     LABEL org.opencontainers.image.source="https://github.com/mritd/notibot"
     LABEL org.opencontainers.image.description="Telegram Notification Bot"

@@ -14,7 +14,7 @@ LABEL:
 
 BUILD_DATE:
     COMMAND
-    FROM mritd/alpine
+    FROM ghcr.io/mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 

@@ -67,7 +67,7 @@ build:
 
 all:
     #DO ../udcs+BUILD_DATE
-    FROM mritd/alpine
+    FROM ghcr.io/mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
     ARG VERSION=$(curl -sSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
