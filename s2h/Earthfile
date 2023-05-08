@@ -25,4 +25,4 @@ build:
     SAVE IMAGE --push ghcr.io/mritd/s2h:latest
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
