@@ -72,4 +72,4 @@ all:
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
     ARG VERSION=$(curl -sSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')
 
-    BUILD --platform=linux/amd64 --platform=linux/arm64 --platform=linux/arm/v7 --platform=linux/arm/v6 +build --BUILD_DATE=${BUILD_DATE} --VERSION=${VERSION}
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build --BUILD_DATE=${BUILD_DATE} --VERSION=${VERSION}
