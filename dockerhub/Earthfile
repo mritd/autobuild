@@ -64,7 +64,7 @@ confluence-server:
 jira-software:
     FROM atlassian/jira-software:8.13
     DO ../udcs+LABEL
-    SAVE IMAGE --push ghcr.io/mritd/dockerhub/atlassian/atlassian/jira-software:8.13
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/atlassian/jira-software:8.13
 
 
 all:
@@ -72,9 +72,9 @@ all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +debian
     BUILD --platform=linux/amd64 --platform=linux/arm64 +ubuntu
     BUILD --platform=linux/amd64 --platform=linux/arm64 +golang
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +nginx
     BUILD --platform=linux/amd64 +eclipse-temurin
     BUILD --platform=linux/amd64 +ibm-semeru-runtimes
     BUILD --platform=linux/amd64 +node
-    BUILD --platform=linux/amd64 +nginx
     BUILD --platform=linux/amd64 +confluence-server
     BUILD --platform=linux/amd64 +jira-software
