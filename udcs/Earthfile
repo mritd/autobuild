@@ -4,7 +4,13 @@ LABEL:
     COMMAND
     LABEL maintainer="mritd <mritd@linux.com>"
     LABEL repository="https://github.com/mritd/autobuild"
-    LABEL description="GitHub Action + Earthly Auto Build"
+    LABEL description="Earthly + CI Auto Build"
+    LABEL licenses="Apache-2.0"
+
+    LABEL org.opencontainers.image.authors="mritd <mritd@linux.com>"
+    LABEL org.opencontainers.image.source="https://github.com/mritd/autobuild"
+    LABEL org.opencontainers.image.description="Earthly + CI Auto Build"
+    LABEL org.opencontainers.image.licenses="Apache-2.0"
 
 BUILD_DATE:
     COMMAND
