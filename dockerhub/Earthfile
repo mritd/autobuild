@@ -20,6 +20,10 @@ golang:
     DO ../udcs+LABEL
     SAVE IMAGE --push ghcr.io/mritd/dockerhub/golang:1-alpine
 
+    FROM golang:1
+    DO ../udcs+LABEL
+    SAVE IMAGE --push ghcr.io/mritd/dockerhub/golang:1
+
 eclipse-temurin:
     FROM eclipse-temurin:8-jdk
     DO ../udcs+LABEL
