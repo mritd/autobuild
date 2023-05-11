@@ -15,5 +15,6 @@ on:
 jobs:
   alpine:
     uses: ./.github/workflows/earthly.yaml
+    secrets: inherit
     with:
       build-dir: ${{ github.job }}
