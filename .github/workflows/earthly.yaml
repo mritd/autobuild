@@ -11,7 +11,7 @@ env:
   DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
 
 jobs:
-  ${{ inputs.build-dir }}:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Init Earthly
