@@ -1,0 +1,19 @@
+name: mritd/alpine
+
+on:
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: Manually trigger
+        required: true
+        type: choice
+        options:
+          - build
+
+
+jobs:
+  alpine:
+    uses: /.github/workflows/earthly.yml
+    with:
+      build-dir: ${{ github.job }}

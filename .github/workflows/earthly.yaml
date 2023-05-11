@@ -1,0 +1,21 @@
+on:
+  workflow_call:
+    inputs:
+      build-dir:
+        required: true
+        type: string
+
+env:
+  FORCE_COLOR: 1
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+jobs:
+  ${{ inputs.build-dir }}:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Init Earthly
+      uses: mritd/init-earthly-action@main
+    - name: Earthly Build
+      working-directory: ${{ inputs.build-dir }}
+      run: earthly --allow-privileged --push +all

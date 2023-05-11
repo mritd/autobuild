@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     strategy:
-      max-parallel: 3
+      max-parallel: 1
       matrix:
         directory:
           - ssh
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     strategy:
-      max-parallel: 3
+      max-parallel: 1
       matrix:
         directory:
           - caddy
