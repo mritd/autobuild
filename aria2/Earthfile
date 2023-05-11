@@ -1,7 +1,7 @@
 VERSION 0.7
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
     RUN set -ex \
         && apk add aria2 --no-cache
@@ -19,7 +19,7 @@ build:
 
     CMD ["/entrypoint.sh"]
 
-    SAVE IMAGE --push ghcr.io/mritd/aria2:latest
+    SAVE IMAGE --push mritd/aria2:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build

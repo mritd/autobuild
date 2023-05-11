@@ -1,4 +1,4 @@
-name: mritd/alpine
+name: mritd/dnsacme
 
 on:
   workflow_call:
@@ -12,8 +12,8 @@ on:
           - build
 
 jobs:
-  alpine:
+  dnsacme:
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:
-      build-dir: alpine
+      build-dir: dnsacme

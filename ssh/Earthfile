@@ -1,7 +1,7 @@
 VERSION 0.7
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
     RUN set -e \
         && apk add sudo coreutils zsh git htop shadow openssh python3 --no-cache \
@@ -19,12 +19,12 @@ build:
         && echo 'SetEnv ENABLE_VIM_CONFIG=true' >> /etc/ssh/sshd_config \
         && printf "\nWelcome to Alpine!\n\n" > /etc/motd
 
-    DO ../udcs+PREZTO
-    DO ../udcs+VIM
+    DO ../.udcs+PREZTO
+    DO ../.udcs+VIM
 
     CMD ["/usr/sbin/sshd", "-D", "-e"]
 
-    SAVE IMAGE --push ghcr.io/mritd/ssh:latest
+    SAVE IMAGE --push mritd/ssh:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build

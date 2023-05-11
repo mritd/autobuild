@@ -1,9 +1,9 @@
 VERSION 0.7
 
 build-ddns:
-    DO ../udcs/image+GO
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    DO ../.udcs/image+GO
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
     
     RUN --mount=type=cache,target=/go/pkg \
         go install -trimpath -ldflags "-w -s" github.com/mritd/ddns@latest
@@ -11,10 +11,10 @@ build-ddns:
     SAVE ARTIFACT /go/bin/ddns
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
     
-    DO ../udcs/os/alpine+TIMEZONE
-    DO ../udcs/language/go+FIX_DNS
+    DO ../.udcs/os/alpine+TIMEZONE
+    DO ../.udcs/language/go+FIX_DNS
 
     BUILD +build-ddns
     
@@ -22,7 +22,7 @@ build:
     
     ENTRYPOINT ["ddns"]
 
-    SAVE IMAGE --push ghcr.io/mritd/ddns:latest
+    SAVE IMAGE --push mritd/ddns:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build

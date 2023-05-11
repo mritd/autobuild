@@ -1,4 +1,4 @@
-name: mritd/alpine
+name: mritd/confluence
 
 on:
   workflow_call:
@@ -12,8 +12,8 @@ on:
           - build
 
 jobs:
-  alpine:
+  confluence:
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:
-      build-dir: alpine
+      build-dir: confluence

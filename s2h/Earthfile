@@ -1,9 +1,9 @@
 VERSION 0.7
 
 build-s2h:
-    DO ../udcs/image+GO
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    DO ../.udcs/image+GO
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
     
     RUN --mount=type=cache,target=/go/pkg \
         go install -trimpath -ldflags "-w -s" github.com/mritd/s2h@master
@@ -11,10 +11,10 @@ build-s2h:
     SAVE ARTIFACT /go/bin/s2h
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
-    DO ../udcs/os/alpine+TIMEZONE
-    DO ../udcs/language/go+FIX_DNS
+    DO ../.udcs/os/alpine+TIMEZONE
+    DO ../.udcs/language/go+FIX_DNS
 
     BUILD +build-s2h
     
@@ -22,7 +22,7 @@ build:
     
     ENTRYPOINT ["s2h"]
 
-    SAVE IMAGE --push ghcr.io/mritd/s2h:latest
+    SAVE IMAGE --push mritd/s2h:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build

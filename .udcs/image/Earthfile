@@ -1,0 +1,69 @@
+VERSION 0.7
+
+ALPINE:
+    COMMAND
+    FROM alpine
+
+DEBIAN:
+    COMMAND
+    FROM debian
+
+UBUNTU:
+    COMMAND
+    FROM ubuntu
+
+GOLANG:
+    COMMAND
+    FROM golang:1-alpine
+
+GOLANG_DEBIAN:
+    COMMAND
+    FROM golang:1
+
+GO:
+    COMMAND
+    DO +GOLANG
+
+GO_DEBIAN:
+    COMMAND
+    DO +GOLANG_DEBIAN
+
+JDK8:
+    COMMAND
+    FROM eclipse-temurin:8-jdk
+
+JDK8_OPENJ9:
+    COMMAND
+    FROM ibm-semeru-runtimes:open-8-jdk
+
+JDK11:
+    COMMAND
+    FROM eclipse-temurin:11-jdk
+
+JDK11_OPENJ9:
+    COMMAND
+    FROM ibm-semeru-runtimes:open-11-jdk
+
+JDK17:
+    COMMAND
+    FROM eclipse-temurin:17-jdk
+
+JDK17_OPENJ9:
+    COMMAND
+    FROM ibm-semeru-runtimes:open-17-jdk
+
+NODE:
+    COMMAND
+    FROM node:lts-buster
+
+NGINX:
+    COMMAND
+    FROM nginx:alpine
+
+CONFLUENCE:
+    COMMAND
+    FROM atlassian/confluence-server:7-ubuntu
+
+JIRA:
+    COMMAND
+    FROM atlassian/jira-software:8.13

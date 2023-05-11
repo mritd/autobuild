@@ -1,4 +1,4 @@
-name: mritd/alpine
+name: mritd/osarch
 
 on:
   workflow_call:
@@ -12,8 +12,8 @@ on:
           - build
 
 jobs:
-  alpine:
+  osarch:
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:
-      build-dir: alpine
+      build-dir: osarch

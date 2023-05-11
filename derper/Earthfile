@@ -1,9 +1,9 @@
 VERSION 0.7
 
 build-derper:
-    DO ../udcs/image+GO
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    DO ../.udcs/image+GO
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
     
     RUN --mount=type=cache,target=/go/pkg \
         go install -trimpath -ldflags "-w -s" tailscale.com/cmd/derper@main
@@ -11,10 +11,10 @@ build-derper:
     SAVE ARTIFACT /go/bin/derper
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
-    DO ../udcs/os/alpine+TIMEZONE
-    DO ../udcs/language/go+FIX_DNS
+    DO ../.udcs/os/alpine+TIMEZONE
+    DO ../.udcs/language/go+FIX_DNS
 
     ENV DERP_ADDR :8080
     ENV DERP_HTTP_PORT 8080
@@ -44,7 +44,7 @@ build:
             --http-port=${DERP_HTTP_PORT} \
             --verify-clients=${DERP_VERIFY_CLIENTS}
 
-    SAVE IMAGE --push ghcr.io/mritd/derper:latest
+    SAVE IMAGE --push mritd/derper:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build

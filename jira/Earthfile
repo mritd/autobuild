@@ -1,11 +1,11 @@
 VERSION 0.7
 
 build:
-    DO ../udcs/image+JIRA
-    DO ../udcs+LABEL
-    DO ../udcs/os/debian+UPGRADE
-    DO ../udcs/os/debian+COMMON_PKG
-    DO ../udcs/os/debian+TIMEZONE
+    DO ../.udcs/image+JIRA
+    DO ../.udcs+LABEL
+    DO ../.udcs/os/debian+UPGRADE
+    DO ../.udcs/os/debian+COMMON_PKG
+    DO ../.udcs/os/debian+TIMEZONE
 
     ENV AGENT_PATH /opt/atlassian-agent.jar
 
@@ -16,7 +16,7 @@ build:
 
     CMD ["/hijack.sh"]
 
-    SAVE IMAGE --push ghcr.io/mritd/jira:latest ghcr.io/mritd/atlassian-jira:latest
+    SAVE IMAGE --push mritd/jira:latest mritd/atlassian-jira:latest
 
 all:
     BUILD --platform=linux/amd64 +build

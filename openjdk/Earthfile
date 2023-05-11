@@ -1,15 +1,15 @@
 VERSION 0.7
 
-DO ../udcs+BUILD_DATE
+DO ../.udcs+BUILD_DATE
 
 OPENJDK:
     COMMAND
-    DO ../udcs+LABEL
-    DO ../udcs/os/debian+UPGRADE
-    DO ../udcs/os/debian+COMMON_PKG
-    DO ../udcs/os/debian+LOCALE
-    DO ../udcs/os/debian+TIMEZONE
-    DO ../udcs+TINI
+    DO ../.udcs+LABEL
+    DO ../.udcs/os/debian+UPGRADE
+    DO ../.udcs/os/debian+COMMON_PKG
+    DO ../.udcs/os/debian+LOCALE
+    DO ../.udcs/os/debian+TIMEZONE
+    DO ../.udcs+TINI
 
     ENTRYPOINT ["tini","--"]
 
@@ -51,117 +51,117 @@ JAVA_BUILD:
 ##################### runtime ######################
 
 build-openjdk8:
-    DO ../udcs/image+JDK8
+    DO ../.udcs/image+JDK8
     DO +OPENJDK
-    DO ../udcs/language/java+JAVA_OPTS
+    DO ../.udcs/language/java+JAVA_OPTS
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/openjdk8:latest ghcr.io/mritd/openjdk8:hotspot ghcr.io/mritd/openjdk8:hotspot-${BUILD_DATE}
+    SAVE IMAGE --push mritd/openjdk8:latest mritd/openjdk8:hotspot mritd/openjdk8:hotspot-${BUILD_DATE}
 
 build-openjdk8-openj9:
-    DO ../udcs/image+JDK8_OPENJ9
+    DO ../.udcs/image+JDK8_OPENJ9
     DO +OPENJDK
 
-    SAVE IMAGE --push ghcr.io/mritd/openjdk8:openj9 ghcr.io/mritd/openjdk8:openj9-${BUILD_DATE}
+    SAVE IMAGE --push mritd/openjdk8:openj9 mritd/openjdk8:openj9-${BUILD_DATE}
 
 build-openjdk11:
-    DO ../udcs/image+JDK11
+    DO ../.udcs/image+JDK11
     DO +OPENJDK
-    DO ../udcs/language/java+JAVA_OPTS_11
+    DO ../.udcs/language/java+JAVA_OPTS_11
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/openjdk11:latest ghcr.io/mritd/openjdk11:hotspot ghcr.io/mritd/openjdk11:hotspot-${BUILD_DATE}
+    SAVE IMAGE --push mritd/openjdk11:latest mritd/openjdk11:hotspot mritd/openjdk11:hotspot-${BUILD_DATE}
 
 build-openjdk11-openj9:
-    DO ../udcs/image+JDK11_OPENJ9
+    DO ../.udcs/image+JDK11_OPENJ9
     DO +OPENJDK
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/openjdk11:openj9 ghcr.io/mritd/openjdk11:openj9-${BUILD_DATE}
+    SAVE IMAGE --push mritd/openjdk11:openj9 mritd/openjdk11:openj9-${BUILD_DATE}
 
 build-openjdk17:
-    DO ../udcs/image+JDK17
+    DO ../.udcs/image+JDK17
     DO +OPENJDK
-    DO ../udcs/language/java+JAVA_OPTS_17
+    DO ../.udcs/language/java+JAVA_OPTS_17
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/openjdk17:latest ghcr.io/mritd/openjdk17:hotspot ghcr.io/mritd/openjdk17:hotspot-${BUILD_DATE}
+    SAVE IMAGE --push mritd/openjdk17:latest mritd/openjdk17:hotspot mritd/openjdk17:hotspot-${BUILD_DATE}
 
 build-openjdk17-openj9:
-    DO ../udcs/image+JDK17_OPENJ9
+    DO ../.udcs/image+JDK17_OPENJ9
     DO +OPENJDK
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/openjdk17:openj9 ghcr.io/mritd/openjdk17:openj9-${BUILD_DATE}
+    SAVE IMAGE --push mritd/openjdk17:openj9 mritd/openjdk17:openj9-${BUILD_DATE}
 
 ##################### build ######################
 
 build-openjdk8-javabuild:
-    DO ../udcs/image+JDK8
+    DO ../.udcs/image+JDK8
     DO +OPENJDK
-    DO ../udcs/language/java+JAVA_OPTS
+    DO ../.udcs/language/java+JAVA_OPTS
     DO +JAVA_BUILD
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/javabuild8:latest ghcr.io/mritd/javabuild8:hotspot ghcr.io/mritd/javabuild8:hotspot-${BUILD_DATE}
+    SAVE IMAGE --push mritd/javabuild8:latest mritd/javabuild8:hotspot mritd/javabuild8:hotspot-${BUILD_DATE}
 
 build-openjdk8-openj9-javabuild:
-    DO ../udcs/image+JDK8_OPENJ9
+    DO ../.udcs/image+JDK8_OPENJ9
     DO +OPENJDK
     DO +JAVA_BUILD
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/javabuild8:openj9 ghcr.io/mritd/javabuild8:openj9-${BUILD_DATE}
+    SAVE IMAGE --push mritd/javabuild8:openj9 mritd/javabuild8:openj9-${BUILD_DATE}
 
 build-openjdk11-javabuild:
-    DO ../udcs/image+JDK11
+    DO ../.udcs/image+JDK11
     DO +OPENJDK
-    DO ../udcs/language/java+JAVA_OPTS_11
+    DO ../.udcs/language/java+JAVA_OPTS_11
     DO +JAVA_BUILD
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/javabuild11:latest ghcr.io/mritd/javabuild11:hotspot ghcr.io/mritd/javabuild11:hotspot-${BUILD_DATE}
+    SAVE IMAGE --push mritd/javabuild11:latest mritd/javabuild11:hotspot mritd/javabuild11:hotspot-${BUILD_DATE}
 
 build-openjdk11-openj9-javabuild:
-    DO ../udcs/image+JDK11_OPENJ9
+    DO ../.udcs/image+JDK11_OPENJ9
     DO +OPENJDK
     DO +JAVA_BUILD
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/javabuild11:openj9 ghcr.io/mritd/javabuild11:openj9-${BUILD_DATE}
+    SAVE IMAGE --push mritd/javabuild11:openj9 mritd/javabuild11:openj9-${BUILD_DATE}
 
 build-openjdk17-javabuild:
-    DO ../udcs/image+JDK17
+    DO ../.udcs/image+JDK17
     DO +OPENJDK
-    DO ../udcs/language/java+JAVA_OPTS_17
+    DO ../.udcs/language/java+JAVA_OPTS_17
     DO +JAVA_BUILD
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/javabuild17:latest ghcr.io/mritd/javabuild17:hotspot ghcr.io/mritd/javabuild17:hotspot-${BUILD_DATE}
+    SAVE IMAGE --push mritd/javabuild17:latest mritd/javabuild17:hotspot mritd/javabuild17:hotspot-${BUILD_DATE}
 
 build-openjdk17-openj9-javabuild:
-    DO ../udcs/image+JDK17_OPENJ9
+    DO ../.udcs/image+JDK17_OPENJ9
     DO +OPENJDK
     DO +JAVA_BUILD
 
     ARG --required BUILD_DATE
 
-    SAVE IMAGE --push ghcr.io/mritd/javabuild17:openj9 ghcr.io/mritd/javabuild17:openj9-${BUILD_DATE}
+    SAVE IMAGE --push mritd/javabuild17:openj9 mritd/javabuild17:openj9-${BUILD_DATE}
 
 
 all:
-    #DO ../udcs+BUILD_DATE
-    FROM ghcr.io/mritd/alpine
+    #DO ../.udcs+BUILD_DATE
+    FROM mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 

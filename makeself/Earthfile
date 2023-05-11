@@ -1,7 +1,7 @@
 VERSION 0.7
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
     RUN set -ex \
         && curl -sSL https://github.com/megastep/makeself/raw/master/makeself-header.sh > /usr/local/bin/makeself-header.sh \
@@ -10,7 +10,7 @@ build:
 
     CMD ["/bin/bash"]
 
-    SAVE IMAGE --push ghcr.io/mritd/makeself:latest
+    SAVE IMAGE --push mritd/makeself:latest
 
 all:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build

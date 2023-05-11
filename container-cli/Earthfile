@@ -6,7 +6,7 @@ docker-cli:
     SAVE ARTIFACT /usr/local/bin/docker /tmp/docker
 
 docker-compose:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
     RUN set -ex \
         && download_url="https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m)" \
@@ -16,7 +16,7 @@ docker-compose:
     SAVE ARTIFACT /tmp/docker-compose /tmp/docker-compose
 
 kubectl:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
     ARG --required OS_ARCH
 
@@ -28,7 +28,7 @@ kubectl:
     SAVE ARTIFACT /tmp/kubectl /tmp/kubectl
 
 nerdctl:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
     ARG --required OS_ARCH
 
@@ -41,7 +41,7 @@ nerdctl:
     SAVE ARTIFACT /tmp/nerdctl /tmp/nerdctl
 
 podman:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
     ARG --required OS_ARCH
 
@@ -54,7 +54,7 @@ podman:
     SAVE ARTIFACT /tmp/podman /tmp/podman
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
     ARG --required OS_ARCH
     ARG --required BUILD_DATE
@@ -73,12 +73,12 @@ build:
 
     CMD ["bash"]
 
-    SAVE IMAGE --push ghcr.io/mritd/container-cli:${BUILD_DATE} ghcr.io/mritd/container-cli:latest
+    SAVE IMAGE --push mritd/container-cli:${BUILD_DATE} mritd/container-cli:latest
 
 all:
-    #DO ../udcs+BUILD_DATE
-    #DO ../udcs+OS_ARCH
-    FROM ghcr.io/mritd/alpine
+    #DO ../.udcs+BUILD_DATE
+    #DO ../.udcs+OS_ARCH
+    FROM mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S") 
 

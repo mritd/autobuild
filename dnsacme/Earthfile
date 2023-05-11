@@ -1,10 +1,10 @@
 VERSION 0.7
 
 build-dnsacme:
-    DO ../udcs/image+GO
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
-    DO ../udcs+GO_TASK
+    DO ../.udcs/image+GO
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
+    DO ../.udcs+GO_TASK
     
     ENV REPO https://github.com/mritd/dnsacme.git
     ENV SRC_PATH /go/src/github.com/mritd/dnsacme
@@ -16,10 +16,10 @@ build-dnsacme:
     SAVE ARTIFACT ${SRC_PATH}/build/dnsacme-local
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
     
-    DO ../udcs/os/alpine+TIMEZONE
-    DO ../udcs/language/go+FIX_DNS
+    DO ../.udcs/os/alpine+TIMEZONE
+    DO ../.udcs/language/go+FIX_DNS
 
     ARG --required BUILD_DATE
 
@@ -33,13 +33,13 @@ build:
 
     CMD ["dnsacme"]
     
-    SAVE IMAGE --push ghcr.io/mritd/dnsacme:latest ghcr.io/mritd/dnsacme:${BUILD_DATE}
+    SAVE IMAGE --push mritd/dnsacme:latest mritd/dnsacme:${BUILD_DATE}
 
 unraid:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
     
-    DO ../udcs/os/alpine+TIMEZONE
-    DO ../udcs/language/go+FIX_DNS
+    DO ../.udcs/os/alpine+TIMEZONE
+    DO ../.udcs/language/go+FIX_DNS
 
     LABEL net.unraid.docker.icon=https://github.com/mritd/dnsacme/raw/main/logo.png
     LABEL net.unraid.docker.shell=bash
@@ -61,11 +61,11 @@ unraid:
 
     ENTRYPOINT ["/entrypoint.sh"]
 
-    SAVE IMAGE --push ghcr.io/mritd/dnsacme:unraid ghcr.io/mritd/dnsacme:unraid-${BUILD_DATE}
+    SAVE IMAGE --push mritd/dnsacme:unraid mritd/dnsacme:unraid-${BUILD_DATE}
 
 all:
-    #DO ../udcs+BUILD_DATE
-    FROM ghcr.io/mritd/alpine
+    #DO ../.udcs+BUILD_DATE
+    FROM mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 

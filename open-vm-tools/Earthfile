@@ -3,8 +3,8 @@ VERSION 0.7
 build:
     FROM debian:11-slim
 
-    DO ../udcs+LABEL
-    DO ../udcs/os/debian+UPGRADE
+    DO ../.udcs+LABEL
+    DO ../.udcs/os/debian+UPGRADE
 
     ARG --required BUILD_DATE
 
@@ -20,10 +20,10 @@ build:
 
     ENTRYPOINT ["/entrypoint.sh"]
 
-    SAVE IMAGE --push ghcr.io/mritd/open-vm-tools:${BUILD_DATE} ghcr.io/mritd/open-vm-tools:latest
+    SAVE IMAGE --push mritd/open-vm-tools:${BUILD_DATE} mritd/open-vm-tools:latest
 
 all:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 

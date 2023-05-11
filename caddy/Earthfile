@@ -1,9 +1,9 @@
 VERSION 0.7
 
 build-caddy:
-    DO ../udcs/image+GO
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    DO ../.udcs/image+GO
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
 
     ARG --required BUILD_DATE
     ARG --required VERSION
@@ -29,12 +29,12 @@ build-caddy:
     SAVE ARTIFACT /caddy
 
 build:
-    DO ../udcs/image+ALPINE
-    DO ../udcs+LABEL
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+COMMON_PKG
-    DO ../udcs/os/alpine+TIMEZONE
-    DO ../udcs/language/go+FIX_DNS
+    DO ../.udcs/image+ALPINE
+    DO ../.udcs+LABEL
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+COMMON_PKG
+    DO ../.udcs/os/alpine+TIMEZONE
+    DO ../.udcs/language/go+FIX_DNS
 
     ARG --required BUILD_DATE
     ARG --required VERSION
@@ -63,11 +63,11 @@ build:
     
     CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
 
-    SAVE IMAGE --push ghcr.io/mritd/caddy:latest ghcr.io/mritd/caddy:${VERSION} ghcr.io/mritd/caddy:${VERSION}-${BUILD_DATE}
+    SAVE IMAGE --push mritd/caddy:latest mritd/caddy:${VERSION} mritd/caddy:${VERSION}-${BUILD_DATE}
 
 all:
-    #DO ../udcs+BUILD_DATE
-    FROM ghcr.io/mritd/alpine
+    #DO ../.udcs+BUILD_DATE
+    FROM mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
     ARG VERSION=$(curl -sSL "https://api.github.com/repos/caddyserver/caddy/releases/latest" | jq -r '.tag_name')

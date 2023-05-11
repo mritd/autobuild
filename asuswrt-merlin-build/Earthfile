@@ -1,12 +1,12 @@
 VERSION 0.7
 
 build:
-    DO ../udcs/image+UBUNTU
-    DO ../udcs+LABEL
-    DO ../udcs/os/debian+UPGRADE
-    DO ../udcs/os/debian+COMMON_PKG
-    DO ../udcs/os/debian+LOCALE
-    DO ../udcs/os/debian+TIMEZONE
+    DO ../.udcs/image+UBUNTU
+    DO ../.udcs+LABEL
+    DO ../.udcs/os/debian+UPGRADE
+    DO ../.udcs/os/debian+COMMON_PKG
+    DO ../.udcs/os/debian+LOCALE
+    DO ../.udcs/os/debian+TIMEZONE
 
     ENV BUILD_USER asuswrt
     ENV BUILD_USER_HOME /home/asuswrt
@@ -43,7 +43,7 @@ build:
 
     CMD ["bash"]
 
-    SAVE IMAGE --push ghcr.io/mritd/asuswrt-merlin-build:latest
+    SAVE IMAGE --push mritd/asuswrt-merlin-build:latest
 
 all:
     BUILD --platform=linux/amd64 +build

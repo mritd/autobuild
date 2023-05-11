@@ -1,9 +1,9 @@
 VERSION 0.7
 
 build-clash:
-    DO ../udcs/image+GO
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    DO ../.udcs/image+GO
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
 
     ARG VERSION
     ARG BUILD_DATE
@@ -21,10 +21,10 @@ build-clash:
     SAVE ARTIFACT /clash
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
     
-    DO ../udcs/os/alpine+TIMEZONE
-    DO ../udcs/language/go+FIX_DNS
+    DO ../.udcs/os/alpine+TIMEZONE
+    DO ../.udcs/language/go+FIX_DNS
 
     ARG VERSION
     ARG BUILD_DATE
@@ -45,10 +45,10 @@ build:
     
     CMD ["clash"]
 
-    SAVE IMAGE --push ghcr.io/mritd/clash-meta:latest ghcr.io/mritd/clash-meta:${VERSION} ghcr.io/mritd/clash-meta:${VERSION}-${BUILD_DATE}
+    SAVE IMAGE --push mritd/clash-meta:latest mritd/clash-meta:${VERSION} mritd/clash-meta:${VERSION}-${BUILD_DATE}
 
 all:
-    DO ../udcs+BUILD_DATE
+    DO ../.udcs+BUILD_DATE
 
     ARG VERSION=$(curl -fsSL "https://api.github.com/repos/MetaCubeX/Clash.Meta/releases/latest" | jq -r '.tag_name')
 

@@ -1,14 +1,14 @@
 VERSION 0.7
 
 build:
-    DO ../udcs/image+NODE
-    DO ../udcs+LABEL
-    DO ../udcs/os/debian+UPGRADE
-    DO ../udcs/os/debian+COMMON_PKG
-    DO ../udcs/os/debian+LOCALE
-    DO ../udcs/os/debian+TIMEZONE
-    DO ../udcs/os/debian+INSTALL_BUILD_BASE
-    DO ../udcs+TINI
+    DO ../.udcs/image+NODE
+    DO ../.udcs+LABEL
+    DO ../.udcs/os/debian+UPGRADE
+    DO ../.udcs/os/debian+COMMON_PKG
+    DO ../.udcs/os/debian+LOCALE
+    DO ../.udcs/os/debian+TIMEZONE
+    DO ../.udcs/os/debian+INSTALL_BUILD_BASE
+    DO ../.udcs+TINI
 
     ARG --required BUILD_DATE
 
@@ -27,11 +27,11 @@ build:
 
     CMD ["node"]
 
-    SAVE IMAGE --push ghcr.io/mritd/nodebuild:${BUILD_DATE} ghcr.io/mritd/nodebuild:latest
+    SAVE IMAGE --push mritd/nodebuild:${BUILD_DATE} mritd/nodebuild:latest
 
 all:
-    # DO ../udcs+BUILD_DATE
-    FROM ghcr.io/mritd/alpine
+    # DO ../.udcs+BUILD_DATE
+    FROM mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 

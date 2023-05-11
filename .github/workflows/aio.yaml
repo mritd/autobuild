@@ -10,75 +10,84 @@ on:
         required: true
         type: choice
         options:
-          - all
-          #- alpine
-          #- alpine-base
-          #- standalone
-
-
-env:
-  FORCE_COLOR: 1
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          - build
 
 jobs:
   alpine:
-    runs-on: ubuntu-latest
-    concurrency: alpine
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ github.job }}
-      run: earthly --allow-privileged --push +all
-
-  alpine-base:
-    needs: alpine
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    strategy:
-      max-parallel: 1
-      matrix:
-        directory:
-          - ssh
-          - s2h
-          - makeself
-          - derper
-          - container-cli
-          - aria2
-          - bandwagonmon
-          - ddns
-          - dnsacme
-          - idgen
-          - notibot
-          - clash-meta
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ matrix.directory }}
-      run: earthly --allow-privileged --push +all
-
-
-  standalone:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    strategy:
-      max-parallel: 1
-      matrix:
-        directory:
-          - caddy
-          - nodebuild
-          - openjdk
-          - open-vm-tools
-          - nginx-singlepage
-          - demo
-          - poetbot
-          - jira
-          - confluence
-    steps:
-    - name: Init Earthly
-      uses: mritd/init-earthly-action@main
-    - name: Earthly Build
-      working-directory: ${{ matrix.directory }}
-      run: earthly --allow-privileged --push +all
+    uses: ./.github/workflows/alpine.yaml
+    secrets: inherit
+  aria2:
+    uses: ./.github/workflows/aria2.yaml
+    secrets: inherit
+  asuswrt-merlin-build:
+    uses: ./.github/workflows/asuswrt-merlin-build.yaml
+    secrets: inherit
+  bandwagonmon:
+    uses: ./.github/workflows/bandwagonmon.yaml
+    secrets: inherit
+  caddy:
+    uses: ./.github/workflows/caddy.yaml
+    secrets: inherit
+  clash-meta:
+    uses: ./.github/workflows/clash-meta.yaml
+    secrets: inherit
+  confluence:
+    uses: ./.github/workflows/confluence.yaml
+    secrets: inherit
+  container-cli:
+    uses: ./.github/workflows/container-cli.yaml
+    secrets: inherit
+  ddns:
+    uses: ./.github/workflows/ddns.yaml
+    secrets: inherit
+  demo:
+    uses: ./.github/workflows/demo.yaml
+    secrets: inherit
+  derper:
+    uses: ./.github/workflows/derper.yaml
+    secrets: inherit
+  dnsacme:
+    uses: ./.github/workflows/dnsacme.yaml
+    secrets: inherit
+  dockerhub:
+    uses: ./.github/workflows/dockerhub.yaml
+    secrets: inherit
+  idgen:
+    uses: ./.github/workflows/idgen.yaml
+    secrets: inherit
+  jira:
+    uses: ./.github/workflows/jira.yaml
+    secrets: inherit
+  makeself:
+    uses: ./.github/workflows/makeself.yaml
+    secrets: inherit
+  nginx-singlepage:
+    uses: ./.github/workflows/nginx-singlepage.yaml
+    secrets: inherit
+  nodebuild:
+    uses: ./.github/workflows/nodebuild.yaml
+    secrets: inherit
+  notibot:
+    uses: ./.github/workflows/notibot.yaml
+    secrets: inherit
+  open-vm-tools:
+    uses: ./.github/workflows/open-vm-tools.yaml
+    secrets: inherit
+  openjdk:
+    uses: ./.github/workflows/openjdk.yaml
+    secrets: inherit
+  osarch:
+    uses: ./.github/workflows/osarch.yaml
+    secrets: inherit
+  poetbot:
+    uses: ./.github/workflows/poetbot.yaml
+    secrets: inherit
+  s2h:
+    uses: ./.github/workflows/s2h.yaml
+    secrets: inherit
+  ssh:
+    uses: ./.github/workflows/ssh.yaml
+    secrets: inherit
+  tpclash:
+    uses: ./.github/workflows/tpclash.yaml
+    secrets: inherit

@@ -1,9 +1,9 @@
 VERSION 0.7
 
 build-poetbot:
-    DO ../udcs/image+GO
-    DO ../udcs/os/alpine+UPGRADE
-    DO ../udcs/os/alpine+INSTALL_BUILD_BASE
+    DO ../.udcs/image+GO
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
     
     RUN --mount=type=cache,target=/go/pkg \
         apk add alpine-sdk linux-headers zlib-dev openssl-dev gperf php cmake \
@@ -27,10 +27,10 @@ build-poetbot:
     SAVE ARTIFACT /go/bin/poetbot
 
 build:
-    FROM ghcr.io/mritd/alpine
+    FROM mritd/alpine
     
-    DO ../udcs/os/alpine+TIMEZONE
-    DO ../udcs/language/go+FIX_DNS
+    DO ../.udcs/os/alpine+TIMEZONE
+    DO ../.udcs/language/go+FIX_DNS
 
     BUILD +build-poetbot
     
@@ -44,7 +44,7 @@ build:
 
     ENTRYPOINT ["poetbot"]
 
-    SAVE IMAGE --push ghcr.io/mritd/poetbot:latest
+    SAVE IMAGE --push mritd/poetbot:latest
 
 all:
     BUILD --platform=linux/amd64 +build
