@@ -14,80 +14,127 @@ on:
 
 jobs:
   alpine:
-    uses: ./.github/workflows/alpine.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: alpine
   aria2:
-    uses: ./.github/workflows/aria2.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: aria2
   asuswrt-merlin-build:
-    uses: ./.github/workflows/asuswrt-merlin-build.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: asuswrt-merlin-build
   bandwagonmon:
-    uses: ./.github/workflows/bandwagonmon.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: bandwagonmon
   caddy:
-    uses: ./.github/workflows/caddy.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: caddy
   clash-meta:
-    uses: ./.github/workflows/clash-meta.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: clash-meta
   confluence:
-    uses: ./.github/workflows/confluence.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: confluence
   container-cli:
-    uses: ./.github/workflows/container-cli.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: container-cli
   ddns:
-    uses: ./.github/workflows/ddns.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: ddns
   demo:
-    uses: ./.github/workflows/demo.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: demo
   derper:
-    uses: ./.github/workflows/derper.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: derper
   dnsacme:
-    uses: ./.github/workflows/dnsacme.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: dnsacme
   dockerhub:
-    uses: ./.github/workflows/dockerhub.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: dockerhub
   idgen:
-    uses: ./.github/workflows/idgen.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: idgen
   jira:
-    uses: ./.github/workflows/jira.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: jira
   makeself:
-    uses: ./.github/workflows/makeself.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: makeself
   nginx-singlepage:
-    uses: ./.github/workflows/nginx-singlepage.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: nginx-singlepage
   nodebuild:
-    uses: ./.github/workflows/nodebuild.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: nodebuild
   notibot:
-    uses: ./.github/workflows/notibot.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: notibot
   open-vm-tools:
-    uses: ./.github/workflows/open-vm-tools.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: open-vm-tools
   openjdk:
-    uses: ./.github/workflows/openjdk.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: openjdk
   osarch:
-    uses: ./.github/workflows/osarch.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: osarch
   poetbot:
-    uses: ./.github/workflows/poetbot.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: poetbot
   s2h:
-    uses: ./.github/workflows/s2h.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
+    with:
+      build-dir: s2h
   ssh:
-    uses: ./.github/workflows/ssh.yaml
+    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-  tpclash:
-    uses: ./.github/workflows/tpclash.yaml
-    secrets: inherit
+    with:
+      build-dir: ssh

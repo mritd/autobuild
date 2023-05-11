@@ -23,8 +23,8 @@ jobs:
 EOF
 
 for name in `ls -d */ | tr -d '/'`; do
-   sed "s@REPLACE_NAME@$name@g" ${WORKFLOW_DIR}/wk.tpl > ${WORKFLOW_DIR}/$name.yaml
-   sed "s@REPLACE_NAME@$name@g" ${WORKFLOW_DIR}/job.tpl >> ${WORKFLOW_DIR}/aio.yaml
+   sed "s@REPLACE_NAME@${name}@g" ${WORKFLOW_DIR}/wk.tpl > ${WORKFLOW_DIR}/${name}.yaml
+   sed "s@REPLACE_NAME@${name}@g" ${WORKFLOW_DIR}/job.tpl >> ${WORKFLOW_DIR}/aio.yaml
 done
 
 
