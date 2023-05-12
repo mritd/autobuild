@@ -13,6 +13,7 @@ on:
 
 jobs:
   dnsacme:
+    runs-on: ubuntu-latest
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:
