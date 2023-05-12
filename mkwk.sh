@@ -31,7 +31,6 @@ jobs:
   ${directories[0]}:
     runs-on: ubuntu-latest
     uses: ./.github/workflows/.earthly.yaml
-    secrets: inherit
     with:
       build-dir: ${directories[0]}
   
@@ -50,7 +49,6 @@ for (( i=0; i<${#directories[@]}; i++ )); do
     allow-failure: true
     needs:
       - ${directories[$((i-1))]}
-    secrets: inherit
     with:
       build-dir: ${directories[$i]}
 
@@ -78,7 +76,6 @@ jobs:
   ${directories[$i]}:
     runs-on: ubuntu-latest
     uses: ./.github/workflows/.earthly.yaml
-    secrets: inherit
     with:
       build-dir: ${directories[$i]}
 EOF

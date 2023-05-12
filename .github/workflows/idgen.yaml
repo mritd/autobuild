@@ -15,6 +15,5 @@ jobs:
   idgen:
     runs-on: ubuntu-latest
     uses: ./.github/workflows/.earthly.yaml
-    secrets: inherit
     with:
       build-dir: idgen

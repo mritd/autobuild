@@ -16,7 +16,6 @@ jobs:
   alpine:
     runs-on: ubuntu-latest
     uses: ./.github/workflows/.earthly.yaml
-    secrets: inherit
     with:
       build-dir: alpine
   
@@ -27,7 +26,6 @@ jobs:
     allow-failure: true
     needs:
       - alpine
-    secrets: inherit
     with:
       build-dir: aria2
   asuswrt-merlin-build:
@@ -36,7 +34,6 @@ jobs:
     allow-failure: true
     needs:
       - aria2
-    secrets: inherit
     with:
       build-dir: asuswrt-merlin-build
   bandwagonmon:
@@ -45,7 +42,6 @@ jobs:
     allow-failure: true
     needs:
       - asuswrt-merlin-build
-    secrets: inherit
     with:
       build-dir: bandwagonmon
   caddy:
@@ -54,7 +50,6 @@ jobs:
     allow-failure: true
     needs:
       - bandwagonmon
-    secrets: inherit
     with:
       build-dir: caddy
   clash-meta:
@@ -63,7 +58,6 @@ jobs:
     allow-failure: true
     needs:
       - caddy
-    secrets: inherit
     with:
       build-dir: clash-meta
   confluence:
@@ -72,7 +66,6 @@ jobs:
     allow-failure: true
     needs:
       - clash-meta
-    secrets: inherit
     with:
       build-dir: confluence
   container-cli:
@@ -81,7 +74,6 @@ jobs:
     allow-failure: true
     needs:
       - confluence
-    secrets: inherit
     with:
       build-dir: container-cli
   ddns:
@@ -90,7 +82,6 @@ jobs:
     allow-failure: true
     needs:
       - container-cli
-    secrets: inherit
     with:
       build-dir: ddns
   demo:
@@ -99,7 +90,6 @@ jobs:
     allow-failure: true
     needs:
       - ddns
-    secrets: inherit
     with:
       build-dir: demo
   derper:
@@ -108,7 +98,6 @@ jobs:
     allow-failure: true
     needs:
       - demo
-    secrets: inherit
     with:
       build-dir: derper
   dnsacme:
@@ -117,7 +106,6 @@ jobs:
     allow-failure: true
     needs:
       - derper
-    secrets: inherit
     with:
       build-dir: dnsacme
   dockerhub:
@@ -126,7 +114,6 @@ jobs:
     allow-failure: true
     needs:
       - dnsacme
-    secrets: inherit
     with:
       build-dir: dockerhub
   idgen:
@@ -135,7 +122,6 @@ jobs:
     allow-failure: true
     needs:
       - dockerhub
-    secrets: inherit
     with:
       build-dir: idgen
   jira:
@@ -144,7 +130,6 @@ jobs:
     allow-failure: true
     needs:
       - idgen
-    secrets: inherit
     with:
       build-dir: jira
   makeself:
@@ -153,7 +138,6 @@ jobs:
     allow-failure: true
     needs:
       - jira
-    secrets: inherit
     with:
       build-dir: makeself
   nginx-singlepage:
@@ -162,7 +146,6 @@ jobs:
     allow-failure: true
     needs:
       - makeself
-    secrets: inherit
     with:
       build-dir: nginx-singlepage
   nodebuild:
@@ -171,7 +154,6 @@ jobs:
     allow-failure: true
     needs:
       - nginx-singlepage
-    secrets: inherit
     with:
       build-dir: nodebuild
   notibot:
@@ -180,7 +162,6 @@ jobs:
     allow-failure: true
     needs:
       - nodebuild
-    secrets: inherit
     with:
       build-dir: notibot
   open-vm-tools:
@@ -189,7 +170,6 @@ jobs:
     allow-failure: true
     needs:
       - notibot
-    secrets: inherit
     with:
       build-dir: open-vm-tools
   openjdk:
@@ -198,7 +178,6 @@ jobs:
     allow-failure: true
     needs:
       - open-vm-tools
-    secrets: inherit
     with:
       build-dir: openjdk
   osarch:
@@ -207,7 +186,6 @@ jobs:
     allow-failure: true
     needs:
       - openjdk
-    secrets: inherit
     with:
       build-dir: osarch
   poetbot:
@@ -216,7 +194,6 @@ jobs:
     allow-failure: true
     needs:
       - osarch
-    secrets: inherit
     with:
       build-dir: poetbot
   s2h:
@@ -225,7 +202,6 @@ jobs:
     allow-failure: true
     needs:
       - poetbot
-    secrets: inherit
     with:
       build-dir: s2h
   ssh:
@@ -234,7 +210,6 @@ jobs:
     allow-failure: true
     needs:
       - s2h
-    secrets: inherit
     with:
       build-dir: ssh
 

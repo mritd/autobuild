@@ -15,6 +15,5 @@ jobs:
   s2h:
     runs-on: ubuntu-latest
     uses: ./.github/workflows/.earthly.yaml
-    secrets: inherit
     with:
       build-dir: s2h
