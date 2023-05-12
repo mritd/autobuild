@@ -14,7 +14,8 @@ on:
 jobs:
   asuswrt-merlin-build:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: asuswrt-merlin-build
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: asuswrt-merlin-build

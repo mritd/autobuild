@@ -14,7 +14,8 @@ on:
 jobs:
   nginx-singlepage:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: nginx-singlepage
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: nginx-singlepage

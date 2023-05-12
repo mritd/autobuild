@@ -14,7 +14,8 @@ on:
 jobs:
   dockerhub:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: dockerhub
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: dockerhub

@@ -14,7 +14,8 @@ on:
 jobs:
   ddns:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: ddns
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: ddns

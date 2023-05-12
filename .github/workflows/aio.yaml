@@ -15,225 +15,250 @@ on:
 jobs:
   alpine:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: alpine
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: alpine
 
   aria2:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - alpine
     secrets: inherit
-    with:
-      build-dir: aria2
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: aria2
   asuswrt-merlin-build:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - aria2
     secrets: inherit
-    with:
-      build-dir: asuswrt-merlin-build
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: asuswrt-merlin-build
   bandwagonmon:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - asuswrt-merlin-build
     secrets: inherit
-    with:
-      build-dir: bandwagonmon
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: bandwagonmon
   caddy:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - bandwagonmon
     secrets: inherit
-    with:
-      build-dir: caddy
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: caddy
   clash-meta:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - caddy
     secrets: inherit
-    with:
-      build-dir: clash-meta
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: clash-meta
   confluence:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - clash-meta
     secrets: inherit
-    with:
-      build-dir: confluence
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: confluence
   container-cli:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - confluence
     secrets: inherit
-    with:
-      build-dir: container-cli
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: container-cli
   ddns:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - container-cli
     secrets: inherit
-    with:
-      build-dir: ddns
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: ddns
   demo:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - ddns
     secrets: inherit
-    with:
-      build-dir: demo
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: demo
   derper:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - demo
     secrets: inherit
-    with:
-      build-dir: derper
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: derper
   dnsacme:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - derper
     secrets: inherit
-    with:
-      build-dir: dnsacme
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: dnsacme
   dockerhub:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - dnsacme
     secrets: inherit
-    with:
-      build-dir: dockerhub
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: dockerhub
   idgen:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - dockerhub
     secrets: inherit
-    with:
-      build-dir: idgen
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: idgen
   jira:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - idgen
     secrets: inherit
-    with:
-      build-dir: jira
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: jira
   makeself:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - jira
     secrets: inherit
-    with:
-      build-dir: makeself
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: makeself
   nginx-singlepage:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - makeself
     secrets: inherit
-    with:
-      build-dir: nginx-singlepage
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: nginx-singlepage
   nodebuild:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - nginx-singlepage
     secrets: inherit
-    with:
-      build-dir: nodebuild
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: nodebuild
   notibot:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - nodebuild
     secrets: inherit
-    with:
-      build-dir: notibot
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: notibot
   open-vm-tools:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - notibot
     secrets: inherit
-    with:
-      build-dir: open-vm-tools
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: open-vm-tools
   openjdk:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - open-vm-tools
     secrets: inherit
-    with:
-      build-dir: openjdk
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: openjdk
   osarch:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - openjdk
     secrets: inherit
-    with:
-      build-dir: osarch
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: osarch
   poetbot:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - osarch
     secrets: inherit
-    with:
-      build-dir: poetbot
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: poetbot
   s2h:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - poetbot
     secrets: inherit
-    with:
-      build-dir: s2h
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: s2h
   ssh:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - s2h
     secrets: inherit
-    with:
-      build-dir: ssh
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: ssh
 

@@ -30,10 +30,11 @@ on:
 jobs:
   ${directories[0]}:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: ${directories[0]}
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: ${directories[0]}
 
 EOF
 )
@@ -46,13 +47,14 @@ for (( i=0; i<${#directories[@]}; i++ )); do
     yaml_content+="$(cat << EOF
   ${directories[$i]}:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     allow-failure: true
     needs:
       - ${directories[$((i-1))]}
     secrets: inherit
-    with:
-      build-dir: ${directories[$i]}
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: ${directories[$i]}
 
 EOF
 )"
@@ -77,10 +79,11 @@ on:
 jobs:
   ${directories[$i]}:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: ${directories[$i]}
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: ${directories[$i]}
 EOF
 
 done

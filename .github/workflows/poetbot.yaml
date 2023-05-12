@@ -14,7 +14,8 @@ on:
 jobs:
   poetbot:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: poetbot
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: poetbot

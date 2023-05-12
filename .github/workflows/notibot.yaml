@@ -14,7 +14,8 @@ on:
 jobs:
   notibot:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: notibot
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: notibot

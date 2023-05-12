@@ -14,7 +14,8 @@ on:
 jobs:
   alpine:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
-    with:
-      build-dir: alpine
+    steps:
+      - uses: ./.github/workflows/.earthly.yaml
+        with:
+          build-dir: alpine
