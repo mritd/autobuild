@@ -20,147 +20,147 @@ jobs:
       build-dir: alpine
 
   aria2:
-    needs:
-      - alpine
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: aria2
   asuswrt-merlin-build:
-    needs:
-      - aria2
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: asuswrt-merlin-build
   bandwagonmon:
-    needs:
-      - asuswrt-merlin-build
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: bandwagonmon
   caddy:
-    needs:
-      - bandwagonmon
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: caddy
   clash-meta:
-    needs:
-      - caddy
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: clash-meta
   confluence:
-    needs:
-      - clash-meta
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: confluence
   container-cli:
-    needs:
-      - confluence
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: container-cli
   ddns:
-    needs:
-      - container-cli
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: ddns
   demo:
-    needs:
-      - ddns
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: demo
   derper:
-    needs:
-      - demo
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: derper
   dnsacme:
-    needs:
-      - derper
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: dnsacme
   dockerhub:
-    needs:
-      - dnsacme
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: dockerhub
   idgen:
-    needs:
-      - dockerhub
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: idgen
   jira:
-    needs:
-      - idgen
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: jira
   makeself:
-    needs:
-      - jira
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: makeself
   nginx-singlepage:
-    needs:
-      - makeself
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: nginx-singlepage
   nodebuild:
-    needs:
-      - nginx-singlepage
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: nodebuild
   notibot:
-    needs:
-      - nodebuild
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: notibot
   open-vm-tools:
-    needs:
-      - notibot
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: open-vm-tools
   openjdk:
-    needs:
-      - open-vm-tools
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: openjdk
   osarch:
-    needs:
-      - openjdk
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: osarch
   poetbot:
-    needs:
-      - osarch
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: poetbot
   s2h:
-    needs:
-      - poetbot
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: s2h
   ssh:
-    needs:
-      - s2h
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: ssh
 

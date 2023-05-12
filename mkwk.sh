@@ -44,9 +44,9 @@ for (( i=0; i<${#directories[@]}; i++ )); do
   if [[ "${directories[$i]}" != "alpine" ]]; then
     yaml_content+="$(cat << EOF
   ${directories[$i]}:
-    needs:
-      - ${directories[$((i-1))]}
+    concurrency: alpine
     uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
     with:
       build-dir: ${directories[$i]}
 
