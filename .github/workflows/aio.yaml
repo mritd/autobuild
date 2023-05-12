@@ -14,226 +14,177 @@ on:
 
 jobs:
   alpine:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: alpine
+    uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
+    with:
+      build-dir: alpine
 
   aria2:
-    runs-on: ubuntu-latest
     needs:
       - alpine
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: aria2
   asuswrt-merlin-build:
-    runs-on: ubuntu-latest
     needs:
       - aria2
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: asuswrt-merlin-build
   bandwagonmon:
-    runs-on: ubuntu-latest
     needs:
       - asuswrt-merlin-build
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: bandwagonmon
   caddy:
-    runs-on: ubuntu-latest
     needs:
       - bandwagonmon
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: caddy
   clash-meta:
-    runs-on: ubuntu-latest
     needs:
       - caddy
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: clash-meta
   confluence:
-    runs-on: ubuntu-latest
     needs:
       - clash-meta
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: confluence
   container-cli:
-    runs-on: ubuntu-latest
     needs:
       - confluence
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: container-cli
   ddns:
-    runs-on: ubuntu-latest
     needs:
       - container-cli
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: ddns
   demo:
-    runs-on: ubuntu-latest
     needs:
       - ddns
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: demo
   derper:
-    runs-on: ubuntu-latest
     needs:
       - demo
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: derper
   dnsacme:
-    runs-on: ubuntu-latest
     needs:
       - derper
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: dnsacme
   dockerhub:
-    runs-on: ubuntu-latest
     needs:
       - dnsacme
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: dockerhub
   idgen:
-    runs-on: ubuntu-latest
     needs:
       - dockerhub
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: idgen
   jira:
-    runs-on: ubuntu-latest
     needs:
       - idgen
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: jira
   makeself:
-    runs-on: ubuntu-latest
     needs:
       - jira
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: makeself
   nginx-singlepage:
-    runs-on: ubuntu-latest
     needs:
       - makeself
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: nginx-singlepage
   nodebuild:
-    runs-on: ubuntu-latest
     needs:
       - nginx-singlepage
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: nodebuild
   notibot:
-    runs-on: ubuntu-latest
     needs:
       - nodebuild
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: notibot
   open-vm-tools:
-    runs-on: ubuntu-latest
     needs:
       - notibot
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: open-vm-tools
   openjdk:
-    runs-on: ubuntu-latest
     needs:
       - open-vm-tools
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: openjdk
   osarch:
-    runs-on: ubuntu-latest
     needs:
       - openjdk
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: osarch
   poetbot:
-    runs-on: ubuntu-latest
     needs:
       - osarch
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: poetbot
   s2h:
-    runs-on: ubuntu-latest
     needs:
       - poetbot
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: s2h
   ssh:
-    runs-on: ubuntu-latest
     needs:
       - s2h
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: ssh
 

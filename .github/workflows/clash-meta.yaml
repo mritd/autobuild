@@ -13,8 +13,7 @@ on:
 
 jobs:
   clash-meta:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: clash-meta
+    uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
+    with:
+      build-dir: clash-meta

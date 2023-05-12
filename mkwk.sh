@@ -29,11 +29,10 @@ on:
 
 jobs:
   ${directories[0]}:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: ${directories[0]}
+    uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
+    with:
+      build-dir: ${directories[0]}
 
 EOF
 )
@@ -45,12 +44,10 @@ for (( i=0; i<${#directories[@]}; i++ )); do
   if [[ "${directories[$i]}" != "alpine" ]]; then
     yaml_content+="$(cat << EOF
   ${directories[$i]}:
-    runs-on: ubuntu-latest
     needs:
       - ${directories[$((i-1))]}
     steps:
       - uses: ./.github/workflows/.earthly.yaml
-        continue-on-error: true
         with:
           build-dir: ${directories[$i]}
 
@@ -76,11 +73,10 @@ on:
 
 jobs:
   ${directories[$i]}:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: ${directories[$i]}
+    uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
+    with:
+      build-dir: ${directories[$i]}
 EOF
 
 done

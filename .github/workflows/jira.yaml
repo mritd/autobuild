@@ -13,8 +13,7 @@ on:
 
 jobs:
   jira:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: jira
+    uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
+    with:
+      build-dir: jira
