@@ -14,8 +14,8 @@ on:
 jobs:
   osarch:
     runs-on: ubuntu-latest
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         with:
           build-dir: osarch

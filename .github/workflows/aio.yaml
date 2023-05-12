@@ -15,9 +15,9 @@ on:
 jobs:
   alpine:
     runs-on: ubuntu-latest
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         with:
           build-dir: alpine
 
@@ -25,9 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - alpine
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: aria2
@@ -35,9 +35,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - aria2
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: asuswrt-merlin-build
@@ -45,9 +45,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - asuswrt-merlin-build
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: bandwagonmon
@@ -55,9 +55,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - bandwagonmon
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: caddy
@@ -65,9 +65,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - caddy
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: clash-meta
@@ -75,9 +75,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - clash-meta
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: confluence
@@ -85,9 +85,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - confluence
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: container-cli
@@ -95,9 +95,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - container-cli
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: ddns
@@ -105,9 +105,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - ddns
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: demo
@@ -115,9 +115,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - demo
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: derper
@@ -125,9 +125,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - derper
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: dnsacme
@@ -135,9 +135,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - dnsacme
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: dockerhub
@@ -145,9 +145,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - dockerhub
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: idgen
@@ -155,9 +155,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - idgen
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: jira
@@ -165,9 +165,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - jira
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: makeself
@@ -175,9 +175,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - makeself
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: nginx-singlepage
@@ -185,9 +185,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - nginx-singlepage
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: nodebuild
@@ -195,9 +195,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - nodebuild
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: notibot
@@ -205,9 +205,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - notibot
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: open-vm-tools
@@ -215,9 +215,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - open-vm-tools
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: openjdk
@@ -225,9 +225,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - openjdk
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: osarch
@@ -235,9 +235,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - osarch
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: poetbot
@@ -245,9 +245,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - poetbot
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: s2h
@@ -255,9 +255,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - s2h
-    secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        secrets: inherit
         continue-on-error: true
         with:
           build-dir: ssh
