@@ -45,6 +45,8 @@ for (( i=0; i<${#directories[@]}; i++ )); do
     yaml_content+="$(cat << EOF
   ${directories[$i]}:
     concurrency: alpine
+    needs:
+      - ${directories[0]}
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:
