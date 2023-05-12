@@ -23,242 +23,242 @@ jobs:
 
   aria2:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - alpine
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: aria2
   asuswrt-merlin-build:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - aria2
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: asuswrt-merlin-build
   bandwagonmon:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - asuswrt-merlin-build
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: bandwagonmon
   caddy:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - bandwagonmon
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: caddy
   clash-meta:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - caddy
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: clash-meta
   confluence:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - clash-meta
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: confluence
   container-cli:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - confluence
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: container-cli
   ddns:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - container-cli
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: ddns
   demo:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - ddns
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: demo
   derper:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - demo
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: derper
   dnsacme:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - derper
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: dnsacme
   dockerhub:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - dnsacme
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: dockerhub
   idgen:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - dockerhub
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: idgen
   jira:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - idgen
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: jira
   makeself:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - jira
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: makeself
   nginx-singlepage:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - makeself
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: nginx-singlepage
   nodebuild:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - nginx-singlepage
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: nodebuild
   notibot:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - nodebuild
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: notibot
   open-vm-tools:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - notibot
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: open-vm-tools
   openjdk:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - open-vm-tools
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: openjdk
   osarch:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - openjdk
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: osarch
   poetbot:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - osarch
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: poetbot
   s2h:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - poetbot
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: s2h
   ssh:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - s2h
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: ssh
 

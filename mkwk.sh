@@ -47,12 +47,12 @@ for (( i=0; i<${#directories[@]}; i++ )); do
     yaml_content+="$(cat << EOF
   ${directories[$i]}:
     runs-on: ubuntu-latest
-    allow-failure: true
     needs:
       - ${directories[$((i-1))]}
     secrets: inherit
     steps:
       - uses: ./.github/workflows/.earthly.yaml
+        continue-on-error: true
         with:
           build-dir: ${directories[$i]}
 
