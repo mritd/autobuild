@@ -46,10 +46,9 @@ for (( i=0; i<${#directories[@]}; i++ )); do
   ${directories[$i]}:
     needs:
       - ${directories[$((i-1))]}
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: ${directories[$i]}
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: ${directories[$i]}
 
 EOF
 )"

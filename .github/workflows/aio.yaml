@@ -22,169 +22,145 @@ jobs:
   aria2:
     needs:
       - alpine
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: aria2
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: aria2
   asuswrt-merlin-build:
     needs:
       - aria2
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: asuswrt-merlin-build
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: asuswrt-merlin-build
   bandwagonmon:
     needs:
       - asuswrt-merlin-build
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: bandwagonmon
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: bandwagonmon
   caddy:
     needs:
       - bandwagonmon
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: caddy
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: caddy
   clash-meta:
     needs:
       - caddy
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: clash-meta
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: clash-meta
   confluence:
     needs:
       - clash-meta
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: confluence
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: confluence
   container-cli:
     needs:
       - confluence
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: container-cli
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: container-cli
   ddns:
     needs:
       - container-cli
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: ddns
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: ddns
   demo:
     needs:
       - ddns
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: demo
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: demo
   derper:
     needs:
       - demo
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: derper
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: derper
   dnsacme:
     needs:
       - derper
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: dnsacme
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: dnsacme
   dockerhub:
     needs:
       - dnsacme
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: dockerhub
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: dockerhub
   idgen:
     needs:
       - dockerhub
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: idgen
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: idgen
   jira:
     needs:
       - idgen
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: jira
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: jira
   makeself:
     needs:
       - jira
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: makeself
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: makeself
   nginx-singlepage:
     needs:
       - makeself
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: nginx-singlepage
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: nginx-singlepage
   nodebuild:
     needs:
       - nginx-singlepage
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: nodebuild
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: nodebuild
   notibot:
     needs:
       - nodebuild
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: notibot
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: notibot
   open-vm-tools:
     needs:
       - notibot
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: open-vm-tools
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: open-vm-tools
   openjdk:
     needs:
       - open-vm-tools
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: openjdk
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: openjdk
   osarch:
     needs:
       - openjdk
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: osarch
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: osarch
   poetbot:
     needs:
       - osarch
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: poetbot
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: poetbot
   s2h:
     needs:
       - poetbot
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: s2h
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: s2h
   ssh:
     needs:
       - s2h
-    steps:
-      - uses: ./.github/workflows/.earthly.yaml
-        with:
-          build-dir: ssh
+    uses: ./.github/workflows/.earthly.yaml
+    with:
+      build-dir: ssh
 
