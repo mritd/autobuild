@@ -31,7 +31,7 @@ fi
 # 获取除alpine action和.earthly以外的所有workflow的名称和ID
 WORKFLOWS=$(curl -s -X GET -H "Authorization: token $TOKEN" \
     "https://api.github.com/repos/$USERNAME/$REPO_NAME/actions/workflows" | \
-    jq -r '.workflows[] | select(.path != ".github/workflows/.earthly.yaml" and .name != "alpine") | "\(.id) \(.name)"')
+    jq -r '.workflows[] | select(.path != ".github/workflows/.earthly.yaml" and .name != "mritd/alpine") | "\(.id) \(.name)"')
 
 # 遍历除alpine action和.earthly以外的所有workflow的名称和ID，并触发它们
 while read -r workflow_id workflow_name
