@@ -2,7 +2,7 @@ name: mritd/confluence
 
 on:
   schedule:
-    - cron: 0 6 * * 1
+    - cron: 0 5 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

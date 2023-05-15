@@ -2,7 +2,7 @@ name: mritd/ddns
 
 on:
   schedule:
-    - cron: 0 8 * * 1
+    - cron: 0 7 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

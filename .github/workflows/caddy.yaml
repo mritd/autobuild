@@ -2,7 +2,7 @@ name: mritd/caddy
 
 on:
   schedule:
-    - cron: 0 4 * * 1
+    - cron: 0 3 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

@@ -2,7 +2,7 @@ name: mritd/dnsacme
 
 on:
   schedule:
-    - cron: 0 11 * * 1
+    - cron: 0 10 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:
