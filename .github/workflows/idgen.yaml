@@ -1,6 +1,8 @@
 name: mritd/idgen
 
 on:
+  schedule:
+    - cron: 0 13 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

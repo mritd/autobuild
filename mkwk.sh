@@ -11,57 +11,19 @@ if [[ $alpine_index != 1 ]]; then
     directories[$alpine_index-1]=$tmp
 fi
 
-# 遍历数组并生成 YAML 配置文件内容
-yaml_content=$(cat << EOF
-name: All In One
-
-on:
-  schedule:
-    - cron: 0 16 * * 1
-  workflow_dispatch:
-    inputs:
-      trigger:
-        description: Manually trigger
-        required: true
-        type: choice
-        options:
-          - build
-
-jobs:
-  ${directories[0]}:
-    uses: ./.github/workflows/.earthly.yaml
-    secrets: inherit
-    with:
-      build-dir: ${directories[0]}
-
-EOF
-)
-
-# 在第一个代码块的末尾添加一个换行符
-yaml_content+=$'\n'
+minute="0"
+hour="0"
+day_of_month="*"
+month="*"
+day_of_week="1"
 
 for (( i=0; i<${#directories[@]}; i++ )); do
-  if [[ "${directories[$i]}" != "alpine" ]]; then
-    yaml_content+="$(cat << EOF
-  ${directories[$i]}:
-    concurrency: alpine
-    needs:
-      - ${directories[0]}
-    uses: ./.github/workflows/.earthly.yaml
-    secrets: inherit
-    with:
-      build-dir: ${directories[$i]}
-
-EOF
-)"
-  fi
-  # 在每个 YAML 代码块的末尾添加一个换行符
-  yaml_content+=$'\n'
-
-  cat > .github/workflows/${directories[$i]}.yaml <<EOF
+    cat > .github/workflows/${directories[$i]}.yaml <<EOF
 name: mritd/${directories[$i]}
 
 on:
+  schedule:
+    - cron: $minute $hour $day_of_month $month $day_of_week
   workflow_call:
   workflow_dispatch:
     inputs:
@@ -80,7 +42,14 @@ jobs:
       build-dir: ${directories[$i]}
 EOF
 
+    hour=$((hour + 1))
+    if [ $hour -eq 24 ]; then
+        hour=0
+        day_of_week=$((day_of_week + 1))
+        if [ $day_of_week -eq 8 ]; then
+            day_of_week=1
+        fi
+    fi
+
 done
 
-# 将生成的 YAML 内容重定向到一个文件中
-echo -e "$yaml_content" > ./.github/workflows/aio.yaml

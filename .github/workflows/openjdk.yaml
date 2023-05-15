@@ -1,6 +1,8 @@
 name: mritd/openjdk
 
 on:
+  schedule:
+    - cron: 0 20 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

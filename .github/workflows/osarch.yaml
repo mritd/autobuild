@@ -1,6 +1,8 @@
 name: mritd/osarch
 
 on:
+  schedule:
+    - cron: 0 21 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

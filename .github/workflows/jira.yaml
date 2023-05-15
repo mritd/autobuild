@@ -1,6 +1,8 @@
 name: mritd/jira
 
 on:
+  schedule:
+    - cron: 0 14 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

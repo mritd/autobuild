@@ -1,6 +1,8 @@
 name: mritd/poetbot
 
 on:
+  schedule:
+    - cron: 0 22 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

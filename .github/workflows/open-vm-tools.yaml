@@ -1,6 +1,8 @@
 name: mritd/open-vm-tools
 
 on:
+  schedule:
+    - cron: 0 19 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

@@ -1,6 +1,8 @@
 name: mritd/makeself
 
 on:
+  schedule:
+    - cron: 0 15 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

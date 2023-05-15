@@ -1,6 +1,8 @@
 name: mritd/derper
 
 on:
+  schedule:
+    - cron: 0 10 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:

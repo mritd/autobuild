@@ -1,6 +1,8 @@
 name: mritd/demo
 
 on:
+  schedule:
+    - cron: 0 9 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:
