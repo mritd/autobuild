@@ -29,7 +29,6 @@
 | [![mritd/makeself](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)         | [https://hub.docker.com/r/mritd/makeself](https://hub.docker.com/r/mritd/makeself)                 |
 
 
-
 ## Why not use Dockerfile?
 
 In the past few years, I have to admit that Dockerfile is great; but as the number of Dockerfile increases, I have to do a lot of repetitive work to solve some problems.
