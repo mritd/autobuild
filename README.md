@@ -7,7 +7,6 @@
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | [![mritd/alpine](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)           | [https://hub.docker.com/r/mritd/alpine](https://hub.docker.com/r/mritd/alpine)                     |
 | [![mritd/caddy](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)            | [https://hub.docker.com/r/mritd/caddy](https://hub.docker.com/r/mritd/caddy)                       |
-| [![mritd/certmonitor](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)      | [https://hub.docker.com/r/mritd/certmonitor](https://hub.docker.com/r/mritd/certmonitor)           |
 | [![mritd/confluence](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)       | [https://hub.docker.com/r/mritd/confluence](https://hub.docker.com/r/mritd/confluence)             |
 | [![mritd/ddns](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)             | [https://hub.docker.com/r/mritd/ddns](https://hub.docker.com/r/mritd/ddns)                         |
 | [![mritd/demo](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)             | [https://hub.docker.com/r/mritd/demo](https://hub.docker.com/r/mritd/demo)                         |
@@ -17,7 +16,6 @@
 | [![mritd/nodebuild](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)        | [https://hub.docker.com/r/mritd/nodebuild](https://hub.docker.com/r/mritd/nodebuild)               |
 | [![mritd/openjdk](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)          | [https://hub.docker.com/r/mritd/openjdk8](https://hub.docker.com/r/mritd/openjdk8)                 |
 | [![mritd/poetbot](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)          | [https://hub.docker.com/r/mritd/poetbot](https://hub.docker.com/r/mritd/poetbot)                   |
-| [![mritd/privoxy](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)          | [https://hub.docker.com/r/mritd/privoxy](https://hub.docker.com/r/mritd/privoxy)                   |
 | [![mritd/s2h](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)              | [https://hub.docker.com/r/mritd/s2h](https://hub.docker.com/r/mritd/s2h)                           |
 | [![mritd/ssh](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)              | [https://hub.docker.com/r/mritd/ssh](https://hub.docker.com/r/mritd/ssh)                           |
 | [![mritd/derper](https://github.com/mritd/autobuild/actions/workflows/aio.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aio.yaml)           | [https://hub.docker.com/r/mritd/derper](https://hub.docker.com/r/mritd/derper)                     |
@@ -66,7 +64,6 @@ Now, Earthly has solved this problem; I unified the specific language version、
 │   └── workflows                   # The workflows directory stores job definitions for each docker image automated build
 │       ├── alpine.yaml
 │       ├── caddy.yaml
-│       ├── certmonitor.yaml
 │       ├── confluence.yaml
 │       ├── ddns.yaml
 │       ├── demo.yaml
@@ -76,7 +73,6 @@ Now, Earthly has solved this problem; I unified the specific language version、
 │       ├── nodebuild.yaml
 │       ├── openjdk.yaml
 │       ├── poetbot.yaml
-│       ├── privoxy.yaml
 │       ├── s2h.yaml
 │       └── ssh.yaml
 └── LICENSE
