@@ -9,7 +9,7 @@ TARGET="$1"
 if [ "${TARGET}" == "alpine" ] || [ "${TARGET}" == "all" ] || [ "${TARGET}" == "" ]; then
     # 触发alpine action
     ALPINE_RESPONSE=$(curl -s -X POST -H "Authorization: token $TOKEN" \
-        "https://api.github.com/repos/$REPO/actions/workflows/alpine.yml/dispatches" \
+        "https://api.github.com/repos/$REPO/actions/workflows/alpine.yaml/dispatches" \
         -d '{"ref":"main", "inputs": {"trigger": "build"}}')
 
     if [ -n "$ALPINE_RESPONSE" ]; then
