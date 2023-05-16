@@ -25,11 +25,11 @@ if [ "${TARGET}" == "alpine" ] || [ "${TARGET}" == "all" ] || [ "${TARGET}" == "
     while true; do
         # 从 GitHub API 获取 action 的状态
         ALPINE_STATUS=$(curl -s -H "Authorization: token $TOKEN" \
-            "https://api.github.com/repos/$REPO/actions/workflows/alpine.yml/runs" | \
+            "https://api.github.com/repos/$REPO/actions/workflows/alpine.yaml/runs" | \
             jq -r '.workflow_runs[0].status')
       
         # 打印日志
-        echo "[$(now)] Status of autobuild/alpine action: $ALPINE_STATUS"
+        echo "[$(now)] Status of mritd/alpine action: $ALPINE_STATUS"
       
         # 如果状态为 "completed"，退出循环
         if [ "$ALPINE_STATUS" == "completed" ]; then
