@@ -11,6 +11,7 @@ function now {
 }
 
 if [ "${TARGET}" == "alpine" ] || [ "${TARGET}" == "all" ] || [ "${TARGET}" == "" ]; then
+
     # 触发alpine action
     ALPINE_RESPONSE=$(curl -s -X POST -H "Authorization: token $TOKEN" \
         "https://api.github.com/repos/$REPO/actions/workflows/alpine.yaml/dispatches" \
@@ -21,6 +22,9 @@ if [ "${TARGET}" == "alpine" ] || [ "${TARGET}" == "all" ] || [ "${TARGET}" == "
     else
         echo "[$(now)] Alpine workflow triggered with no response"
     fi
+
+    # 等待 alpine workflow job 运行
+    sleep 10
 
     while true; do
         # 从 GitHub API 获取 action 的状态
