@@ -4,10 +4,9 @@ set -e
 
 REPO="mritd/autobuild"
 TOKEN="${GITHUB_TOKEN:-}"
-TRIGGER_ALPINE="${TRIGGER_ALPINE:false}"
+TARGET="$1"
 
-
-if [ "$TRIGGER_ALPINE" = true ]; then
+if [ "${TARGET}" == "alpine" ] || [ "${TARGET}" == "all" ] || [ "${TARGET}" == "" ]; then
     # 触发alpine action
     ALPINE_RESPONSE=$(curl -s -X POST -H "Authorization: token $TOKEN" \
         "https://api.github.com/repos/$REPO/actions/workflows/alpine.yml/dispatches" \
@@ -23,20 +22,22 @@ if [ "$TRIGGER_ALPINE" = true ]; then
     sleep 5
 fi
 
-# 获取除alpine action和.earthly以外的所有workflow的名称和ID
-WORKFLOWS=$(curl -s -X GET -H "Authorization: token $TOKEN" \
-    "https://api.github.com/repos/$REPO/actions/workflows" | \
-    jq -r '.workflows[] | select(.path != ".github/workflows/.earthly.yaml" and .name != "mritd/alpine") | "\(.id) \(.name)"')
-
-# 遍历除alpine action和.earthly以外的所有workflow的名称和ID，并触发它们
-while read -r workflow_id workflow_name
-do
-    response=$(curl -s -X POST -H "Authorization: token $TOKEN" \
-        "https://api.github.com/repos/$REPO/actions/workflows/$workflow_id/dispatches" \
-        -d '{"ref":"main", "inputs": {"trigger": "build"}}')
-    if [ -n "$response" ]; then
-        echo "Workflow $workflow_name ($workflow_id): $response"
-    else
-        echo "Workflow $workflow_name ($workflow_id) triggered with no response"
-    fi
-done <<< "$WORKFLOWS"
+if [ "${TARGET}" == "all" ] || [ "${TARGET}" == "" ]; then
+    # 获取除alpine action和.earthly以外的所有workflow的名称和ID
+    WORKFLOWS=$(curl -s -X GET -H "Authorization: token $TOKEN" \
+        "https://api.github.com/repos/$REPO/actions/workflows" | \
+        jq -r '.workflows[] | select(.path != ".github/workflows/.earthly.yaml" and .name != "mritd/alpine") | "\(.id) \(.name)"')
+    
+    # 遍历除alpine action和.earthly以外的所有workflow的名称和ID，并触发它们
+    while read -r workflow_id workflow_name
+    do
+        response=$(curl -s -X POST -H "Authorization: token $TOKEN" \
+            "https://api.github.com/repos/$REPO/actions/workflows/$workflow_id/dispatches" \
+            -d '{"ref":"main", "inputs": {"trigger": "build"}}')
+        if [ -n "$response" ]; then
+            echo "Workflow $workflow_name ($workflow_id): $response"
+        else
+            echo "Workflow $workflow_name ($workflow_id) triggered with no response"
+        fi
+    done <<< "$WORKFLOWS"
+fi
