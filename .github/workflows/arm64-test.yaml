@@ -36,16 +36,6 @@ jobs:
     - name: Docker Login
       shell: bash
       run: docker login --username "${DOCKERHUB_USERNAME}" --password "${DOCKERHUB_PASSWORD}"
-    - name: Install Deps
-      shell: bash
-      run: |
-        sudo apt update -y
-        sudo apt install curl jq qemu binfmt-support qemu-user-static -y
-    - name: Install Earthly
-      shell: bash
-      run: |
-        sudo curl -fsSL $(curl -fsSL https://api.github.com/repos/earthly/earthly/releases/latest | jq -r '.assets[].browser_download_url' | grep earthly-linux-amd64) > /usr/local/bin/earthly
-        sudo chmod +x /usr/local/bin/earthly
     - name: Earthly Build
       working-directory: idgen
-      run: earthly --allow-privileged +all
+      run: earthly --allow-privileged --platform=linux/arm64 +build
