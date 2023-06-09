@@ -5,8 +5,10 @@ build-derper:
     DO ../.udcs/os/alpine+UPGRADE
     DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
     
+    ARG --required VERSION
+
     RUN --mount=type=cache,target=/go/pkg \
-        go install -trimpath -ldflags "-w -s" tailscale.com/cmd/derper@latest
+        go install -trimpath -ldflags "-w -s" tailscale.com/cmd/derper@${VERSION}
 
     SAVE ARTIFACT /go/bin/derper
 
@@ -15,6 +17,9 @@ build:
 
     DO ../.udcs/os/alpine+TIMEZONE
     DO ../.udcs/language/go+FIX_DNS
+
+    ARG --required BUILD_DATE
+    ARG --required VERSION
 
     ENV DERP_ADDR :8080
     ENV DERP_HTTP_PORT 8080
@@ -25,7 +30,7 @@ build:
     ENV DERP_STUN_PORT 3456
     ENV DERP_VERIFY_CLIENTS true
 
-    BUILD +build-derper
+    BUILD +build-derper --VERSION=${VERSION}
 
     COPY +build-derper/derper /usr/bin/derper
     COPY entrypoint.sh /entrypoint.sh
@@ -37,7 +42,12 @@ build:
 
     ENTRYPOINT ["/entrypoint.sh"]
 
-    SAVE IMAGE --push mritd/derper:latest
+    SAVE IMAGE --push mritd/derper:latest mritd/derper:${VERSION} mritd/derper:${VERSION}-${BUILD_DATE}
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
+    FROM mritd/alpine
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+    ARG VERSION=$(curl -sSL "https://api.github.com/repos/tailscale/tailscale/releases/latest" | jq -r '.tag_name')
+
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build --BUILD_DATE=${BUILD_DATE} --VERSION=${VERSION}
