@@ -1,5 +1,7 @@
 name: arm64/test
 
+runs-on: self-hosted
+
 on:
   schedule:
     - cron: 0 11 * * 1
