@@ -28,21 +28,14 @@ build:
     BUILD +build-derper
 
     COPY +build-derper/derper /usr/bin/derper
+    COPY entrypoint.sh /entrypoint.sh
 
     EXPOSE 8080/tcp
     EXPOSE 3456/udp
 
     VOLUME ["/var/run/tailscale", "/var/lib/derper"]
 
-    CMD derper \
-            --a=${DERP_ADDR} \
-            --hostname=${DERP_DOMAIN} \
-            --certmode=${DERP_CERT_MODE} \
-            --certdir=${DERP_CERT_DIR} \
-            --stun=${DERP_STUN} \
-            --stun-port=${DERP_STUN_PORT} \
-            --http-port=${DERP_HTTP_PORT} \
-            --verify-clients=${DERP_VERIFY_CLIENTS}
+    ENTRYPOINT ["/entrypoint.sh"]
 
     SAVE IMAGE --push mritd/derper:latest
 
