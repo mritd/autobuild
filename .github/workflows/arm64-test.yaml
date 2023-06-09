@@ -33,9 +33,8 @@ jobs:
           branch="${GITHUB_REF##*/}"
         fi
         git checkout -b "$branch" || true
-    - name: Docker Login
-      shell: bash
-      run: docker login --username "${DOCKERHUB_USERNAME}" --password "${DOCKERHUB_PASSWORD}"
     - name: Earthly Build
       working-directory: idgen
       run: earthly --allow-privileged --platform=linux/arm64 +build
+    - name: Clean Images
+      run: docker rmi mritd/idgen:latest mritd/idgen:latest_linux_arm64
