@@ -6,7 +6,7 @@ build-derper:
     DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
     
     RUN --mount=type=cache,target=/go/pkg \
-        go install -trimpath -ldflags "-w -s" tailscale.com/cmd/derper@main
+        go install -trimpath -ldflags "-w -s" tailscale.com/cmd/derper@latest
 
     SAVE ARTIFACT /go/bin/derper
 
