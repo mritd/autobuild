@@ -23,6 +23,7 @@ build:
 
     ENV DERP_ADDR :8080
     ENV DERP_HTTP_PORT 8080
+    ENV DERP_CONFIG /var/lib/derper/derper.key
     ENV DERP_DOMAIN your.domain.com
     ENV DERP_CERT_MODE letsencrypt
     ENV DERP_CERT_DIR /var/run/tailscale
