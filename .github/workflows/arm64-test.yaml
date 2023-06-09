@@ -34,7 +34,7 @@ jobs:
         fi
         git checkout -b "$branch" || true
     - name: Earthly Build
-      working-directory: idgen
+      working-directory: poetbot
       run: earthly --allow-privileged --platform=linux/arm64 +build
     - name: Clean Images
-      run: docker rmi mritd/idgen:latest mritd/idgen:latest_linux_arm64
+      run: docker rmi mritd/poetbot:latest mritd/poetbot:latest_linux_arm64
