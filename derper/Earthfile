@@ -21,23 +21,24 @@ build:
     ARG --required BUILD_DATE
     ARG --required VERSION
 
-    ENV DERP_ADDR :8080
-    ENV DERP_HTTP_PORT 8080
-    ENV DERP_CONFIG /var/lib/derper/derper.key
-    ENV DERP_DOMAIN your.domain.com
-    ENV DERP_CERT_MODE letsencrypt
-    ENV DERP_CERT_DIR /var/run/tailscale
-    ENV DERP_STUN true
-    ENV DERP_STUN_PORT 3456
-    ENV DERP_VERIFY_CLIENTS true
+    ENV DERP_ADDR
+    ENV DERP_HTTP_PORT
+    ENV DERP_CONFIG
+    ENV DERP_DOMAIN
+    ENV DERP_CERT_MODE
+    ENV DERP_CERT_DIR
+    ENV DERP_STUN
+    ENV DERP_STUN_PORT
+    ENV DERP_VERIFY_CLIENTS
 
     BUILD +build-derper --VERSION=${VERSION}
 
     COPY +build-derper/derper /usr/bin/derper
     COPY entrypoint.sh /entrypoint.sh
 
-    EXPOSE 8080/tcp
-    EXPOSE 3456/udp
+    EXPOSE 80/tcp
+    EXPOSE 443/tcp
+    EXPOSE 3478/udp
 
     VOLUME ["/var/run/tailscale", "/var/lib/derper"]
 
