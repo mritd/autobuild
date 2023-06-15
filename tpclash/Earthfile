@@ -1,0 +1,53 @@
+VERSION 0.7
+
+build-premium:
+    DO ../.udcs/image+DEBIAN
+    DO ../.udcs/os/debian+UPGRADE
+    DO ../.udcs/os/debian+COMMON_PKG
+
+    ARG --required VERSION
+
+    ENV DOWNLOAD_URL https://github.com/mritd/tpclash/releases/download/${VERSION}/tpclash-premium-linux-$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+
+    RUN set -ex \
+        && apt update \
+        && apt install iptables -y \
+        && curl -fsSL ${DOWNLOAD_URL} > /usr/local/bin/tpclash \
+        && chmod +x /usr/local/bin/tpclash
+
+    VOLUME /etc/clash.yaml
+
+    CMD ["tpclash"]
+
+    SAVE IMAGE --push mritd/tpclash:latest mritd/tpclash:${VERSION} mritd/tpclash:premium mritd/tpclash:premium-${VERSION}
+
+
+build-meta:
+    DO ../.udcs/image+DEBIAN
+    DO ../.udcs/os/debian+UPGRADE
+    DO ../.udcs/os/debian+COMMON_PKG
+
+    ARG --required VERSION
+
+    ENV DOWNLOAD_URL https://github.com/mritd/tpclash/releases/download/${VERSION}/tpclash-meta-linux-$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+
+    RUN set -ex \
+        && apt update \
+        && apt install iptables -y \
+        && curl -fsSL ${DOWNLOAD_URL} > /usr/local/bin/tpclash \
+        && chmod +x /usr/local/bin/tpclash
+
+    VOLUME /etc/clash.yaml
+
+    CMD ["tpclash"]
+
+    SAVE IMAGE --push mritd/tpclash:meta mritd/tpclash:meta-${VERSION}
+
+all:
+    #DO ../.udcs+BUILD_DATE
+    FROM mritd/alpine
+
+    ARG VERSION=$(curl -sSL "https://api.github.com/repos/mritd/tpclash/releases/latest" | jq -r '.tag_name')
+
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build-premium --VERSION=${VERSION}
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build-meta --VERSION=${VERSION}

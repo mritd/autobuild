@@ -4,7 +4,7 @@
 
 
 | Status                                                                                                                                                                                        | Docker Hub                                                                                         |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | [![mritd/alpine](https://github.com/mritd/autobuild/actions/workflows/alpine.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/alpine.yaml)                               | [https://hub.docker.com/r/mritd/alpine](https://hub.docker.com/r/mritd/alpine)                     |
 | [![mritd/caddy](https://github.com/mritd/autobuild/actions/workflows/caddy.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/caddy.yaml)                                  | [https://hub.docker.com/r/mritd/caddy](https://hub.docker.com/r/mritd/caddy)                       |
 | [![mritd/confluence](https://github.com/mritd/autobuild/actions/workflows/confluence.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/confluence.yaml)                   | [https://hub.docker.com/r/mritd/confluence](https://hub.docker.com/r/mritd/confluence)             |
@@ -28,6 +28,7 @@
 | [![mritd/clash-meta](https://github.com/mritd/autobuild/actions/workflows/clash-meta.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/clash-meta.yaml)                   | [https://hub.docker.com/r/mritd/clash-meta](https://hub.docker.com/r/mritd/clash-meta)             |
 | [![mritd/aria2](https://github.com/mritd/autobuild/actions/workflows/aria2.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aria2.yaml)                                  | [https://hub.docker.com/r/mritd/aria2](https://hub.docker.com/r/mritd/aria2)                       |
 | [![mritd/makeself](https://github.com/mritd/autobuild/actions/workflows/makeself.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/makeself.yaml)                         | [https://hub.docker.com/r/mritd/makeself](https://hub.docker.com/r/mritd/makeself)                 |
+| [![mritd/tpclash](https://github.com/mritd/autobuild/actions/workflows/tpclash.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/tpclash.yaml)                            | [https://hub.docker.com/r/mritd/tpclash](https://hub.docker.com/r/mritd/tpclash)                   |
 
 
 ## Why not use Dockerfile?

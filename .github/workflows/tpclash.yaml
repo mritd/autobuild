@@ -1,0 +1,21 @@
+name: mritd/tpclash
+
+on:
+  schedule:
+    - cron: 0 23 * * 1
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: Manually trigger
+        required: true
+        type: choice
+        options:
+          - build
+
+jobs:
+  tpclash:
+    uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
+    with:
+      build-dir: tpclash
