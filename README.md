@@ -29,6 +29,7 @@
 | [![mritd/aria2](https://github.com/mritd/autobuild/actions/workflows/aria2.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/aria2.yaml)                                  | [https://hub.docker.com/r/mritd/aria2](https://hub.docker.com/r/mritd/aria2)                       |
 | [![mritd/makeself](https://github.com/mritd/autobuild/actions/workflows/makeself.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/makeself.yaml)                         | [https://hub.docker.com/r/mritd/makeself](https://hub.docker.com/r/mritd/makeself)                 |
 | [![mritd/tpclash](https://github.com/mritd/autobuild/actions/workflows/tpclash.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/tpclash.yaml)                            | [https://hub.docker.com/r/mritd/tpclash](https://hub.docker.com/r/mritd/tpclash)                   |
+| [![mritd/tuic-server](https://github.com/mritd/autobuild/actions/workflows/tuic-server.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/tuic-server.yaml)                | [https://hub.docker.com/r/mritd/tuic-server](https://hub.docker.com/r/mritd/tuic-server)           |
 
 
 ## Why not use Dockerfile?

@@ -1,0 +1,21 @@
+name: mritd/tuic
+
+on:
+  schedule:
+    - cron: 0 0 * * 2
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: Manually trigger
+        required: true
+        type: choice
+        options:
+          - build
+
+jobs:
+  tuic:
+    uses: ./.github/workflows/.earthly.yaml
+    secrets: inherit
+    with:
+      build-dir: tuic

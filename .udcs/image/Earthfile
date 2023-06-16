@@ -32,6 +32,14 @@ GO_DEBIAN:
     COMMAND
     DO +GOLANG_DEBIAN
 
+RUST:
+    COMMAND
+    FROM rust:alpine
+
+RUST_DEFIAN:
+    COMMAND
+    FROM rust
+
 JDK8:
     COMMAND
     FROM eclipse-temurin:8-jdk

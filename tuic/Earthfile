@@ -1,0 +1,45 @@
+VERSION 0.7
+
+build-tuic-server:
+    DO ../.udcs/image+RUST
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
+
+    ARG --required VERSION
+
+    ENV REPO https://github.com/EAimTY/tuic.git
+
+    RUN set -ex \
+        && git clone --branch ${VERSION} ${REPO} /tuic \
+        && cd /tuic/tuic-server && cargo build --release
+
+    SAVE ARTIFACT /tuic/target/release/tuic-server
+
+build:
+    DO ../.udcs/image+ALPINE
+    DO ../.udcs+LABEL
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+COMMON_PKG
+    DO ../.udcs/os/alpine+TIMEZONE
+
+    ARG --required BUILD_DATE
+    ARG --required VERSION
+
+    BUILD +build-tuic-server --VERSION=${VERSION}
+    
+    COPY +build-tuic-server/tuic/target/release/tuic-server /usr/bin/tuic-server
+    
+    VOLUME /etc/tuic-server.json
+    
+    CMD ["tuic-server", "-c", "/etc/tuic-server.json"]
+
+    SAVE IMAGE --push mritd/tuic:latest mritd/tuic-server:latest mritd/tuic-server:${VERSION} mritd/tuic-server:${VERSION}-${BUILD_DATE}
+
+all:
+    #DO ../.udcs+BUILD_DATE
+    FROM mritd/alpine
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+    ARG VERSION=$(curl -sSL "https://api.github.com/repos/EAimTY/tuic/releases/latest" | jq -r '.tag_name' | sed 's@tuic-server-@v@g')
+
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build --BUILD_DATE=${BUILD_DATE} --VERSION=${VERSION}
