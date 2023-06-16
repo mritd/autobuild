@@ -1,4 +1,4 @@
-name: mritd/tuic
+name: mritd/tuic-server
 
 on:
   schedule:
@@ -14,8 +14,8 @@ on:
           - build
 
 jobs:
-  tuic:
+  tuic-server:
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:
-      build-dir: tuic
+      build-dir: tuic-server
