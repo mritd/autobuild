@@ -10,7 +10,7 @@ DEBIAN:
 
 DEBIAN_SLIM:
     COMMAND
-    FROM debian:slim
+    FROM debian:stable-slim
 
 UBUNTU:
     COMMAND
