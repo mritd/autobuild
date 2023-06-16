@@ -3,7 +3,6 @@ VERSION 0.7
 build-premium:
     DO ../.udcs/image+DEBIAN_SLIM
     DO ../.udcs/os/debian+UPGRADE
-    DO ../.udcs/os/debian+COMMON_PKG
 
     ARG --required VERSION
 
@@ -11,7 +10,7 @@ build-premium:
 
     RUN set -ex \
         && apt update \
-        && apt install iptables iproute2 -y \
+        && apt install curl iptables iproute2 -y \
         && curl -fsSL ${DOWNLOAD_URL} > /usr/local/bin/tpclash \
         && chmod +x /usr/local/bin/tpclash
 
@@ -25,7 +24,6 @@ build-premium:
 build-meta:
     DO ../.udcs/image+DEBIAN_SLIM
     DO ../.udcs/os/debian+UPGRADE
-    DO ../.udcs/os/debian+COMMON_PKG
 
     ARG --required VERSION
 
@@ -33,7 +31,7 @@ build-meta:
 
     RUN set -ex \
         && apt update \
-        && apt install iptables iproute2 -y \
+        && apt install curl iptables iproute2 -y \
         && curl -fsSL ${DOWNLOAD_URL} > /usr/local/bin/tpclash \
         && chmod +x /usr/local/bin/tpclash
 
