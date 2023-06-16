@@ -1,7 +1,7 @@
 VERSION 0.7
 
 build-premium:
-    DO ../.udcs/image+DEBIAN
+    DO ../.udcs/image+DEBIAN_SLIM
     DO ../.udcs/os/debian+UPGRADE
     DO ../.udcs/os/debian+COMMON_PKG
 
@@ -23,7 +23,7 @@ build-premium:
 
 
 build-meta:
-    DO ../.udcs/image+DEBIAN
+    DO ../.udcs/image+DEBIAN_SLIM
     DO ../.udcs/os/debian+UPGRADE
     DO ../.udcs/os/debian+COMMON_PKG
 

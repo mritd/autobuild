@@ -8,6 +8,10 @@ DEBIAN:
     COMMAND
     FROM debian
 
+DEBIAN_SLIM:
+    COMMAND
+    FROM debian:slim
+
 UBUNTU:
     COMMAND
     FROM ubuntu
