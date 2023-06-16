@@ -25,6 +25,8 @@ build:
     ARG --required BUILD_DATE
     ARG --required VERSION
 
+    ARG IMAGE_TAG=$(echo ${VERSION} | sed 's@tuic-server-@v@g')
+
     BUILD +build-tuic-server --VERSION=${VERSION}
     
     COPY +build-tuic-server/tuic/target/release/tuic-server /usr/bin/tuic-server
@@ -33,13 +35,13 @@ build:
     
     CMD ["tuic-server", "-c", "/etc/tuic-server.json"]
 
-    SAVE IMAGE --push mritd/tuic:latest mritd/tuic-server:latest mritd/tuic-server:${VERSION} mritd/tuic-server:${VERSION}-${BUILD_DATE}
+    SAVE IMAGE --push mritd/tuic:latest mritd/tuic-server:latest mritd/tuic-server:${IMAGE_TAG} mritd/tuic-server:${IMAGE_TAG}-${BUILD_DATE}
 
 all:
     #DO ../.udcs+BUILD_DATE
     FROM mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
-    ARG VERSION=$(curl -sSL "https://api.github.com/repos/EAimTY/tuic/releases/latest" | jq -r '.tag_name' | sed 's@tuic-server-@v@g')
+    ARG VERSION=$(curl -sSL "https://api.github.com/repos/EAimTY/tuic/releases/latest" | jq -r '.tag_name')
 
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build --BUILD_DATE=${BUILD_DATE} --VERSION=${VERSION}
