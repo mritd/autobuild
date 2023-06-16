@@ -10,9 +10,12 @@ build-premium:
 
     RUN set -ex \
         && apt update \
-        && apt install curl iptables iproute2 -y \
+        && apt install tzdata ca-certificates curl iptables iproute2 -y \
         && curl -fsSL ${DOWNLOAD_URL} > /usr/local/bin/tpclash \
-        && chmod +x /usr/local/bin/tpclash
+        && chmod +x /usr/local/bin/tpclash \
+        && rm -rf /var/lib/apt/lists/*
+
+    DO ../.udcs/os/debian+TIMEZONE
 
     VOLUME /etc/clash.yaml
 
@@ -31,9 +34,12 @@ build-meta:
 
     RUN set -ex \
         && apt update \
-        && apt install curl iptables iproute2 -y \
+        && apt install tzdata ca-certificates curl iptables iproute2 -y \
         && curl -fsSL ${DOWNLOAD_URL} > /usr/local/bin/tpclash \
-        && chmod +x /usr/local/bin/tpclash
+        && chmod +x /usr/local/bin/tpclash \
+        && rm -rf /var/lib/apt/lists/*
+
+    DO ../.udcs/os/debian+TIMEZONE
 
     VOLUME /etc/clash.yaml
 
