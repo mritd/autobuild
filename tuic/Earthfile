@@ -13,7 +13,7 @@ build-tuic-server:
         && git clone --branch ${VERSION} ${REPO} /tuic \
         && cd /tuic/tuic-server && cargo build --release
 
-    SAVE ARTIFACT /tuic/target/release/tuic-server /tuic-server
+    SAVE ARTIFACT /tuic/target/release/tuic-server
 
 build:
     DO ../.udcs/image+ALPINE
