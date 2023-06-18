@@ -31,7 +31,7 @@ build:
     
     COPY +build-tuic-server/tuic-server /usr/bin/tuic-server
     
-    VOLUME /etc/tuic-server.json
+    VOLUME /etc/tuic
     
     CMD ["tuic-server", "-c", "/etc/tuic/server.json"]
 
