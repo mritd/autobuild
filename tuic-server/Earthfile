@@ -33,7 +33,7 @@ build:
     
     VOLUME /etc/tuic-server.json
     
-    CMD ["tuic-server", "-c", "/etc/tuic-server.json"]
+    CMD ["tuic-server", "-c", "/etc/tuic/server.json"]
 
     SAVE IMAGE --push mritd/tuic:latest mritd/tuic-server:latest mritd/tuic-server:${IMAGE_TAG} mritd/tuic-server:${IMAGE_TAG}-${BUILD_DATE}
 
