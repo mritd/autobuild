@@ -35,34 +35,6 @@ build:
     
     SAVE IMAGE --push mritd/dnsacme:latest mritd/dnsacme:${BUILD_DATE}
 
-unraid:
-    FROM mritd/alpine
-    
-    DO ../.udcs/os/alpine+TIMEZONE
-    DO ../.udcs/language/go+FIX_DNS
-
-    LABEL net.unraid.docker.icon=https://github.com/mritd/dnsacme/raw/main/logo.png
-    LABEL net.unraid.docker.shell=bash
-
-    ARG --required BUILD_DATE
-
-    RUN apk add openssh-client --no-cache
-
-    ENV XDG_CONFIG_HOME /data
-    ENV ACME_OBTAINED_HOOK unraid
-    
-    COPY +build-dnsacme/dnsacme-local /usr/local/bin/dnsacme
-    COPY unraid_hook.sh /usr/local/bin/unraid
-    COPY unraid_entrypoint.sh /entrypoint.sh
-
-    VOLUME /data
-    VOLUME /host_ssh
-    VOLUME /host_certs
-
-    ENTRYPOINT ["/entrypoint.sh"]
-
-    SAVE IMAGE --push mritd/dnsacme:unraid mritd/dnsacme:unraid-${BUILD_DATE}
-
 all:
     #DO ../.udcs+BUILD_DATE
     FROM mritd/alpine
@@ -70,4 +42,3 @@ all:
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build --BUILD_DATE=${BUILD_DATE}
-    # BUILD --platform=linux/amd64 --platform=linux/arm64 +unraid --BUILD_DATE=${BUILD_DATE}
