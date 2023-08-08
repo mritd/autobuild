@@ -30,6 +30,7 @@
 | [![mritd/makeself](https://github.com/mritd/autobuild/actions/workflows/makeself.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/makeself.yaml)                         | [https://hub.docker.com/r/mritd/makeself](https://hub.docker.com/r/mritd/makeself)                 |
 | [![mritd/tpclash](https://github.com/mritd/autobuild/actions/workflows/tpclash.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/tpclash.yaml)                            | [https://hub.docker.com/r/mritd/tpclash](https://hub.docker.com/r/mritd/tpclash)                   |
 | [![mritd/tuic-server](https://github.com/mritd/autobuild/actions/workflows/tuic-server.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/tuic-server.yaml)                | [https://hub.docker.com/r/mritd/tuic-server](https://hub.docker.com/r/mritd/tuic-server)           |
+| [![mritd/snell](https://github.com/mritd/autobuild/actions/workflows/snell.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/snell.yaml)                                  | [https://hub.docker.com/r/mritd/snell](https://hub.docker.com/r/mritd/snell)                       |
 
 
 ## Why not use Dockerfile?
