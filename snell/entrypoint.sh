@@ -13,4 +13,4 @@ psk = ${SNELL_PSK}
 ipv6 = ${SNELL_IPV6}
 EOF
 
-exec snell-server --config /etc/snell-server.conf
+exec snell-server -c /etc/snell-server.conf
