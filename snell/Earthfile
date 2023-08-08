@@ -1,0 +1,23 @@
+VERSION 0.7
+
+build:
+    DO ../.udcs/image+DEBIAN_SLIM
+    DO ../.udcs/os/debian+UPGRADE
+    DO ../.udcs/os/debian+COMMON_PKG
+
+    ENV SNELL_VERSION v4.0.1
+
+    RUN set -ex \
+        && curl -sSL https://dl.nssurge.com/snell/snell-server-${SNELL_VERSION}-linux-amd64.zip > /tmp/snell.zip \
+        && unzip /tmp/snell.zip \
+        && mv snell-server /usr/local/bin/snell-server \
+        && rm -f /tmp/snell.zip
+
+    COPY entrypoint.sh /entrypoint.sh
+
+    CMD ["/entrypoint.sh"]
+
+    SAVE IMAGE --push mritd/snell:latest
+
+all:
+    BUILD --platform=linux/amd64 +build

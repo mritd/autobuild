@@ -1,8 +1,8 @@
-name: mritd/tpclash
+name: mritd/snell
 
 on:
   schedule:
-    - cron: 0 0 * * 2
+    - cron: 0 22 * * 1
   workflow_call:
   workflow_dispatch:
     inputs:
@@ -14,8 +14,8 @@ on:
           - build
 
 jobs:
-  tpclash:
+  snell:
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:
-      build-dir: tpclash
+      build-dir: snell
