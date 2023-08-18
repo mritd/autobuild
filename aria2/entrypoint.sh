@@ -4,7 +4,7 @@ set -e
 
 TRACKER_URL="https://cdn.staticaly.com/gh/XIU2/TrackersListCollection/master/best_aria2.txt"
 
-if [ ! -f /data/conf/aria2.conf ]; then
+if [ ! -f  ${XDG_DATA_HOME}/conf/aria2.conf ]; then
     mkdir -p ${XDG_DATA_HOME}/{conf,downloads}
     touch ${XDG_DATA_HOME}/conf/aria2.session
     cp /etc/aria2.conf ${XDG_DATA_HOME}/conf/aria2.conf
