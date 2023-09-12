@@ -3,7 +3,7 @@ VERSION 0.7
 build:
     DO ../.udcs/image+DEBIAN_SLIM
     DO ../.udcs/os/debian+UPGRADE
-    DO ../.udcs/os/debian+LOCAL
+    DO ../.udcs/os/debian+LOCALE
     DO ../.udcs/os/debian+COMMON_PKG
     DO ../.udcs/os/debian+TIMEZONE
 
