@@ -6,7 +6,7 @@ build:
     DO ../.udcs/os/debian+LOCALE
     DO ../.udcs/os/debian+COMMON_PKG
     DO ../.udcs/os/debian+TIMEZONE
-    DO ../.udcs/os/debian+GO_TASK
+    DO ../.udcs+GO_TASK
 
     ARG --required VERSION
 
