@@ -1,8 +1,8 @@
-name: mritd/tuic-server
+name: mritd/syncbase
 
 on:
   schedule:
-    - cron: 0 2 * * 2
+    - cron: 0 0 * * 2
   workflow_call:
   workflow_dispatch:
     inputs:
@@ -14,8 +14,8 @@ on:
           - build
 
 jobs:
-  tuic-server:
+  syncbase:
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:
-      build-dir: tuic-server
+      build-dir: syncbase

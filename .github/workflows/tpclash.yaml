@@ -2,7 +2,7 @@ name: mritd/tpclash
 
 on:
   schedule:
-    - cron: 0 0 * * 2
+    - cron: 0 1 * * 2
   workflow_call:
   workflow_dispatch:
     inputs:
