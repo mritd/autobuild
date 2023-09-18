@@ -17,10 +17,10 @@ build:
         && apt update \
         && apt install cifs-utils -y \
         && if [ "$(uname -m)" == "aarch64" ]; then export UPX_ARCH = "arm64"; fi \
-        && curl -sSL https://github.com/upyun/upx/releases/download/v${UPX_VERSION}/upx_${UPX_VERSION}_Linux_${UPX_ARCH}.tar.gz > upx.tar.gz \
-        && mkdir /tmp/upx && tar -zxf upx.tar.gz -C /tmp/upx \
-        && mv /tmp/upx/upx /usr/local/bin \
-        && rm -rf /tmp/upx /var/lib/apt/lists/*
+        && curl -sSL https://github.com/upyun/upx/releases/download/v${UPX_VERSION}/upx_${UPX_VERSION}_Linux_${UPX_ARCH}.tar.gz > /tmp/upx.tar.gz \
+        && tar -zxf /tmp/upx.tar.gz -C /tmp \
+        && mv /tmp/upx /usr/local/bin \
+        && rm -rf /tmp/* /var/lib/apt/lists/*
 
     CMD ["bash"]
 
