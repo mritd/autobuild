@@ -53,5 +53,5 @@ all:
 
     ARG VERSION=$(curl -sSL "https://api.github.com/repos/mritd/tpclash/releases/latest" | jq -r '.tag_name')
 
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +build-premium --VERSION=${VERSION}
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +build-meta --VERSION=${VERSION}
+    BUILD --platform=linux/386 --platform=linux/amd64 --platform=linux/arm64 +build-premium --VERSION=${VERSION}
+    BUILD --platform=linux/386 --platform=linux/amd64 --platform=linux/arm64 +build-meta --VERSION=${VERSION}
