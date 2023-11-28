@@ -3,20 +3,19 @@ VERSION 0.7
 build-notibot:
     DO ../.udcs/image+GO
     DO ../.udcs/os/alpine+UPGRADE
-    DO ../.udcs/os/alpine+TIMEZONE
     DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
     
-    RUN set -ex \
-        && git clone https://github.com/mritd/notibot.git /go/src/notibot \
+    ARG VERSION
+    ARG BUILD_DATE
+
+    RUN --mount=type=cache,target=/go/pkg set -e \
+        && echo ">>>>>>>>>>>>>>> Build Version: ${VERSION} <<<<<<<<<<<<<<<" \
+        && git clone --depth 1 --branch ${VERSION} https://github.com/mritd/notibot.git /go/src/notibot \
         && cd /go/src/notibot \
-        && export latest_tag=$(git describe --tags --abbrev=0) \
-        && git checkout -b ${latest_tag} ${latest_tag} \
-        && export version=$(git describe --tags --always) \
-        && export build_date=$(date '+%F %T') \
         && export commit_hash=$(git rev-parse HEAD) \
         && go install -trimpath -ldflags "-w -s \
-            -X \"main.version=${version}\" \
-            -X \"main.build=${build_date}\" \
+            -X \"main.version=${VERSION}\" \
+            -X \"main.build=${BUILD_DATE}\" \
             -X \"main.commit=${commit_hash}\""
 
     SAVE ARTIFACT /go/bin/notibot
@@ -27,11 +26,14 @@ build:
     LABEL org.opencontainers.image.source="https://github.com/mritd/notibot"
     LABEL org.opencontainers.image.description="Telegram Notification Bot"
     LABEL org.opencontainers.image.licenses="Apache-2.0"
-    
+
+    ARG VERSION
+    ARG BUILD_DATE
+
     DO ../.udcs/os/alpine+TIMEZONE
     DO ../.udcs/language/go+FIX_DNS
 
-    BUILD +build-notibot
+    BUILD +build-notibot --VERSION=${VERSION} --BUILD_DATE=${BUILD_DATE}
     
     COPY +build-notibot/notibot /usr/bin/notibot
 
@@ -39,7 +41,12 @@ build:
 
     CMD ["notibot"]
 
-    SAVE IMAGE --push mritd/notibot:latest
+    SAVE IMAGE --push mritd/notibot:latest mritd/notibot:${VERSION} mritd/notibot:${VERSION}-${BUILD_DATE}
 
 all:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
+    FROM mritd/alpine
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+    ARG VERSION=$(curl -fsSL "https://api.github.com/repos/mritd/notibot/releases/latest" | jq -r '.tag_name')
+
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build --VERSION=${VERSION} --BUILD_DATE=${BUILD_DATE}
