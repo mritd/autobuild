@@ -13,8 +13,8 @@ build:
     ARG --required BUILD_DATE
 
     ENV NPM_CACHE_DIR /data/npm_cache
-    ENV NPM_DIST https://npm.taobao.org/dist
-    ENV NPM_REGISTRY https://registry.npm.taobao.org
+    ENV NPM_DIST https://npmmirror.com/mirrors/node
+    ENV NPM_REGISTRY https://registry.npmmirror.com
 
     RUN apt update \
         && apt install python2 -y \
