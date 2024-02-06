@@ -2,16 +2,9 @@ name: mritd/s2h
 
 on:
   schedule:
-    - cron: 0 20 * * 1
+    - cron: 0 21 * * 1
   workflow_call:
   workflow_dispatch:
-    inputs:
-      trigger:
-        description: Manually trigger
-        required: true
-        type: choice
-        options:
-          - build
 
 jobs:
   s2h:

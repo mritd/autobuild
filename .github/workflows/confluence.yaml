@@ -2,16 +2,9 @@ name: mritd/confluence
 
 on:
   schedule:
-    - cron: 0 4 * * 1
+    - cron: 0 5 * * 1
   workflow_call:
   workflow_dispatch:
-    inputs:
-      trigger:
-        description: Manually trigger
-        required: true
-        type: choice
-        options:
-          - build
 
 jobs:
   confluence:

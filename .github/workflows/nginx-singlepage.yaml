@@ -2,16 +2,9 @@ name: mritd/nginx-singlepage
 
 on:
   schedule:
-    - cron: 0 13 * * 1
+    - cron: 0 14 * * 1
   workflow_call:
   workflow_dispatch:
-    inputs:
-      trigger:
-        description: Manually trigger
-        required: true
-        type: choice
-        options:
-          - build
 
 jobs:
   nginx-singlepage:

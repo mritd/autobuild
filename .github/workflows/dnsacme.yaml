@@ -2,16 +2,9 @@ name: mritd/dnsacme
 
 on:
   schedule:
-    - cron: 0 9 * * 1
+    - cron: 0 10 * * 1
   workflow_call:
   workflow_dispatch:
-    inputs:
-      trigger:
-        description: Manually trigger
-        required: true
-        type: choice
-        options:
-          - build
 
 jobs:
   dnsacme:

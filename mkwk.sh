@@ -26,13 +26,6 @@ on:
     - cron: $minute $hour $day_of_month $month $day_of_week
   workflow_call:
   workflow_dispatch:
-    inputs:
-      trigger:
-        description: Manually trigger
-        required: true
-        type: choice
-        options:
-          - build
 
 jobs:
   ${directories[$i]}:

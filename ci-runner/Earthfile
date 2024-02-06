@@ -1,0 +1,30 @@
+VERSION 0.7
+
+build:
+    DO ../.udcs/image+DEBIAN_SLIM
+    DO ../.udcs/os/debian+UPGRADE
+    DO ../.udcs/os/debian+LOCALE
+    DO ../.udcs/os/debian+COMMON_PKG
+    DO ../.udcs/os/debian+TIMEZONE
+    DO ../.udcs+GO_TASK
+    DO ../.udcs+UPYUN_UPX
+    DO ../.udcs+GITHUB_CLI
+
+    ARG --required VERSION
+
+    RUN set -ex \
+        && apt update \
+        && apt install cifs-utils -y \
+        && rm -rf /var/lib/apt/lists/*
+
+    CMD ["bash"]
+
+    SAVE IMAGE --push mritd/ci-runner:latest mritd/ci-runner:${VERSION}
+
+
+all:
+    FROM mritd/alpine
+
+    ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
+
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build --VERSION=${BUILD_DATE} 

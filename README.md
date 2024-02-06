@@ -29,7 +29,7 @@
 | [![mritd/makeself](https://github.com/mritd/autobuild/actions/workflows/makeself.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/makeself.yaml)                         | [https://hub.docker.com/r/mritd/makeself](https://hub.docker.com/r/mritd/makeself)                 |
 | [![mritd/tuic-server](https://github.com/mritd/autobuild/actions/workflows/tuic-server.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/tuic-server.yaml)                | [https://hub.docker.com/r/mritd/tuic-server](https://hub.docker.com/r/mritd/tuic-server)           |
 | [![mritd/snell](https://github.com/mritd/autobuild/actions/workflows/snell.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/snell.yaml)                                  | [https://hub.docker.com/r/mritd/snell](https://hub.docker.com/r/mritd/snell)                       |
-| [![mritd/syncbase](https://github.com/mritd/autobuild/actions/workflows/syncbase.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/syncbase.yaml)                         | [https://hub.docker.com/r/mritd/syncbase](https://hub.docker.com/r/mritd/syncbase)                 |
+| [![mritd/ci-runner](https://github.com/mritd/autobuild/actions/workflows/ci-runner.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/ci-runner.yaml)                      | [https://hub.docker.com/r/mritd/ci-runner](https://hub.docker.com/r/mritd/ci-runner)               |
 
 
 ## Why not use Dockerfile?

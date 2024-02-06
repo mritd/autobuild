@@ -1,14 +1,14 @@
-name: mritd/poetbot
+name: mritd/ci-runner
 
 on:
   schedule:
-    - cron: 0 20 * * 1
+    - cron: 0 4 * * 1
   workflow_call:
   workflow_dispatch:
 
 jobs:
-  poetbot:
+  ci-runner:
     uses: ./.github/workflows/.earthly.yaml
     secrets: inherit
     with:
-      build-dir: poetbot
+      build-dir: ci-runner

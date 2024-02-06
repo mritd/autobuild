@@ -2,16 +2,9 @@ name: mritd/ssh
 
 on:
   schedule:
-    - cron: 0 22 * * 1
+    - cron: 0 23 * * 1
   workflow_call:
   workflow_dispatch:
-    inputs:
-      trigger:
-        description: Manually trigger
-        required: true
-        type: choice
-        options:
-          - build
 
 jobs:
   ssh:
