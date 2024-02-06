@@ -13,8 +13,8 @@ build:
     ARG --required VERSION
 
     RUN set -ex \
-        && apt update \
-        && apt install cifs-utils -y \
+        && apt update -qq \
+        && apt install -qq cifs-utils -y \
         && rm -rf /var/lib/apt/lists/*
 
     CMD ["bash"]

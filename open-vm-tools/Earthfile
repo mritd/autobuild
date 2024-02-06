@@ -9,8 +9,8 @@ build:
     ARG --required BUILD_DATE
 
     RUN set -ex \
-        && apt update \
-        && apt install openssh-client open-vm-tools -y \
+        && apt update -qq \
+        && apt install -qq openssh-client open-vm-tools -y \
         && rm -rf /var/lib/apt/lists/*
 
     COPY shutdown.sh /sbin/shutdown
