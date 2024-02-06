@@ -8,7 +8,7 @@ build:
         && ssh-keygen -A \
         && bash -c "ssh-keygen -q -t rsa -N '' <<< $'\ny' >/dev/null 2>&1" \
         && echo 'auth sufficient pam_shells.so' > /etc/pam.d/chsh \
-        && curl -sSL https://github.com/mritd.keys > /root/.ssh/authorized_keys \
+        && curl -fsSL https://github.com/mritd.keys > /root/.ssh/authorized_keys \
         && chmod 0600 /root/.ssh/authorized_keys \
         && ROOT_PASSWORD=$(hexdump -e '"%02x"' -n 16 /dev/urandom) \
         && echo "root:${ROOT_PASSWORD}" | chpasswd &>/dev/null \
@@ -16,11 +16,11 @@ build:
         && sed -i "s/#X11Forwarding.*/X11Forwarding\ yes/" /etc/ssh/sshd_config \
         && sed -i "s/AllowTcpForwarding.*/AllowTcpForwarding\ yes/" /etc/ssh/sshd_config \
         && sed -i "s/#PermitUserEnvironment.*/PermitUserEnvironment\ yes/" /etc/ssh/sshd_config \
-        && echo 'SetEnv ENABLE_VIM_CONFIG=true' >> /etc/ssh/sshd_config \
         && printf "\nWelcome to Alpine!\n\n" > /etc/motd
 
     DO ../.udcs+PREZTO
     DO ../.udcs+VIM
+    DO ../.udcs+TMUX
     DO ../.udcs+TINI
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
