@@ -4,7 +4,7 @@ build:
     FROM mritd/alpine
 
     RUN set -e \
-        && apk add sudo coreutils zsh git htop shadow openssh python3 --no-cache \
+        && apk add sudo coreutils zsh vim tmux git htop shadow openssh python3 --no-cache \
         && ssh-keygen -A \
         && bash -c "ssh-keygen -q -t rsa -N '' <<< $'\ny' >/dev/null 2>&1" \
         && echo 'auth sufficient pam_shells.so' > /etc/pam.d/chsh \
