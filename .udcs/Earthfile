@@ -33,7 +33,7 @@ TINI:
     RUN set -ex \
         && export OS_ARCH=$(curl -fsSL https://raw.githubusercontent.com/mritd/autobuild/main/osarch/osarch.sh | bash) \
         && export TINI_DOWNLOAD_ADDR=$(curl -fsSL https://api.github.com/repos/krallin/tini/releases | \
-            jq -r ".[0].assets[].browser_download_url | select (. | test(\"tini-static-${OS_ARCH}\"))") \
+            jq -r ".[0].assets[].browser_download_url | select (. | test(\"tini-static-${OS_ARCH}$\"))") \
         && curl -fsSL ${TINI_DOWNLOAD_ADDR} > /usr/bin/tini \
         && chmod +x /usr/bin/tini
 
