@@ -24,24 +24,18 @@ OS_ARCH:
 
     ARG OS_ARCH=$(osarch)
 
+GO_TASK:
+    COMMAND
+    RUN sh -c "$(curl -sSL https://taskfile.dev/install.sh)" -- -b /usr/local/bin
+
 TINI:
     COMMAND
-    ENV TINI_VERSION v0.19.0
-    ENV TINI_DOWNLOAD_URL https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-amd64
-
-    RUN curl -sSL ${TINI_DOWNLOAD_URL} > /usr/bin/tini \
-        && chmod +x /usr/bin/tini
-
-UPYUN_UPX:
-    COMMAND
     RUN set -ex \
-        && export UPX_ARCH=$(echo "$(uname -m)" | grep -q "x86_64" && echo "x86_64" || echo "arm64") \
-        && export UPX_DOWNLOAD_ADDR=$(curl -fsSL https://api.github.com/repos/upyun/upx/releases | \
-            jq -r ".[0].assets[].browser_download_url | select (. | test(\"Linux_${UPX_ARCH}\"))") \
-        && curl -fsSL ${UPX_DOWNLOAD_ADDR} > /tmp/upx.tar.gz \
-        && tar -zxf /tmp/upx.tar.gz -C /tmp \
-        && mv /tmp/upx /usr/local/bin \
-        && rm -rf /tmp/*
+        && export OS_ARCH=$(curl -fsSL https://raw.githubusercontent.com/mritd/autobuild/main/osarch/osarch.sh | bash) \
+        && export TINI_DOWNLOAD_ADDR=$(curl -fsSL https://api.github.com/repos/krallin/tini/releases | \
+            jq -r ".[0].assets[].browser_download_url | select (. | test(\"tini-static-${OS_ARCH}\"))") \
+        && curl -fsSL ${TINI_DOWNLOAD_ADDR} > /usr/bin/tini \
+        && chmod +x /usr/bin/tini
 
 GITHUB_CLI:
     COMMAND
@@ -54,6 +48,16 @@ GITHUB_CLI:
         && mv /tmp/bin/gh /usr/local/bin/gh \
         && rm -rf /tmp/*
 
+UPYUN_UPX:
+    COMMAND
+    RUN set -ex \
+        && export UPX_ARCH=$(echo "$(uname -m)" | grep -q "x86_64" && echo "x86_64" || echo "arm64") \
+        && export UPX_DOWNLOAD_ADDR=$(curl -fsSL https://api.github.com/repos/upyun/upx/releases | \
+            jq -r ".[0].assets[].browser_download_url | select (. | test(\"Linux_${UPX_ARCH}\"))") \
+        && curl -fsSL ${UPX_DOWNLOAD_ADDR} > /tmp/upx.tar.gz \
+        && tar -zxf /tmp/upx.tar.gz -C /tmp \
+        && mv /tmp/upx /usr/local/bin \
+        && rm -rf /tmp/*
 
 PREZTO:
     COMMAND
@@ -75,8 +79,4 @@ TMUX:
     RUN curl -fsSL ${TMUX_INIT_SCRIPT} > /tmp/tmux.sh \
         && bash /tmp/tmux.sh \
         && rm -f /tmp/tmux.sh
-
-GO_TASK:
-    COMMAND
-    RUN sh -c "$(curl -sSL https://taskfile.dev/install.sh)" -- -b /usr/local/bin
 
