@@ -5,7 +5,7 @@ TIMEZONE:
     ENV TZ Asia/Shanghai
 
     RUN export DEBIAN_FRONTEND=noninteractive \
-        && apt install tzdata -y \
+        && apt install -q tzdata -y \
         && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
         && echo ${TZ} > /etc/timezone \
         && dpkg-reconfigure --frontend noninteractive tzdata \
@@ -22,7 +22,7 @@ UPGRADE:
 COMMON_PKG:
     COMMAND
     RUN apt update \
-        && apt install tzdata ca-certificates wget curl nload iftop htop unzip procps dnsutils iputils-ping git jq -y \
+        && apt install -q tzdata ca-certificates wget curl nload iftop htop unzip procps dnsutils iputils-ping git jq -y \
         && rm -rf /var/lib/apt/lists/*
 
 LOCALE:
@@ -32,7 +32,7 @@ LOCALE:
     ENV LANGUAGE en_US:en
 
     RUN apt update \
-        && apt install locales fonts-noto-cjk -y \
+        && apt install -q locales fonts-noto-cjk -y \
         && locale-gen --purge en_US.UTF-8 zh_CN.UTF-8 \
         && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
         && echo 'LANG="en_US.UTF-8"' > /etc/default/locale \
@@ -42,6 +42,6 @@ LOCALE:
 INSTALL_BUILD_BASE:
     COMMAND
     RUN apt update \
-        && apt install build-essential -y \
+        && apt install -q build-essential -y \
         && rm -rf /var/lib/apt/lists/*
         
