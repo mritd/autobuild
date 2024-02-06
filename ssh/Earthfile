@@ -21,6 +21,9 @@ build:
 
     DO ../.udcs+PREZTO
     DO ../.udcs+VIM
+    DO ../.udcs+TINI
+
+    ENTRYPOINT ["/usr/bin/tini", "--"]
 
     CMD ["/usr/sbin/sshd", "-D", "-e"]
 
