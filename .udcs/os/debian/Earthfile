@@ -22,7 +22,7 @@ UPGRADE:
 COMMON_PKG:
     COMMAND
     RUN apt update -qq \
-        && apt install -qq tzdata ca-certificates wget curl nload iftop htop unzip procps dnsutils iputils-ping git jq -y \
+        && apt install -qq tzdata ca-certificates wget curl nload iftop htop unzip procps dnsutils net-tools iputils-ping git jq -y \
         && rm -rf /var/lib/apt/lists/*
 
 LOCALE:
