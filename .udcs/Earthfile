@@ -51,7 +51,7 @@ GITHUB_CLI:
 UPYUN_UPX:
     COMMAND
     RUN set -ex \
-        && export UPX_ARCH=$(echo "$(uname -m)" | grep -q "x86_64" && echo "x86_64" || echo "arm64") \
+        && export UPX_ARCH=$(echo "$(uname -m)" | grep -q "x86_64" && echo "amd64" || echo "arm64") \
         && export UPX_DOWNLOAD_ADDR=$(curl -fsSL https://api.github.com/repos/upyun/upx/releases | \
             jq -r ".[0].assets[].browser_download_url | select (. | test(\"Linux_${UPX_ARCH}\"))") \
         && curl -fsSL ${UPX_DOWNLOAD_ADDR} > /tmp/upx.tar.gz \
