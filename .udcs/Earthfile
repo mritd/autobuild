@@ -61,21 +61,21 @@ UPYUN_UPX:
 
 PREZTO:
     COMMAND
-    ENV PREZTO_INIT_SCRIPT https://github.com/mritd/scripts/releases/download/v1.0.0/prezto.sh
+    ENV PREZTO_INIT_SCRIPT https://github.com/mritd/scripts/releases/download/latest/prezto.sh
     RUN curl -fsSL ${PREZTO_INIT_SCRIPT} > /tmp/prezto.sh \
         && bash /tmp/prezto.sh \
         && rm -f /tmp/prezto.sh
 
 VIM:
     COMMAND
-    ENV VIM_INIT_SCRIPT https://github.com/mritd/scripts/releases/download/v1.0.0/vim.sh
+    ENV VIM_INIT_SCRIPT https://github.com/mritd/scripts/releases/download/latest/vim.sh
     RUN curl -fsSL ${VIM_INIT_SCRIPT} > /tmp/vim.sh \
         && bash /tmp/vim.sh \
         && rm -f /tmp/vim.sh
 
 TMUX:
     COMMAND
-    ENV TMUX_INIT_SCRIPT https://github.com/mritd/scripts/releases/download/v1.0.0/tmux.sh
+    ENV TMUX_INIT_SCRIPT https://github.com/mritd/scripts/releases/download/latest/tmux.sh
     RUN curl -fsSL ${TMUX_INIT_SCRIPT} > /tmp/tmux.sh \
         && bash /tmp/tmux.sh \
         && rm -f /tmp/tmux.sh
