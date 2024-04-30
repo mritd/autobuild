@@ -1,9 +1,9 @@
-VERSION 0.7
+VERSION 0.8
 
 DO ../.udcs+BUILD_DATE
 
 OPENJDK:
-    COMMAND
+    FUNCTION
     DO ../.udcs+LABEL
     DO ../.udcs/os/debian+UPGRADE
     DO ../.udcs/os/debian+COMMON_PKG
@@ -16,7 +16,7 @@ OPENJDK:
     CMD ["bash"]
 
 JAVA_BUILD:
-    COMMAND
+    FUNCTION
     ENV MAVEN_CACHE_DIR /data/maven_cache
     ENV MAVEN_INSTALL_DIR /usr/local/maven
     ENV GRADLE_CACHE_DIR /data/gradle_cache

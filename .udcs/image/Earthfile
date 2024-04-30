@@ -1,81 +1,81 @@
-VERSION 0.7
+VERSION 0.8
 
 ALPINE:
-    COMMAND
+    FUNCTION
     FROM alpine
 
 DEBIAN:
-    COMMAND
+    FUNCTION
     FROM debian
 
 DEBIAN_SLIM:
-    COMMAND
+    FUNCTION
     FROM debian:stable-slim
 
 UBUNTU:
-    COMMAND
+    FUNCTION
     FROM ubuntu
 
 GOLANG:
-    COMMAND
+    FUNCTION
     FROM golang:1-alpine
 
 GOLANG_DEBIAN:
-    COMMAND
+    FUNCTION
     FROM golang:1
 
 GO:
-    COMMAND
+    FUNCTION
     DO +GOLANG
 
 GO_DEBIAN:
-    COMMAND
+    FUNCTION
     DO +GOLANG_DEBIAN
 
 RUST:
-    COMMAND
+    FUNCTION
     FROM rust:alpine
 
 RUST_DEFIAN:
-    COMMAND
+    FUNCTION
     FROM rust
 
 JDK8:
-    COMMAND
+    FUNCTION
     FROM eclipse-temurin:8-jdk
 
 JDK8_OPENJ9:
-    COMMAND
+    FUNCTION
     FROM ibm-semeru-runtimes:open-8-jdk
 
 JDK11:
-    COMMAND
+    FUNCTION
     FROM eclipse-temurin:11-jdk
 
 JDK11_OPENJ9:
-    COMMAND
+    FUNCTION
     FROM ibm-semeru-runtimes:open-11-jdk
 
 JDK17:
-    COMMAND
+    FUNCTION
     FROM eclipse-temurin:17-jdk
 
 JDK17_OPENJ9:
-    COMMAND
+    FUNCTION
     FROM ibm-semeru-runtimes:open-17-jdk
 
 NODE:
-    COMMAND
+    FUNCTION
     FROM node:lts-buster
 
 NGINX:
-    COMMAND
+    FUNCTION
     FROM nginx:alpine
 
 CONFLUENCE:
-    COMMAND
+    FUNCTION
     FROM atlassian/confluence-server:7-ubuntu
 
 JIRA:
-    COMMAND
+    FUNCTION
     FROM atlassian/jira-software:8.13

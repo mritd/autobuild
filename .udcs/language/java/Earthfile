@@ -1,7 +1,7 @@
-VERSION 0.7
+VERSION 0.8
 
 JAVA_OPTS:
-    COMMAND
+    FUNCTION
     # see also: https://merikan.com/2019/04/jvm-in-a-container
     ENV JAVA_OPTS "-Djava.security.egd=file:/dev/./urandom
                     -XX:AutoBoxCacheMax=20000
@@ -19,7 +19,7 @@ JAVA_OPTS:
                     -XshowSettings:vm"
 
 JAVA_OPTS_11:
-    COMMAND
+    FUNCTION
     ENV JAVA_OPTS "-Djava.security.egd=file:/dev/./urandom
                     -XX:AutoBoxCacheMax=20000
                     -XX:MinRAMPercentage=45.0
@@ -33,7 +33,7 @@ JAVA_OPTS_11:
                     -XshowSettings:vm"
 
 JAVA_OPTS_17:
-    COMMAND
+    FUNCTION
     ENV JAVA_OPTS "-Djava.security.egd=file:/dev/./urandom
                     -XX:AutoBoxCacheMax=20000
                     -XX:MinRAMPercentage=45.0

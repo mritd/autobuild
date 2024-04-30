@@ -1,7 +1,7 @@
-VERSION 0.7
+VERSION 0.8
 
 TIMEZONE:
-    COMMAND
+    FUNCTION
     ENV TZ Asia/Shanghai
 
     RUN export DEBIAN_FRONTEND=noninteractive \
@@ -12,7 +12,7 @@ TIMEZONE:
         && rm -rf /var/lib/apt/lists/*
 
 UPGRADE:
-    COMMAND
+    FUNCTION
     RUN apt update -qq \
         && apt upgrade -qq -y \
         && apt autoremove -y \
@@ -20,13 +20,13 @@ UPGRADE:
         && rm -rf /var/lib/apt/lists/*
 
 COMMON_PKG:
-    COMMAND
+    FUNCTION
     RUN apt update -qq \
         && apt install -qq tzdata ca-certificates wget curl nload iftop htop unzip procps dnsutils net-tools iputils-ping git jq -y \
         && rm -rf /var/lib/apt/lists/*
 
 LOCALE:
-    COMMAND
+    FUNCTION
     ENV LANG en_US.UTF-8
     ENV LC_ALL en_US.UTF-8
     ENV LANGUAGE en_US:en
@@ -40,7 +40,7 @@ LOCALE:
         && rm -rf /var/lib/apt/lists/*
 
 INSTALL_BUILD_BASE:
-    COMMAND
+    FUNCTION
     RUN apt update -qq \
         && apt install -qq build-essential -y \
         && rm -rf /var/lib/apt/lists/*

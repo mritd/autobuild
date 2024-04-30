@@ -1,7 +1,7 @@
-VERSION 0.7
+VERSION 0.8
 
 LABEL:
-    COMMAND
+    FUNCTION
     LABEL maintainer="mritd <mritd@linux.com>"
     LABEL repository="https://github.com/mritd/autobuild"
     LABEL description="Earthly + CI Auto Build"
@@ -13,23 +13,23 @@ LABEL:
     LABEL org.opencontainers.image.licenses="Apache-2.0"
 
 BUILD_DATE:
-    COMMAND
+    FUNCTION
     FROM mritd/alpine
 
     ARG BUILD_DATE=$(date "+%Y%m%d%H%M%S")
 
 OS_ARCH:
-    COMMAND
+    FUNCTION
     FROM mritd/osarch
 
     ARG OS_ARCH=$(osarch)
 
 GO_TASK:
-    COMMAND
+    FUNCTION
     RUN sh -c "$(curl -sSL https://taskfile.dev/install.sh)" -- -b /usr/local/bin
 
 TINI:
-    COMMAND
+    FUNCTION
     RUN set -ex \
         && export OS_ARCH=$(curl -fsSL https://raw.githubusercontent.com/mritd/autobuild/main/osarch/osarch.sh | bash) \
         && export TINI_DOWNLOAD_ADDR=$(curl -fsSL https://api.github.com/repos/krallin/tini/releases | \
@@ -38,7 +38,7 @@ TINI:
         && chmod +x /usr/bin/tini
 
 GITHUB_CLI:
-    COMMAND
+    FUNCTION
     RUN set -ex \
         && export OS_ARCH=$(curl -fsSL https://raw.githubusercontent.com/mritd/autobuild/main/osarch/osarch.sh | bash) \
         && export GITHUB_CLI_DOWNLOAD_ADDR=$(curl -fsSL https://api.github.com/repos/cli/cli/releases | \
@@ -49,7 +49,7 @@ GITHUB_CLI:
         && rm -rf /tmp/*
 
 UPYUN_UPX:
-    COMMAND
+    FUNCTION
     RUN set -ex \
         && export UPX_ARCH=$(echo "$(uname -m)" | grep -q "x86_64" && echo "amd64" || echo "arm64") \
         && export UPX_DOWNLOAD_ADDR=$(curl -fsSL https://api.github.com/repos/upyun/upx/releases | \
@@ -60,21 +60,21 @@ UPYUN_UPX:
         && rm -rf /tmp/*
 
 PREZTO:
-    COMMAND
+    FUNCTION
     ENV PREZTO_INIT_SCRIPT https://github.com/mritd/scripts/releases/download/latest/prezto.sh
     RUN curl -fsSL ${PREZTO_INIT_SCRIPT} > /tmp/prezto.sh \
         && bash /tmp/prezto.sh \
         && rm -f /tmp/prezto.sh
 
 VIM:
-    COMMAND
+    FUNCTION
     ENV VIM_INIT_SCRIPT https://github.com/mritd/scripts/releases/download/latest/vim.sh
     RUN curl -fsSL ${VIM_INIT_SCRIPT} > /tmp/vim.sh \
         && bash /tmp/vim.sh \
         && rm -f /tmp/vim.sh
 
 TMUX:
-    COMMAND
+    FUNCTION
     ENV TMUX_INIT_SCRIPT https://github.com/mritd/scripts/releases/download/latest/tmux.sh
     RUN curl -fsSL ${TMUX_INIT_SCRIPT} > /tmp/tmux.sh \
         && bash /tmp/tmux.sh \
