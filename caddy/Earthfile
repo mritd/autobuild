@@ -12,7 +12,6 @@ build-caddy:
         echo ">>>>>>>>>>>>>>> Build Version: ${VERSION} <<<<<<<<<<<<<<<" \
         && go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest \
         && xcaddy build ${VERSION} --output /caddy \
-            --with github.com/caddy-dns/route53 \
             --with github.com/caddy-dns/cloudflare \
             --with github.com/caddy-dns/alidns \
             --with github.com/caddy-dns/dnspod \
@@ -24,7 +23,8 @@ build-caddy:
             --with github.com/porech/caddy-maxmind-geolocation \
             --with github.com/caddyserver/transform-encoder \
             --with github.com/caddyserver/replace-response \
-            --with github.com/imgk/caddy-trojan
+            --with github.com/imgk/caddy-trojan \
+            --with github.com/tailscale/caddy-tailscale
 
     SAVE ARTIFACT /caddy
 
