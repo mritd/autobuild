@@ -8,6 +8,8 @@ build-caddy:
     ARG --required BUILD_DATE
     ARG --required VERSION
 
+    ENV GOAMD64=v3
+
     RUN --mount=type=cache,target=/go/pkg \
         echo ">>>>>>>>>>>>>>> Build Version: ${VERSION} <<<<<<<<<<<<<<<" \
         && go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest \
@@ -19,8 +21,6 @@ build-caddy:
             --with github.com/abiosoft/caddy-exec \
             --with github.com/greenpau/caddy-trace \
             --with github.com/hairyhenderson/caddy-teapot-module \
-            --with github.com/kirsch33/realip \
-            --with github.com/porech/caddy-maxmind-geolocation \
             --with github.com/caddyserver/transform-encoder \
             --with github.com/caddyserver/replace-response \
             --with github.com/imgk/caddy-trojan
