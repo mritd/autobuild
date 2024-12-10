@@ -5,7 +5,7 @@ build:
     DO ../.udcs/os/debian+UPGRADE
     DO ../.udcs/os/debian+COMMON_PKG
 
-    ENV SNELL_VERSION v4.0.1
+    ENV SNELL_VERSION v4.1.1
 
     RUN set -ex \
         && curl -sSL https://dl.nssurge.com/snell/snell-server-${SNELL_VERSION}-linux-amd64.zip > /tmp/snell.zip \
