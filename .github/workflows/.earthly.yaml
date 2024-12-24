@@ -32,7 +32,7 @@ jobs:
       shell: bash
       run: |
         sudo apt update -y
-        sudo apt install curl jq qemu binfmt-support qemu-user-static -y
+        sudo apt install curl jq qemu-system binfmt-support qemu-user-static -y
     - name: Install Earthly
       shell: bash
       run: |
