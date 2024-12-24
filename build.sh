@@ -15,7 +15,7 @@ if [ "${TARGET}" == "alpine" ] || [ "${TARGET}" == "all" ] || [ "${TARGET}" == "
     # 触发alpine action
     ALPINE_RESPONSE=$(curl -s -X POST -H "Authorization: token $TOKEN" \
         "https://api.github.com/repos/$REPO/actions/workflows/alpine.yaml/dispatches" \
-        -d '{"ref":"main", "inputs": {"trigger": "build"}}')
+        -d '{"ref":"main"}')
 
     if [ -n "$ALPINE_RESPONSE" ]; then
         echo "[$(now)] Alpine workflow triggered: $ALPINE_RESPONSE"
@@ -58,7 +58,7 @@ if [ "${TARGET}" == "all" ] || [ "${TARGET}" == "" ]; then
     do
         response=$(curl -s -X POST -H "Authorization: token $TOKEN" \
             "https://api.github.com/repos/$REPO/actions/workflows/$workflow_id/dispatches" \
-            -d '{"ref":"main", "inputs": {"trigger": "build"}}')
+            -d '{"ref":"main"}')
         if [ -n "$response" ]; then
             echo "[$(now)] Workflow $workflow_name ($workflow_id): $response"
         else
