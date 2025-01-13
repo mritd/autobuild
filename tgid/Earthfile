@@ -1,0 +1,30 @@
+VERSION 0.8
+
+build-tgid:
+    DO ../.udcs/image+GO
+    DO ../.udcs/os/alpine+UPGRADE
+    DO ../.udcs/os/alpine+INSTALL_BUILD_BASE
+    
+    RUN --mount=type=cache,target=/go/pkg \
+        go install -trimpath -ldflags "-w -s" github.com/mritd/tgid@latest
+
+    SAVE ARTIFACT /go/bin/tgid
+
+build:
+    FROM mritd/alpine
+    
+    DO ../.udcs/os/alpine+TIMEZONE
+    DO ../.udcs/language/go+FIX_DNS
+
+    ENV BOT_TOKEN=""
+
+    BUILD +build-tgid
+    
+    COPY +build-tgid/tgid /usr/bin/tgid
+    
+    ENTRYPOINT ["tgid"]
+
+    SAVE IMAGE --push mritd/tgid:latest
+
+all:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +build

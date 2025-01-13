@@ -29,6 +29,7 @@
 | [![mritd/tuic-server](https://github.com/mritd/autobuild/actions/workflows/tuic-server.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/tuic-server.yaml)                | [https://hub.docker.com/r/mritd/tuic-server](https://hub.docker.com/r/mritd/tuic-server)           |
 | [![mritd/snell](https://github.com/mritd/autobuild/actions/workflows/snell.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/snell.yaml)                                  | [https://hub.docker.com/r/mritd/snell](https://hub.docker.com/r/mritd/snell)                       |
 | [![mritd/ci-runner](https://github.com/mritd/autobuild/actions/workflows/ci-runner.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/ci-runner.yaml)                      | [https://hub.docker.com/r/mritd/ci-runner](https://hub.docker.com/r/mritd/ci-runner)               |
+| [![mritd/tgid](https://github.com/mritd/autobuild/actions/workflows/tgid.yaml/badge.svg)](https://github.com/mritd/autobuild/actions/workflows/tgid.yaml)                                     | [https://hub.docker.com/r/mritd/tgid](https://hub.docker.com/r/mritd/tgid)                         |
 
 
 ## Why not use Dockerfile?
