@@ -66,7 +66,7 @@ JDK17_OPENJ9:
 
 NODE:
     FUNCTION
-    FROM node:lts-buster
+    FROM node:lts
 
 NGINX:
     FUNCTION
