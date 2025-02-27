@@ -19,7 +19,7 @@ build:
     RUN apt update -qq \
         && apt install -qq python2 -y \
         && npm install -g npm \
-        && npm install -g pnpm fis3
+        && npm install -g pnpm
 
     COPY cnpm /usr/local/bin/cnpm
     
