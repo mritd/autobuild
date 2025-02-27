@@ -17,7 +17,6 @@ build:
     ENV NPM_REGISTRY https://registry.npmmirror.com
 
     RUN apt update -qq \
-        && apt install -qq python2 -y \
         && npm install -g npm \
         && npm install -g pnpm
 
